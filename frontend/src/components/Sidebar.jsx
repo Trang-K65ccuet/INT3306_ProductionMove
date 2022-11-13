@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink} from "react-router-dom";
-import { IoPerson, IoPricetag, IoHome, IoLogOut } from "react-icons/io5";
+import { IoPerson, IoPricetag, IoHome } from "react-icons/io5";
 
 const Sidebar = () => {
   return (
@@ -19,12 +19,6 @@ const Sidebar = () => {
         <ul className="menu-list">
           <li>
           <NavLink to={"/users"}><IoPerson />Users</NavLink>
-          </li>
-        </ul>
-        <p className="menu-label">Settings</p>
-        <ul className="menu-list">
-          <li>
-            <button className="button is-white"><IoLogOut />Logout</button>
           </li>
         </ul>
       </aside>

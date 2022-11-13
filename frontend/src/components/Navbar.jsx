@@ -29,7 +29,7 @@ const Navbar = () => {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                <button className="button is-light">Log out</button>
+                <NavLink to={"/"} className="button is-light">Log out</NavLink>
               </div>
             </div>
           </div>
