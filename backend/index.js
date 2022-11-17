@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import {getUsers, getUserById} from './controllers/UserController.js';
 import router from './routes/UserRoute.js';
+import session from 'express-session';
+
 dotenv.config();
 
 const app = express();
