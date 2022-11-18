@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize";
 import { DataTypes } from "sequelize";
-import { sequelize } from "../config/Database.js";
+import { database} from "../config/Database.js";
 
-const User = sequelize.define("users", {
+const User = database.define("users", {
     id : {
       type: DataTypes.INTEGER,
         defaultValue: DataTypes.UUIDV4,
@@ -30,7 +30,7 @@ const User = sequelize.define("users", {
       allowNull: false
     }
  });
- sequelize.sync().then(() => {
+ database.sync().then(() => {
   console.log('table created successfully!');
 }).catch((error) => {
   console.error('Unable to create table : ', error);
