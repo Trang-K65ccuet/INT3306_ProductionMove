@@ -1,8 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Login from "./components/Login";
-import Users from "./pages/Users";
-import Products from "./pages/Products";
+import Users from "./pages/users/Users";
+import Products from "./pages/products/Products";
+import AddProduct from "./pages/products/AddProduct";
+import EditProduct from "./pages/products/EditProduct";
+import AddUser from "./pages/users/AddUser";
+import EditUser from "./pages/users/EditUser";
 
 function App() {
   return (
@@ -12,7 +16,11 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/users/add" element={<AddUser />} />
+          <Route path="/users/edit/:id" element={<EditUser />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/add" element={<AddProduct />} />
+          <Route path="/products/edit/:id" element={<EditProduct />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -9,16 +9,16 @@ const Sidebar = () => {
         <p className="menu-label">General</p>
         <ul className="menu-list">
           <li>
-            <NavLink to={"/dashboard"}><IoHome />Dashboard</NavLink>
+            <NavLink to={"/dashboard"}><IoHome /> Dashboard</NavLink>
           </li>
           <li>
-            <NavLink to={"/products"}><IoPricetag />Products</NavLink>
+            <NavLink to={"/products"}><IoPricetag /> Products</NavLink>
           </li>
         </ul>
         <p className="menu-label">Admin</p>
         <ul className="menu-list">
           <li>
-          <NavLink to={"/users"}><IoPerson />Users</NavLink>
+          <NavLink to={"/users"}><IoPerson /> Users</NavLink>
           </li>
         </ul>
       </aside>
