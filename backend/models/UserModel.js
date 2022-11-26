@@ -7,10 +7,8 @@ const User = database.define("users", {
       type: DataTypes.INTEGER,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        allowNull: false,
-        validate:{
-          notEmpty: true           
-        }
+        allowNull: true,
+        
     },
     name: {
       type: DataTypes.STRING,

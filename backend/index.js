@@ -5,24 +5,20 @@ import SequelizeStore from "connect-session-sequelize";
 import { database } from "./config/Database.js";
 import {getUsers, getUserById} from './controllers/UserController.js';
 import router from './routes/UserRoute.js';
+import loginrouter from "./routes/LoginRoute.js";
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
+import jwt from 'jsonwebtoken';
 
 dotenv.config();
-
 const app = express();
 
-const sessionStore = SequelizeStore(session.Store);
-
-const store = new sessionStore({
-    db: database
-});
+app.use(cookieParser());
 
 app.use(cors());
 
 app.use(express.json());
-//app.use(cookieParser());
-app.use(session({
+/*app.use(session({
     secret: 'app',
     resave: false,
     saveUninitialized: true,
@@ -30,9 +26,9 @@ app.use(session({
     cookie: {
         secure: 'auto'
     }
-}));
+}));*/
 app.use(router);
-
-app.listen(3000);
+app.use(loginrouter);
+app.listen(5000);
 
 

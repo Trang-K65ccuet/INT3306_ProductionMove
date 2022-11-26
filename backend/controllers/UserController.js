@@ -2,6 +2,7 @@ import { where } from "sequelize";
 import User from "../models/UserModel.js";
 import bcrypt from 'bcrypt';
 import argon2 from 'argon2';
+
 export const getUsers = async (req, res) => {
     try {
         const resp = await User.findAll({
@@ -51,12 +52,12 @@ export const updateUser = async (req, res) => {
     
 }
 export const postUser = async(req, res) => {
-    const {id,name,username,position,password, confpassword} = req.body;
+    const {name,username,position,password, confpassword} = req.body;
     if(password !== confpassword) return res.status(400).json({msg: "Password khác conf"});
     const hashPassword = await argon2.hash(password);
     try {
         await User.create({
-            id: id,
+            id: '',
             name: name,
             username: username,
             position: position,
