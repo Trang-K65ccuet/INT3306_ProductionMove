@@ -57,13 +57,13 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="field mt-5">
+                {isError && <p className="has-text-centered">{message}</p>}
                   <button
                     type="submit"
                     className="button is-success is-fullwidth"
                   >
                     {isLoading ? "Loading..." : "Login"}
                   </button>
-                  {isError && <p className="has-text-centered">{message}</p>}
                 </div>
               </form>
             </div>
