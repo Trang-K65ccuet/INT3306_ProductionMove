@@ -56,8 +56,8 @@ const Login = () => {
                     />
                   </div>
                 </div>
+                {isError && <p className="has-text-centered" style={{ color: "red"}}>{message}</p>}
                 <div className="field mt-5">
-                {isError && <p className="has-text-centered">{message}</p>}
                   <button
                     type="submit"
                     className="button is-success is-fullwidth"
