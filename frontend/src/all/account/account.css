@@ -1,0 +1,31 @@
+.hero-body{
+    background: linear-gradient(#e66465, #9198e5);
+}
+
+#signin{
+    width:40%;
+}
+
+#button{
+    background-color: rgb(21, 155, 137);
+    color:antiquewhite;
+}
+
+#button:hover{
+    background-color: rgb(143, 16, 135);
+    color:antiquewhite;
+}
+
+.has-text-centered{
+    color:red;
+    font-style: italic;
+}
+
+#sign-in-text{
+    text-align: center;
+    font-size: 35px;
+}
+
+.input{
+    margin-bottom: 10px;
+}

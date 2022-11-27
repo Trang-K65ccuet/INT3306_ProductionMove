@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LoginUser, reset } from "../features/authSlice";
+import { IoPerson,IoKeySharp } from "react-icons/io5";
+import "./account.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -40,11 +42,11 @@ const Login = () => {
       <div className="hero-body">
         <div className="container">
           <div className="columns is-centered">
-            <div className="column is-4">
+            <div className="column is-4" id="signin">
               <form onSubmit={Auth} className="box">
-                <h1 className="title is-2">Sign In</h1>
+                <h1 className="title is-2" id = "sign-in-text">Sign In</h1>
                 <div className="field">
-                  <label className="label">Username</label>
+                  <label className="label"><IoPerson /> Username</label>
                   <div className="control">
                     <input
                       type="text"
@@ -56,7 +58,7 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Password</label>
+                  <label className="label"><IoKeySharp /> Password</label>
                   <div className="control">
                     <input
                       type="password"
@@ -67,10 +69,10 @@ const Login = () => {
                     />
                   </div>
                 </div>
-                {isError && <p className="has-text-centered" style={{ color: "red"}}>{message}</p>}
+                {isError && <p className="has-text-centered">{message}</p>}
                 <div className="field mt-5">
                   <button
-                    type="submit"
+                    type="submit" id="button"
                     className="button is-success is-fullwidth"
                   >
                     {isLoading ? "Loading..." : "Login"}
