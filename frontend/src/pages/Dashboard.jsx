@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import Layout from "./Layout";
 import Welcome from "../components/Welcome";
 
+
 const Dashboard = () => {
+
   return (
     <Layout>
       <Welcome />

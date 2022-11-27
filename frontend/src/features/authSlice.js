@@ -24,6 +24,22 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI
     }
 });
 
+export const getProfile = createAsyncThunk("user/getProfile", async(user, thunkAPI) => {
+    try {
+        const response = await axios.get('http://localhost:5000/profile', {
+            username: user.username,
+            password: user.password
+        });
+        return response.data;
+    } catch (error) {
+        if(error.response){
+            const message = error.response.data.msg;
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+});
+
+
 export const LogOut = createAsyncThunk("user/LogOut", async() => {
     await axios.delete('http://localhost:5000/logout');
 });
