@@ -15,7 +15,16 @@ const Login = () => {
   useEffect(() => {
     if (user || isSuccess) {
       if(user.position=="admin") {
-        navigate("/dashboard");
+        navigate("/admin/dashboard");
+      }
+      if(user.position=="cssx") {
+        navigate("/cssx/dashboard");
+      }
+      if(user.position=="dlpp") {
+        navigate("/dlpp/dashboard");
+      }
+      if(user.position=="ttbh") {
+        navigate("/ttbh/dashboard");
       }
     }
     dispatch(reset());

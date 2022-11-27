@@ -3,7 +3,7 @@ import Layout from './Layout'
 
 const Users = () => {
   return (
-    <Layout>Users</Layout>
+    <Layout>User</Layout>
   )
 }
 
