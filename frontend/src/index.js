@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './all/app/store';
 import App from './App';
 import "bulma/css/bulma.css";
+import {CookiesProvider} from 'react-cookie';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -11,8 +12,10 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <CookiesProvider>
       <App />
-    </Provider>
+      </CookiesProvider>
+      </Provider>
   </React.StrictMode>
 );
 
