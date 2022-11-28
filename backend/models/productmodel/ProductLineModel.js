@@ -2,15 +2,12 @@ import { database } from "../../config/Database.js";
 import { Sequelize } from "sequelize";
 import { DataTypes } from "sequelize";
 
-const ProductList = database.define("productlists", {
+  export const ProductLine = database.define("productlines", {
     id: {
         type: DataTypes.INTEGER,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        allowNull: false,
-        validate:{
-          notEmpty: true           
-        }
+       allowNull: true
     },
 
     name: {
@@ -28,4 +25,3 @@ database.sync().then(() => {
   }).catch((error) => {
     console.error('Unable to create table : ', error);
   });
-export default ProductList;

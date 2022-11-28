@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 
 dotenv.config();
+//check xem người dùng đã đăng nhập hay chưa
 export const authorizationUser = async (req, res, next) => {
     const token = req.cookies.access_token;
     if (!token) {
@@ -20,6 +21,8 @@ export const authorizationUser = async (req, res, next) => {
       return res.status(403).json({message: token, });
     }
   };
+  
+// check xem người dùng có phải là admin hay không
 export const checkAdmin = async (req, res, next) => {
    if(req.userPosition == 'admin') return next();
    return res.status(403).json({msg: req.userPosition})

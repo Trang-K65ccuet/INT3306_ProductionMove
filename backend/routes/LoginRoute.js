@@ -4,5 +4,5 @@ import { authorizationUser } from "../middleware/AuthUser.js";
 const loginrouter = express.Router();
 loginrouter.post('/login', Login);
 loginrouter.get('/profile',authorizationUser, profile);
-loginrouter.delete('/logout',logOut);
+loginrouter.get('/logout',logOut);
 export default loginrouter;

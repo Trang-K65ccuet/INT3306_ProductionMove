@@ -53,13 +53,21 @@ export const updateUser = async (req, res) => {
 }
 export const postUser = async(req, res) => {
     const {name,username,position,password, confpassword} = req.body;
+    const existed = User.findOne({
+        attributes:['id','name','username','position','password'],
+        where: {
+            username: req.body.username
+        }
+
+    })
+    if(existed) return res.status(400).json({msg: "Tài khoản username đã tồn tại. Vui lòng chọn username khác!"});
     if(password !== confpassword) return res.status(400).json({msg: "Password khác conf"});
     const hashPassword = await argon2.hash(password);
     try {
         await User.create({
-            id: '',
+            id: null,
             name: name,
-            username: username,
+            username: username + i,
             position: position,
             password: hashPassword,
             
