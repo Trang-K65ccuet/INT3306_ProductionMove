@@ -7,25 +7,26 @@ import { getProfile } from "../../all/features/authSlice";
 
 
 const Dashboard = () => {
-  /*
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { isError } = useSelector((state) => state.auth);
+  const { user } = useSelector(
+    (state) => state.auth
+  );
 
   useEffect(() => {
     dispatch(getProfile());
-  }, [dispatch]);
+    console.log("a");
+  
+  }, [dispatch, user]);
 
-  useEffect(() => {
-    if (isError) {
-      navigate("/");
-    }
-  }, [isError, navigate]); */
+  const Auth = (e) => {
+    e.preventDefault();
+    dispatch(getProfile());
+  };
 
   return (
     <Layout>
       <Welcome />
-      <button>Set Cookie</button>
+      <button onClick={Auth}>Set Cookie</button>
     </Layout>
   );
 };

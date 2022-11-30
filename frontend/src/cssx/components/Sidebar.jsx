@@ -6,10 +6,10 @@ const Sidebar = () => {
   return (
     <div>
       <aside className="menu pl-2 has-shadow">
-        <p className="menu-label">General</p>
+        <p className="menu-label">Chung</p>
         <ul className="menu-list">
           <li>
-            <NavLink to={"/cssx/dashboard"}><IoHome /> Dashboard</NavLink>
+            <NavLink to={"/cssx/dashboard"}><IoHome /> Trang chủ</NavLink>
           </li>
         </ul>
       </aside>

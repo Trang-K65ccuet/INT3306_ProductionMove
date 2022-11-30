@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getProfile, LoginUser, reset } from "../features/authSlice";
+import { LoginUser, reset } from "../features/authSlice";
 import { IoPerson,IoKeySharp } from "react-icons/io5";
 import "./account.css";
 import { useCookies } from "react-cookie";
@@ -19,7 +19,6 @@ const Login = () => {
   useEffect(() => {
     if (user || isSuccess) {
       setCookie('access_token',user.token, {path: "/"});
-      console.log(cookies.access_token);
       if(user.position=="admin") {
         navigate("/admin/dashboard");
       }
@@ -39,9 +38,7 @@ const Login = () => {
   const Auth = (e) => {
     e.preventDefault();
     dispatch(LoginUser({ username, password }));
-    dispatch(getProfile());
-    console.log(user.position);
-    console.log(cookies.access_token);
+    //dispatch(getProfile());
   };
 
   return (
@@ -51,21 +48,21 @@ const Login = () => {
           <div className="columns is-centered">
             <div className="column is-4" id="signin">
               <form onSubmit={Auth} className="box">
-                <h1 className="title is-2" id = "sign-in-text">Sign In</h1>
+                <h1 className="title is-2" id = "sign-in-text">Đăng nhập</h1>
                 <div className="field">
-                  <label className="label"><IoPerson /> Username</label>
+                  <label className="label"><IoPerson /> Tài khoản</label>
                   <div className="control">
                     <input
                       type="text"
                       className="input"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      placeholder="Username"
+                      placeholder="Tài khoản"
                     />
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label"><IoKeySharp /> Password</label>
+                  <label className="label"><IoKeySharp /> Mật khẩu</label>
                   <div className="control">
                     <input
                       type="password"
@@ -82,7 +79,7 @@ const Login = () => {
                     type="submit" id="button"
                     className="button is-success is-fullwidth"
                   >
-                    {isLoading ? "Loading..." : "Login"}
+                    {isLoading ? "Loading..." : "Đăng nhập"}
                   </button>
                 </div>
               </form>

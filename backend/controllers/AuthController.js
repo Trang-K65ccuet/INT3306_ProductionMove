@@ -19,9 +19,11 @@ export const Login = async (req, res)=> {
     const token = jwt.sign({username: existUser.username, position: existUser.position}, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "2h"
     })
+    const refreshToken = jwt.sign({username: existUser.username, position: existUser.position}, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
+
    
-    res.cookie("access_token", token, )
-    
+    res.cookie("access_token", token,{ httpOnly: true } );
+
     const name = existUser.name;
     const username = existUser.username;
     const position = existUser.position;
@@ -32,10 +34,9 @@ export const profile = async (req, res) =>{
     return res.json({ user: { username: req.userName, position: req.userPosition } });
 
 }
-export const SignOut = async (req,res) => {
 
-}
 
 export const logOut = (req, res) =>{
-   
+   res.cookie('access_token','', {maxAge: 1});
+   return res.status(200).json({msg: "Đăng xuất thành công"})
 }

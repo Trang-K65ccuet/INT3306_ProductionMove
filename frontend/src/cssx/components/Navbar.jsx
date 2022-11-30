@@ -39,7 +39,7 @@ const Navbar = () => {
             <div className="navbar-item">
               <div className="buttons">
               <button onClick={logout} className="button is-light">
-                  Log out
+                  Đăng xuất
                 </button>
               </div>
             </div>
