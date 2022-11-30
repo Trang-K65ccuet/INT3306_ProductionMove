@@ -10,6 +10,20 @@ import EditUser from "./admin/pages/users/EditUser";
 import DashboardCSSX from "./cssx/pages/Dashboard";
 import DashboardDLPP from "./dlpp/pages/Dashboard";
 import DashboardTTBH from "./ttbh/pages/Dashboard";
+import StatisticCSSX from "./cssx/pages/Statistic";
+import ImportProductsCSSX from "./cssx/pages/Products/ImportProducts";
+import ExportProductsCSSX from "./cssx/pages/Products/ExportProducts";
+import ProductsCSSX from "./cssx/pages/Products/Products";
+import InsuranceCSSX from "./cssx/pages/Products/Insurance";
+import StatisticDLPP from "./dlpp/pages/Statistic";
+import ProductsDLPP from "./dlpp/pages/Products/Products";
+import ImportProductsDLPP from "./dlpp/pages/Products/ImportProducts";
+import ExportProductsDLPP from "./dlpp/pages/Products/ExportProducts";
+import InsuranceDLPP from "./dlpp/pages/Products/Insurance";
+import StatisticTTBH from "./ttbh/pages/Statistic";
+import ImportTTBH from "./ttbh/pages/Insurance/ImportProducts";
+import ExportTTBH from "./ttbh/pages/Insurance/ExportProducts";
+import ProductsTTBH from "./ttbh/pages/Insurance/Products";
 
 
 function App() {
@@ -17,8 +31,10 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
+          // All
           <Route path="/" element={<Login />} />
 
+          //Admin
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/users" element={<Users />} />
           <Route path="/admin/users/add" element={<AddUser />} />
@@ -27,11 +43,28 @@ function App() {
           <Route path="/admin/products/add" element={<AddProduct />} />
           <Route path="/admin/products/edit/:id" element={<EditProduct />} />
 
+          //CSSX
           <Route path="/cssx/dashboard" element={<DashboardCSSX />} />
+          <Route path="/cssx/statistic" element={<StatisticCSSX />} />
+          <Route path="/cssx/products" element={<ProductsCSSX />} />
+          <Route path="/cssx/import" element={<ImportProductsCSSX />} />
+          <Route path="/cssx/export" element={<ExportProductsCSSX />} />
+          <Route path="/cssx/insurance" element={<InsuranceCSSX />} />
 
+          //DLPP
           <Route path="/dlpp/dashboard" element={<DashboardDLPP />} />
+          <Route path="/dlpp/statistic" element={<StatisticDLPP />} />
+          <Route path="/dlpp/products" element={<ProductsDLPP />} />
+          <Route path="/dlpp/import" element={<ImportProductsDLPP />} />
+          <Route path="/dlpp/export" element={<ExportProductsDLPP />} />
+          <Route path="/dlpp/insurance" element={<InsuranceDLPP />} />
           
+          //TTBH
           <Route path="/ttbh/dashboard" element={<DashboardTTBH />} />
+          <Route path="/ttbh/statistic" element={<StatisticTTBH />} />
+          <Route path="/ttbh/import" element={<ImportTTBH />} />
+          <Route path="/ttbh/export" element={<ExportTTBH />} />
+          <Route path="/ttbh/products" element={<ProductsTTBH />} />
         </Routes>
       </BrowserRouter>
     </div>
