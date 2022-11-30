@@ -50,7 +50,7 @@ const Login = () => {
             <div className="column is-4" id="signin">
               <form onSubmit={Auth} className="box" id = "box">
                 <img src={img_log} alt="Login" id = "login-img" />
-                <h1 className="title is-2">Production Move</h1>
+                <h1 className="title is-2" id = 'production-move'>Production Move</h1>
                 <div className="field">
                   <label className="label"><IoPerson /> Tài khoản</label>
                   <div className="control">

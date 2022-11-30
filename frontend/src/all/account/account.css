@@ -4,13 +4,14 @@
 
 #box{
     border: solid 0px;
+    background-color: azure;
 }
 
-h1{
+
+#production-move{
     text-align: center;
-    font-size: 27px;
+    font-size: 30px;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color:#a80a51;
 }
 
 #button{
