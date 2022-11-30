@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink} from "react-router-dom";
 import { IoPerson, IoPricetag, IoHome } from "react-icons/io5";
+import './components.css'
 
 const Sidebar = () => {
   return (

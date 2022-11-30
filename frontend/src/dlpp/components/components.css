@@ -1,0 +1,9 @@
+#logout{
+    background-color: rgb(41, 175, 212);
+    color:aliceblue;
+}
+
+#logout:hover{
+    background-color: rgb(15, 75, 92);
+}
+
