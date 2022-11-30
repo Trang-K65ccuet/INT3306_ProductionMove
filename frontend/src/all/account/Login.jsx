@@ -5,6 +5,7 @@ import { LoginUser, reset } from "../features/authSlice";
 import { IoPerson,IoKeySharp } from "react-icons/io5";
 import "./account.css";
 import { useCookies } from "react-cookie";
+import img_log from './image/img_log.png'
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -47,8 +48,9 @@ const Login = () => {
         <div className="container">
           <div className="columns is-centered">
             <div className="column is-4" id="signin">
-              <form onSubmit={Auth} className="box">
-                <h1 className="title is-2" id = "sign-in-text">Đăng nhập</h1>
+              <form onSubmit={Auth} className="box" id = "box">
+                <img src={img_log} alt="Login" id = "login-img" />
+                <h1 className="title is-2">Production Move</h1>
                 <div className="field">
                   <label className="label"><IoPerson /> Tài khoản</label>
                   <div className="control">
@@ -83,6 +85,7 @@ const Login = () => {
                   </button>
                 </div>
               </form>
+
             </div>
           </div>
         </div>
