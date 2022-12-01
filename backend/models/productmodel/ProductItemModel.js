@@ -1,12 +1,9 @@
 import { database } from "../../config/Database.js";
 import { DataTypes } from "sequelize";
+import { ProductLine } from "./ProductLineModel.js";
 
- export const ProductItem = database.define('productitems', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        allowNull: false
-    },
+export const ProductItem = database.define('productitems', {
+    
     name: {
         type: DataTypes.STRING,
         allowNull:false
@@ -15,45 +12,34 @@ import { DataTypes } from "sequelize";
         type: DataTypes.STRING,
         allowNull: false
     },
-    productline: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+    productlineId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: ProductLine,
+            key: 'id'
+        }
+     },
+
     productcode: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        primaryKey: true
     },
     manufacture: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    distributionAgent: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    warrantyAgent: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
+        allowNull: false,
+    }
+    ,
+    // tình trạng ở đây sẽ là 1 số nguyên, với 0 là mới sản xuất, còn ở trong kho
     status: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    warrantyTime: {
         type: DataTypes.INTEGER,
-        allowNull:false
-    },
-    activeWarranty: {
-        type: DataTypes.DATE,
-        allowNull: true
-    }, 
-    note: {
-        type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
     }
 
 
 });
+ProductLine.hasMany(ProductItem);
 database.sync().then(() => {
     console.log('table created successfully!');
   }).catch((error) => {

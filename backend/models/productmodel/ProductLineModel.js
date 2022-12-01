@@ -10,7 +10,7 @@ import { DataTypes } from "sequelize";
        allowNull: true
     },
 
-    name: {
+    productline: {
         type: DataTypes.STRING,
         allowNull: false
     },

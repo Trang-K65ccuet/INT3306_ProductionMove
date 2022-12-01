@@ -1,14 +1,12 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import SequelizeStore from "connect-session-sequelize";
 import { database } from "./config/Database.js";
-import {getUsers, getUserById} from './controllers/AdminController.js';
-import router from './routes/UserRoute.js';
+import router from './routes/AdminRoute.js';
 import loginrouter from "./routes/LoginRoute.js";
-import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
+import itemRouter from './routes/productRoute/ProductItemRoute.js';
 
 dotenv.config();
 const app = express();
@@ -21,8 +19,12 @@ app.use((req, res, next) => {
     next();
   });
 app.use(express.json());
-app.use(router);
+// route cho việc đăng nhập
 app.use(loginrouter);
+//route của admin
+app.use(router);
+// route của product
+app.use(itemRouter);
 app.listen(5000);
 
 

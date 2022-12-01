@@ -25,5 +25,10 @@ export const authorizationUser = async (req, res, next) => {
 // check xem người dùng có phải là admin hay không
 export const checkAdmin = async (req, res, next) => {
    if(req.userPosition == 'admin') return next();
-   return res.status(403).json({msg: req.userPosition})
+   return res.status(403).json({msg: req.userPosition + " Không có quyền truy cập"})
+}
+
+export const checkCssx = async (req, res, next) => {
+  if (req.userPosition == 'cssx') return next();
+  return res.status(403).json({msg: req.userPosition + " không được phép tạo các lô hàng"})
 }
