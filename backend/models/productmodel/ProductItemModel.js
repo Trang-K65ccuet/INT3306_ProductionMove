@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-import { database } from "../../config/Database.js";
-import { DataTypes } from "sequelize";
-
-export const ProductItem = database.define('productitem', {
-    id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    name: {
-        type: DataTypes.STRING,
-        allowNull:false
-    },
-    productline: {
-        type: 
-    }
-})
-=======
 import { database } from "../../config/Database.js";
 import { DataTypes } from "sequelize";
 import { ProductLine } from "./ProductLineModel.js";
@@ -63,4 +45,3 @@ database.sync().then(() => {
   }).catch((error) => {
     console.error('Unable to create table : ', error);
   });
->>>>>>> origin/branchcuaphanducmanh
