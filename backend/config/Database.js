@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 export const database = new Sequelize(
     'userdb',
     'root',
-    'Manh2812002',
+    '24092002hoan%',
      {
        host: 'localhost',
        dialect: 'mysql'
