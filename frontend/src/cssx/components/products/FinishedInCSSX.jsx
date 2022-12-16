@@ -7,7 +7,7 @@ const FinishedInCSSX = () => {
     <Layout>
           <div>
             <h1 className="title">Bảo hành</h1>
-            <h2>Danh sách đang bảo hành</h2>
+            <h2>Danh sách đã bảo hành</h2>
             <table className="table is-striped is-fullwidth">
               <thead>
                 <tr>

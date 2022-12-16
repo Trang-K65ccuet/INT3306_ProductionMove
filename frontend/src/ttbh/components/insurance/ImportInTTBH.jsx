@@ -15,7 +15,6 @@ const ImportInTTBH = () => {
                   <th>Mặt hàng</th>
                   <th>Số lượng</th>
                   <th>Đại lý phân phối</th>
-                  <th>Cơ sở sản xuất</th>
                   <th>Hành động</th>
                   
                 </tr>
@@ -26,7 +25,6 @@ const ImportInTTBH = () => {
                     <td>Asus</td>
                     <td>2</td>
                     <td>Đại lý 1</td>
-                    <td>Cơ sở của Trang</td>
                     <td>
                         <button className="button is-small is-info">Chấp nhận</button>
                     </td>
