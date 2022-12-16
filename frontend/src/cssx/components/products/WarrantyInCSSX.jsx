@@ -14,6 +14,7 @@ const WarrantyInCSSX = () => {
                   <th>STT</th>
                   <th>Mặt hàng</th>
                   <th>Số lượng</th>
+                  <th>Đại lý phân phối</th>
                   <th>Cập nhật</th>
                   
                 </tr>
@@ -23,6 +24,7 @@ const WarrantyInCSSX = () => {
                     <td>1</td>
                     <td>Asus</td>
                     <td>2</td>
+                    <td>Đại lý 1</td>
                     <td>
                         <button className="button is-small is-info">Đã xong</button>
                         <button className="button is-small is-danger">Hỏng</button>

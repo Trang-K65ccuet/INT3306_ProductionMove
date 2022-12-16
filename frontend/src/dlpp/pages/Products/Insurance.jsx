@@ -11,6 +11,9 @@ const InsuranceDLPP = () => {
             <Link to="/dlpp/insurance/new" className="button is-primary mb-2">
               Tạo mới
             </Link>
+            <Link to="/dlpp/insurance/finished" className="button is-primary mb-2">
+              Đã bảo hành
+            </Link>
             <h3>Lịch sử bảo hành</h3>
             <table className="table is-striped is-fullwidth">
               <thead>

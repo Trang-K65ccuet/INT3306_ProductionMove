@@ -1,13 +1,13 @@
 import Layout from "../../pages/Layout";
 
 
-const ImportInTTBH = () => {
+const FinishedInCSSX = () => {
 
   return (
     <Layout>
           <div>
             <h1 className="title">Bảo hành</h1>
-            <h2>Danh sách yêu cầu</h2>
+            <h2>Danh sách đang bảo hành</h2>
             <table className="table is-striped is-fullwidth">
               <thead>
                 <tr>
@@ -15,7 +15,6 @@ const ImportInTTBH = () => {
                   <th>Mặt hàng</th>
                   <th>Số lượng</th>
                   <th>Đại lý phân phối</th>
-                  <th>Cơ sở sản xuất</th>
                   <th>Hành động</th>
                   
                 </tr>
@@ -26,9 +25,8 @@ const ImportInTTBH = () => {
                     <td>Asus</td>
                     <td>2</td>
                     <td>Đại lý 1</td>
-                    <td>Cơ sở của Trang</td>
                     <td>
-                        <button className="button is-small is-info">Chấp nhận</button>
+                        <button className="button is-small is-info">Chuyển cho đại lý</button>
                     </td>
                   </tr>
               </tbody>
@@ -38,4 +36,4 @@ const ImportInTTBH = () => {
   );
 };
 
-export default ImportInTTBH;
+export default FinishedInCSSX;

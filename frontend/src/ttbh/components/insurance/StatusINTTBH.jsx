@@ -7,7 +7,7 @@ const StatusInTTBH = () => {
     <Layout>
           <div>
             <h1 className="title">Bảo hành</h1>
-            <h2>Danh sách yêu cầu</h2>
+            <h2>Trạng thái</h2>
             <table className="table is-striped is-fullwidth">
               <thead>
                 <tr>
