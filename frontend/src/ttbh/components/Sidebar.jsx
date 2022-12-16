@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink} from "react-router-dom";
-import { FcExport, FcHome,FcImport,FcSalesPerformance,FcDocument } from "react-icons/fc";
+import { FcHome,FcSalesPerformance,FcDocument,FcCheckmark, FcFlashOn } from "react-icons/fc";
 
 const Sidebar = () => {
   return (
@@ -21,11 +21,12 @@ const Sidebar = () => {
             <NavLink to={"/ttbh/products"}><FcDocument /> Kho</NavLink>
           </li>
           <li>
-              <NavLink to={"/ttbh/import"}><FcImport/> Nhập</NavLink>
+            <NavLink to={"/ttbh/successful"}><FcCheckmark /> Đã bảo hành</NavLink>
           </li>
           <li>
-              <NavLink to={"/ttbh/export"}><FcExport /> Xuất</NavLink>
+            <NavLink to={"/ttbh/errors"}><FcFlashOn /> Lỗi</NavLink>
           </li>
+
         </ul>
       </aside>
     </div>

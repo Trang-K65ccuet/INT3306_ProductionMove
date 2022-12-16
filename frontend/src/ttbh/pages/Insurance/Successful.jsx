@@ -1,13 +1,12 @@
 import Layout from "../Layout";
 
-
-const ExportTTBH = () => {
+const SuccessfulTTBH = () => {
 
   return (
     <Layout>
-      Xuất
+      Thành công
     </Layout>
   );
 };
 
-export default ExportTTBH;
+export default SuccessfulTTBH;
