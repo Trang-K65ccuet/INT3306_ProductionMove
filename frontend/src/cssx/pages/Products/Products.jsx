@@ -1,11 +1,12 @@
 import Layout from "../Layout";
+import ProductListCSSX from "../../components/products/ProductListCSSX";
 
 
 const ProductsCSSX = () => {
 
   return (
     <Layout>
-      Sản phẩm
+      <ProductListCSSX/>
     </Layout>
   );
 };

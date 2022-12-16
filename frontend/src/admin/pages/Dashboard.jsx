@@ -3,7 +3,7 @@ import Welcome from "../components/Welcome";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getProfile } from "../../all/features/authSlice";
+import { getProfile, LoginUser } from "../../all/features/authSlice";
 
 
 const Dashboard = () => {
@@ -13,14 +13,13 @@ const Dashboard = () => {
   );
 
   useEffect(() => {
-    dispatch(getProfile());
-    console.log("a");
+    console.log(user);
   
   }, [dispatch, user]);
 
   const Auth = (e) => {
     e.preventDefault();
-    dispatch(getProfile());
+    dispatch(getProfile);
   };
 
   return (

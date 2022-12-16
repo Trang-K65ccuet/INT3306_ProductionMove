@@ -1,11 +1,40 @@
 import Layout from "../Layout";
+import { Link } from "react-router-dom";
 
 
 const InsuranceDLPP = () => {
 
   return (
     <Layout>
-      Bảo hành
+          <div>
+            <h1 className="title">Bảo hành</h1>
+            <Link to="/dlpp/insurance/new" className="button is-primary mb-2">
+              Tạo mới
+            </Link>
+            <h3>Lịch sử bảo hành</h3>
+            <table className="table is-striped is-fullwidth">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Mặt hàng</th>
+                  <th>Số lượng</th>
+                  <th>Họ tên khách hàng</th>
+                  <th>Số điện thoại</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr>
+                    <td>1</td>
+                    <td>Asus</td>
+                    <td>5</td>
+                    <td>Mạnh</td>
+                    <td>0123456789</td>
+                    <td>Đang bảo hành</td>
+                  </tr>
+              </tbody>
+            </table>
+    </div>
     </Layout>
   );
 };

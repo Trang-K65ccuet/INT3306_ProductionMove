@@ -1,20 +1,13 @@
-import Layout from "../Layout";
-import { Link } from "react-router-dom";
+import Layout from "../../pages/Layout";
 
 
-const ImportProductsDLPP = () => {
+const ImportProductInDLPP = () => {
 
   return (
     <Layout>
           <div>
             <h1 className="title">Nhập hàng</h1>
-            <Link to="/dlpp/import/add" className="button is-primary mb-2">
-              Gửi yêu cầu
-            </Link>
-            <Link to="/dlpp/import/import" className="button is-primary mb-2">
-              Nhập hàng
-            </Link>
-            <h3>Lịch sử nhập hàng</h3>
+            <h2>Danh sách hàng được xuất cho đại lý</h2>
             <table className="table is-striped is-fullwidth">
               <thead>
                 <tr>
@@ -22,20 +15,26 @@ const ImportProductsDLPP = () => {
                   <th>Mặt hàng</th>
                   <th>Số lượng</th>
                   <th>Cơ sở sản xuất</th>
+                  <th>Cập nhật</th>
+                  
                 </tr>
               </thead>
               <tbody>
               <tr>
                     <td>1</td>
                     <td>Asus</td>
-                    <td>1000</td>
+                    <td>2</td>
                     <td>Cơ sở của Trang</td>
+                    <td>
+                        <button className="button is-small is-info">Chấp nhận</button>
+                        <button className="button is-small is-danger">Từ chối</button>
+                    </td>
                   </tr>
               </tbody>
             </table>
-         </div>
+    </div>
     </Layout>
   );
 };
 
-export default ImportProductsDLPP;
+export default ImportProductInDLPP;

@@ -1,35 +1,31 @@
-import Layout from "../Layout";
-import { Link } from "react-router-dom";
+import Layout from "../../pages/Layout";
 
 
-const InsuranceCSSX = () => {
+const InsuranceInCSSX = () => {
 
   return (
     <Layout>
           <div>
             <h1 className="title">Bảo hành</h1>
-            <Link to="/cssx/insurance/required" className="button is-primary mb-2">
-              Yêu cầu
-            </Link>
-            <Link to="/cssx/insurance/warranty" className="button is-primary mb-2">
-              Đang bảo hành
-            </Link>
-            <h3>Lịch sử bảo hành</h3>
+            <h2>Danh sách yêu cầu</h2>
             <table className="table is-striped is-fullwidth">
               <thead>
                 <tr>
                   <th>STT</th>
                   <th>Mặt hàng</th>
                   <th>Số lượng</th>
-                  <th>Trạng thái</th>
+                  <th>Hành động</th>
+                  
                 </tr>
               </thead>
               <tbody>
               <tr>
                     <td>1</td>
                     <td>Asus</td>
-                    <td>5</td>
-                    <td>Đang bảo hành</td>
+                    <td>2</td>
+                    <td>
+                        <button className="button is-small is-info">Chấp nhận</button>
+                    </td>
                   </tr>
               </tbody>
             </table>
@@ -38,4 +34,4 @@ const InsuranceCSSX = () => {
   );
 };
 
-export default InsuranceCSSX;
+export default InsuranceInCSSX;

@@ -1,25 +1,39 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./admin/pages/Dashboard";
+
 import Login from "./all/account/Login";
+
+import Dashboard from "./admin/pages/Dashboard";
 import Users from "./admin/pages/users/Users";
 import Products from "./admin/pages/products/Products";
 import AddProduct from "./admin/pages/products/AddProduct";
 import EditProduct from "./admin/pages/products/EditProduct";
 import AddUser from "./admin/pages/users/AddUser";
 import EditUser from "./admin/pages/users/EditUser";
+
 import DashboardCSSX from "./cssx/pages/Dashboard";
-import DashboardDLPP from "./dlpp/pages/Dashboard";
-import DashboardTTBH from "./ttbh/pages/Dashboard";
 import StatisticCSSX from "./cssx/pages/Statistic";
 import ImportProductsCSSX from "./cssx/pages/Products/ImportProducts";
 import ExportProductsCSSX from "./cssx/pages/Products/ExportProducts";
 import ProductsCSSX from "./cssx/pages/Products/Products";
 import InsuranceCSSX from "./cssx/pages/Products/Insurance";
+import AddProductInCSSX from "./cssx/components/products/AddProductInCSSX";
+import ExportProductInCSSX from "./cssx/components/products/ExportProductInCSSX";
+import InsuranceInCSSX from "./cssx/components/products/InsuranceInCSSX";
+import WarrantyInCSSX from "./cssx/components/products/WarrantyInCSSX";
+
+import DashboardDLPP from "./dlpp/pages/Dashboard";
 import StatisticDLPP from "./dlpp/pages/Statistic";
 import ProductsDLPP from "./dlpp/pages/Products/Products";
 import ImportProductsDLPP from "./dlpp/pages/Products/ImportProducts";
 import ExportProductsDLPP from "./dlpp/pages/Products/ExportProducts";
 import InsuranceDLPP from "./dlpp/pages/Products/Insurance";
+import AddProductInDLPP from "./dlpp/components/products/AddProductInDLPP";
+import ImportProductInDLPP from "./dlpp/components/products/ImportProductInDLPP";
+import ExportProductInDLPP from "./dlpp/components/products/ExportProductInDLPP";
+import InsuranceInDLPP from "./dlpp/components/products/InsuranceInDLPP";
+
+
+import DashboardTTBH from "./ttbh/pages/Dashboard";
 import StatisticTTBH from "./ttbh/pages/Statistic";
 import ImportTTBH from "./ttbh/pages/Insurance/ImportProducts";
 import ExportTTBH from "./ttbh/pages/Insurance/ExportProducts";
@@ -50,6 +64,10 @@ function App() {
           <Route path="/cssx/import" element={<ImportProductsCSSX />} />
           <Route path="/cssx/export" element={<ExportProductsCSSX />} />
           <Route path="/cssx/insurance" element={<InsuranceCSSX />} />
+          <Route path="/cssx/import/add" element={<AddProductInCSSX />} />
+          <Route path="/cssx/export/exportnew" element={<ExportProductInCSSX />} />
+          <Route path="/cssx/insurance/required" element={<InsuranceInCSSX />} />
+          <Route path="/cssx/insurance/warranty" element={<WarrantyInCSSX />} />
 
           //DLPP
           <Route path="/dlpp/dashboard" element={<DashboardDLPP />} />
@@ -58,7 +76,11 @@ function App() {
           <Route path="/dlpp/import" element={<ImportProductsDLPP />} />
           <Route path="/dlpp/export" element={<ExportProductsDLPP />} />
           <Route path="/dlpp/insurance" element={<InsuranceDLPP />} />
-          
+          <Route path="/dlpp/import/add" element={<AddProductInDLPP />} />
+          <Route path="/dlpp/import/import" element={<ImportProductInDLPP />} />
+          <Route path="/dlpp/export/new" element={<ExportProductInDLPP />} />
+          <Route path="/dlpp/insurance/new" element={<InsuranceInDLPP />} />
+
           //TTBH
           <Route path="/ttbh/dashboard" element={<DashboardTTBH />} />
           <Route path="/ttbh/statistic" element={<StatisticTTBH />} />
