@@ -7,8 +7,9 @@ const InsuranceList = () => {
               <thead>
                 <tr>
                   <th>STT</th>
-                  <th>Mặt hàng</th>
-                  <th>Số lượng bảo hành</th>
+                  <th>Mã bảo hành</th>
+                  <th>Mã sản phẩm</th>
+                  <th>Sản phẩm</th>
                   <th>Đại lý phân phối</th>
                   <th>Trạng thái</th>
                 </tr>
@@ -16,8 +17,9 @@ const InsuranceList = () => {
               <tbody>
               <tr>
                     <td>1</td>
-                    <td>Asus</td>
-                    <td>1000</td>
+                    <td>BH2</td>
+                    <td>DELL12345</td>
+                    <td>Dell</td>
                     <td>Đại lý 1</td>
                     <td>Đã chuyển về cơ sở sản xuất</td>
                   </tr>

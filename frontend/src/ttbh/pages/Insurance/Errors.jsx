@@ -10,8 +10,9 @@ const ErrorsTTBH = () => {
               <thead>
                 <tr>
                   <th>STT</th>
-                  <th>Mặt hàng</th>
-                  <th>Số lượng bảo hành</th>
+                  <th>Mã bảo hành</th>
+                  <th>Mã sản phẩm</th>
+                  <th>Sản phẩm</th>
                   <th>Đại lý phân phối</th>
                   <th>Hành động</th>
                 </tr>
@@ -19,8 +20,9 @@ const ErrorsTTBH = () => {
               <tbody>
               <tr>
                     <td>1</td>
-                    <td>Asus</td>
-                    <td>1000</td>
+                    <td>BH1</td>
+                    <td>HP14314</td>
+                    <td>HP1</td>
                     <td>Đại lý 1</td>
                     <td>
                       <button className="button is-small is-danger">Chuyển về cơ sở sản xuất</button>
