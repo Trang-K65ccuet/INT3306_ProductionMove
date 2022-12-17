@@ -7,13 +7,13 @@ const InsuranceInCSSX = () => {
     <Layout>
           <div>
             <h1 className="title">Bảo hành</h1>
-            <h2>Danh sách yêu cầu</h2>
+            <h2>Danh sách yêu cầu trả lại hàng</h2>
             <table className="table is-striped is-fullwidth">
               <thead>
                 <tr>
                   <th>STT</th>
+                  <th>Mã sản phẩm</th>
                   <th>Mặt hàng</th>
-                  <th>Số lượng</th>
                   <th>Đại lý phân phối</th>
                   <th>Hành động</th>
                   
@@ -22,8 +22,8 @@ const InsuranceInCSSX = () => {
               <tbody>
               <tr>
                     <td>1</td>
+                    <td>Asus15</td>
                     <td>Asus</td>
-                    <td>2</td>
                     <td>Đại lý 1</td>
                     <td>
                         <button className="button is-small is-info">Chấp nhận</button>

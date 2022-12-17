@@ -11,28 +11,22 @@ const InsuranceCSSX = () => {
             <Link to="/cssx/insurance/required" className="button is-primary mb-2">
               Yêu cầu
             </Link>
-            <Link to="/cssx/insurance/warranty" className="button is-primary mb-2">
-              Đang bảo hành
-            </Link>
-            <Link to="/cssx/insurance/finished" className="button is-primary mb-2">
-              Đã bảo hành
-            </Link>
-            <h3>Lịch sử bảo hành</h3>
+            <h3>Lịch sử</h3>
             <table className="table is-striped is-fullwidth">
               <thead>
                 <tr>
                   <th>STT</th>
+                  <th>Mã sản phẩm</th>
                   <th>Mặt hàng</th>
-                  <th>Số lượng</th>
-                  <th>Trạng thái</th>
+                  <th>Đại lý phân phối</th>
                 </tr>
               </thead>
               <tbody>
               <tr>
                     <td>1</td>
-                    <td>Asus</td>
-                    <td>5</td>
-                    <td>Đang bảo hành</td>
+                    <td>DELL1</td>
+                    <td>DELL</td>
+                    <td>Đại lý 1</td>
                   </tr>
               </tbody>
             </table>
