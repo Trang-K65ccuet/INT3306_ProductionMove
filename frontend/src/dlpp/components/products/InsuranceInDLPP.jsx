@@ -13,25 +13,16 @@ const InsuranceInDLPP = () => {
             <form>
               <p className="has-text-centered"></p>
               <div className="field">
-                <label className="label">Mặt hàng</label>
+                <label className="label">Mã sản phẩm</label>
                 <div className="control">
                   <input
                     type="text"
                     className="input"
-                    placeholder="Mặt hàng"
+                    placeholder="Mã sản phẩm"
                   />
                 </div>
               </div>
-              <div className="field">
-                <label className="label">Số lượng</label>
-                <div className="control">
-                  <input
-                    type="number"
-                    className="input"
-                    placeholder="Số lượng"
-                  />
-                </div>
-              </div>
+
               <div className="field">
                 <label className="label">Họ tên khách hàng</label>
                 <div className="control">

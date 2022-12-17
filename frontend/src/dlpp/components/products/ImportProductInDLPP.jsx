@@ -12,7 +12,7 @@ const ImportProductInDLPP = () => {
               <thead>
                 <tr>
                   <th>STT</th>
-                  <th>Mặt hàng</th>
+                  <th>Sản phẩm</th>
                   <th>Số lượng</th>
                   <th>Cơ sở sản xuất</th>
                   <th>Cập nhật</th>
@@ -22,7 +22,7 @@ const ImportProductInDLPP = () => {
               <tbody>
               <tr>
                     <td>1</td>
-                    <td>Asus</td>
+                    <td>DELL1</td>
                     <td>2</td>
                     <td>Cơ sở của Trang</td>
                     <td>

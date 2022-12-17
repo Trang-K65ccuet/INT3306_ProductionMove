@@ -19,8 +19,9 @@ const InsuranceDLPP = () => {
               <thead>
                 <tr>
                   <th>STT</th>
-                  <th>Mặt hàng</th>
-                  <th>Số lượng</th>
+                  <th>Mã bảo hành</th>
+                  <th>Mã sản phẩm</th>
+                  <th>Sản phẩm</th>
                   <th>Họ tên khách hàng</th>
                   <th>Số điện thoại</th>
                   <th>Trạng thái</th>
@@ -29,8 +30,9 @@ const InsuranceDLPP = () => {
               <tbody>
               <tr>
                     <td>1</td>
+                    <td>BH1</td>
+                    <td>DELL123</td>
                     <td>Asus</td>
-                    <td>5</td>
                     <td>Mạnh</td>
                     <td>0123456789</td>
                     <td>Đang bảo hành</td>
