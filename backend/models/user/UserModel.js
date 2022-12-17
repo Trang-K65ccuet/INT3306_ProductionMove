@@ -1,6 +1,5 @@
-import { Sequelize } from "sequelize";
 import { DataTypes } from "sequelize";
-import { database} from "../config/Database.js";
+import { database} from "../../config/Database.js";
 
 //lưu danh sách các người dùng bao gồm người quản lý, cơ sở sản xuất, đại lý phân phối
 const User = database.define("users", {

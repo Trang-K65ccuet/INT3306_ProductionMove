@@ -1,4 +1,4 @@
-import User from "../models/UserModel.js";
+import User from "../models/user/UserModel.js";
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 
@@ -12,7 +12,8 @@ export const authorizationUser = async (req, res, next) => {
     try {
       const data = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
       if(!data) return res.status(400).json({data});
-
+      
+      req.Id = data.id;
       req.userName = data.username;
       req.userPosition = data.position;
       return next();

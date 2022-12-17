@@ -1,8 +1,8 @@
-import {ProductLine} from "../../models/productmodel/ProductLineModel.js";
+import {ProductLine} from "../../models/product/ProductLineModel.js";
 export const getProductLine = async (req, res) => {
     try {
-        const productlist = await ProductList.findAll({
-            attributes: ['id', 'productline', 'description']
+        const productlist = await ProductLine.findAll({
+            attributes: ['productline', 'description']
             
         })
         res.status(200).json(productlist);
@@ -12,11 +12,8 @@ export const getProductLine = async (req, res) => {
 }
 
 export const addProductLine = async (req,res) => {
-    const {productline, description} = req.body;
-
     try {
-        await ProductList.create({
-            id: null,
+        await ProductLine.create({
             productline: req.body.productline,
             description: req.body.description
         })

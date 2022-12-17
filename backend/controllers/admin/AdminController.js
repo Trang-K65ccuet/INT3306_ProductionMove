@@ -1,5 +1,5 @@
 import { where } from "sequelize";
-import User from "../models/UserModel.js";
+import User from "../../models/user/UserModel.js";
 import bcrypt from 'bcrypt';
 import argon2 from 'argon2';
 
