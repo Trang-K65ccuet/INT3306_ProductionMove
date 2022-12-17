@@ -16,7 +16,7 @@ const ImportProductsCSSX = () => {
               <thead>
                 <tr>
                   <th>STT</th>
-                  <th>Mặt hàng</th>
+                  <th>Sản phẩm</th>
                   <th>Số lượng</th>
                 </tr>
               </thead>

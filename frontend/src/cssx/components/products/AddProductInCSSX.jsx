@@ -13,12 +13,12 @@ const AddProductInCSSX = () => {
             <form>
               <p className="has-text-centered"></p>
               <div className="field">
-                <label className="label">Mặt hàng</label>
+                <label className="label">Sản phẩm</label>
                 <div className="control">
                   <input
                     type="text"
                     className="input"
-                    placeholder="Mặt hàng"
+                    placeholder="Sản phẩm"
                   />
                 </div>
               </div>
