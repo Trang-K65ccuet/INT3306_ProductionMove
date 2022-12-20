@@ -67,7 +67,7 @@ export const postUser = async(req, res) => {
         await User.create({
             id: null,
             name: name,
-            username: username,
+            username: username + i,
             position: position,
             password: hashPassword,
             
@@ -84,7 +84,7 @@ export const deleteUser = async(req, res) =>{
             id: req.params.id
         }
     });
-    if(!user) return res.status(404).json({msg: "User không tồn tại"});
+    if(!user) return res.status(404).json({msg: "User tidak ditemukan"});
     try {
         await User.destroy({
             where:{

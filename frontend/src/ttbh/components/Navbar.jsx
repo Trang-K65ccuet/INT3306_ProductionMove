@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch} from "react-redux";
 import { LogOut, reset } from "../../all/features/authSlice";
+import './components.css';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -38,8 +39,8 @@ const Navbar = () => {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-              <button onClick={logout} className="button is-light">
-                  Log out
+              <button onClick={logout} className="button is-light" id = "logout">
+                  Đăng xuất
                 </button>
               </div>
             </div>

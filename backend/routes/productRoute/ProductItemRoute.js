@@ -1,10 +1,8 @@
+import { getProductItem, addProductItemList, sendListProductItem } from "../../controllers/product/ProductItemController.js";
+import { authorizationUser,checkAdmin,checkCssx } from "../../middleware/AuthUser.js";
 import express from 'express';
-import { getProductItem,getProductitemByCssx, addProductItemList, sendListProductItem } from '../../controllers/product/ProductItemController.js';
-import {checkCssx, authorizationUser } from '../../middleware/AuthUser.js';
-const itemRouter = express.Router();
+const itemRoute = express.Router();
 
-itemRouter.get('/productitems',authorizationUser, getProductItem);
-itemRouter.get('/productitems/cssx/:cssx',authorizationUser, getProductitemByCssx);
-itemRouter.post('/productitems/add',authorizationUser, checkCssx, addProductItemList);
-itemRouter.post('/productitems/send',authorizationUser,checkCssx, sendListProductItem);
-export default itemRouter;
+itemRoute.post('/productitem/add',authorizationUser,checkCssx,addProductItemList);
+itemRoute.post('/productitem/send',authorizationUser, checkCssx, sendListProductItem )
+export default itemRoute;
