@@ -14,62 +14,74 @@ import "./chart.scss";
 const data = [
   {
     Month: "1",
-    Sold: 40,
+    Import:51,
+    Export: 40,
     Error: 2
   },
   {
     Month: "2",
-    Sold: 30,
+    Import:5,
+    Export: 30,
     Error: 1
   },
   {
     Month: "3",
-    Sold: 20,
+    Import:43,
+    Export: 20,
     Error: 9
   },
   {
     Month: "4",
-    Sold: 27,
+    Import:45,
+    Export: 27,
     Error: 3
   },
   {
     Month: "5",
-    Sold: 25,
+    Import:25,
+    Export: 25,
     Error: 5
   },
   {
     Month: "6",
-    Sold: 23,
+    Import:74,
+    Export: 23,
     Error: 3
   },
   {
     Month: "7",
-    Sold: 34,
+    Import:35,
+    Export: 64,
     Error: 2
   },
   {
     Month: "8",
-    Sold: 34,
+    Import:5,
+    Export: 34,
     Error: 7
   },
   {
     Month: "9",
-    Sold: 25,
+    Import:29,
+    Export: 25,
     Error: 4
   },
   {
     Month: "10",
-    Sold: 55,
+    Import:35,
+    Export: 55,
     Error: 3
   },
   {
     Month: "11",
-    Sold: 34,
+    Import:55,
+    Export: 34,
     Error: 1
   },
   {
     Month: "12",
-    Sold: 43,
+    Import:44,
+    Export: 43,
     Error: 2
   },
 ];
@@ -93,7 +105,8 @@ const Chart = ({ aspect, title }) => {
 
           <Tooltip />
           <Legend/>
-          <Bar dataKey="Sold" fill="#5BD150" />
+          <Bar dataKey="Import" fill="#73DCB9" />
+          <Bar dataKey="Export" fill="#5BD150" />
           <Bar dataKey="Error" fill="#993122" />
 
         </BarChart>
