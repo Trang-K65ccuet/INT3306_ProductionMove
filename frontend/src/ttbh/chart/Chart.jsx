@@ -14,74 +14,62 @@ import "./chart.scss";
 const data = [
   {
     Month: "1",
-    Import:51,
-    Export: 40,
-    Error: 2
+    Insurance: 51,
+    Error: 3
   },
   {
     Month: "2",
-    Import:5,
-    Export: 30,
-    Error: 1
+    Insurance: 5,
+    Error: 2
   },
   {
     Month: "3",
-    Import:43,
-    Export: 20,
-    Error: 9
+    Insurance: 70,
+    Error: 10
   },
   {
     Month: "4",
-    Import:45,
-    Export: 27,
-    Error: 3
+    Insurance: 18,
+    Error: 8
   },
   {
     Month: "5",
-    Import:25,
-    Export: 25,
-    Error: 5
+    Insurance: 40,
+    Error: 15
   },
   {
     Month: "6",
-    Import:74,
-    Export: 23,
-    Error: 3
+    Insurance: 22,
+    Error: 6
   },
   {
     Month: "7",
-    Import:35,
-    Export: 64,
+    Insurance: 40,
     Error: 2
   },
   {
     Month: "8",
-    Import:5,
-    Export: 34,
-    Error: 7
+    Insurance: 10,
+    Error: 0
   },
   {
     Month: "9",
-    Import:29,
-    Export: 25,
-    Error: 4
-  },
-  {
-    Month: "10",
-    Import:35,
-    Export: 55,
-    Error: 3
-  },
-  {
-    Month: "11",
-    Import:55,
-    Export: 34,
+    Insurance: 46,
     Error: 1
   },
   {
+    Month: "10",
+    Insurance: 30,
+    Error: 2
+  },
+  {
+    Month: "11",
+    Insurance: 20,
+    Error: 3
+  },
+  {
     Month: "12",
-    Import:44,
-    Export: 43,
+    Insurance: 55,
     Error: 2
   },
 ];
@@ -105,8 +93,7 @@ const Chart = ({ aspect, title }) => {
 
           <Tooltip />
           <Legend/>
-          <Bar dataKey="Import" fill="#73DCB9" />
-          <Bar dataKey="Export" fill="#5BD150" />
+          <Bar dataKey="Insurance" fill="#5BD150" />
           <Bar dataKey="Error" fill="#993122" />
 
         </BarChart>
