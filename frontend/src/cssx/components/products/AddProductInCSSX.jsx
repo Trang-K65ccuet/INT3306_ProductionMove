@@ -15,11 +15,10 @@ const AddProductInCSSX = () => {
               <div className="field">
                 <label className="label">Sản phẩm</label>
                 <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    placeholder="Sản phẩm"
-                  />
+                <select className="input">
+                  <option value="DELL">Máy tính Dell</option>
+                  <option value="HP">Máy tính HP</option>
+                </select>
                 </div>
               </div>
               <div className="field">
