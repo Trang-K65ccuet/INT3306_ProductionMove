@@ -3,6 +3,10 @@ import { ConsignmentDetail } from "../../models/consignment/ConsignmentDetailMod
 import { ProductItem } from "../../models/product/ProductItemModel.js";
 import { database } from "../../config/Database.js";
 import {QueryTypes} from 'sequelize';
+import CustomerDetail from '../../models/transaction/CustomerDetailModel.js';
+import Transaction from '../../models/transaction/TransactionModel.js';
+import { response } from "express";
+// dưới đây là những chức năng mà đại lý phân phối có quyên thực hiện
 export const getProductLotByDistributor = async (req, res) => {
     const distributorId = req.params.id;
     try {
@@ -18,13 +22,13 @@ export const getProductLotByDistributor = async (req, res) => {
     
 }
 export const getProductItemByDistributor = async (req, res) => {
-    const distributorid = req.params.id;
+    const distributorid = req.Id;
     try {
         const getallLot = await Consignment.findAll({
             where: {
-                distributorid: distributorid
+                distributorid : distributorid
             }
-        })
+        });
         var i = 0;
         var allItem = [];
         for(i; i< getallLot.length; i++) {
@@ -34,8 +38,11 @@ export const getProductItemByDistributor = async (req, res) => {
             const getItemByLot = await database.query(sql, {
                 replacements: [Lot],
                 type: QueryTypes.SELECT}); 
-           
-            allItem = getItemByLot;
+        var j = 0;
+        for (j; j< getItemByLot.length; j++) {
+            allItem.push(getItemByLot.at(j))
+        }
+            
         }
        
         
@@ -46,6 +53,56 @@ export const getProductItemByDistributor = async (req, res) => {
     
     
 }
-const sendProductToCus = async(req, res) => {
+// gửi hàng tới người nhận là khách hàng
+export const sendProductToCustomer = async(req, res) => {
+   const {productline, quantity, customername, customerphone, customeraddress, date} = req.body;
+   const distributorid = req.Id;
 
+   try {
+    const findexist = await CustomerDetail.findOne({
+        where: {
+            customerPhoneNumber: customerphone
+        }
+    });
+    if(findexist.length == 0) {
+    const customer = await CustomerDetail.create({
+        customerName: customername,
+        customerPhoneNumber: customerphone,
+        customerAddress: customeraddress
+    });
+    findexist = customer;
+}
+    const quer = "SELECT * FROM consignmentdetails Left Join consignments ON consignmentdetails.lot " 
+    + "= consignments.lot left join productitems ON consignmentdetails.productcode = productitems.productcode WHERE status = 1 AND productline = :product_line";
+    const getItemAvailable = await database.query(quer, {
+                    replacements: {product_line: productline},
+               type: QueryTypes.SELECT}); 
+               var i = 0;
+               for(i; i< quantity; i++) {
+                           try {
+                                ProductItem.update({
+                                    status: 2
+                                }, {
+                                    where: {
+                                        productcode: getItemAvailable.at(i).productcode  
+                                    }
+                                })
+                               
+                                await Transaction.create({
+                                    productcode: getItemAvailable.at(i).productcode,
+                                    customerId: findexist.customerId,
+                                    dateOfTransaction: date
+                                })
+                            } catch (error) {
+                                return res.status(400).json({msg: error + getItemAvailable.length })
+                            }
+                            
+                          }  
+
+    res.status(200).json({msg: "Gửi sản phẩm thành công cho khách hàng " + findexist.customerName});
+
+  } catch (error) {
+     res.status(400).json(error);
+
+   }
 }

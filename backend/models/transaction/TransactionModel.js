@@ -30,5 +30,7 @@ const Transaction = database.define('transaction', {
         allowNull: false
     }
 
+}, {
+    timestamps: false
 });
 export default Transaction;

@@ -26,8 +26,15 @@ const User = database.define("users", {
     password :{
       type: DataTypes.STRING,
       allowNull: false
+    },
+    status: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
- });
+    
+ }, {
+  timestamps: false
+});
  database.sync().then(() => {
   console.log('table created successfully!');
 }).catch((error) => {

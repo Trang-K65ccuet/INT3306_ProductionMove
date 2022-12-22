@@ -1,36 +1,41 @@
+import { database } from "../../config/Database.js";
 import { DataTypes } from "sequelize";
-import { database} from "../../config/Database.js";
+import { ProductLine } from "../product/ProductLineModel.js";
 import User from "../user/UserModel.js";
 
-export const Consignment = database.define('consignment', {
-    lot: {
+const ConsignmentRequest = database.define('consignmentrequests', {
+    id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
     },
+    productline: {
+        type: DataTypes.STRING,
+        references: {
+            model: ProductLine,
+            key: 'productline'
+        }
+    },
     quantity: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    distributorid: {
+    consignmentid: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         references: {
             model: User,
             key: 'id'
         }
-
     },
-    manufactureid: {
+    manufactureid : {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
+        references : {
             model: User,
             key: 'id'
         }
     }
-
 }, {
     timestamps: false
-  });
+});
+export default ConsignmentRequest;

@@ -20,6 +20,8 @@ const CustomerDetail = database.define('customerdetail', {
         type: DataTypes.STRING,
         allowNull: true
     }
+}, {
+    timestamps: false
 });
 database.sync().then(() => {
     console.log('table created successfully!');

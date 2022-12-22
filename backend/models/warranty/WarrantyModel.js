@@ -23,5 +23,7 @@ const Warranty = database.define('warranty', {
         type: DataTypes.DATE,
         allowNull: false
     }
-});
+}, {
+    timestamps: false
+  });
 export default Warranty;
