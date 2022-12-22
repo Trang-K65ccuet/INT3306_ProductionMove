@@ -15,11 +15,10 @@ const ExportProductInDLPP = () => {
               <div className="field">
                 <label className="label">Sản phẩm</label>
                 <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    placeholder="Sản phẩm"
-                  />
+                <select className="input">
+                  <option value="DELL">Máy tính Dell</option>
+                  <option value="HP">Máy tính HP</option>
+                </select>
                 </div>
               </div>
               <div className="field">
@@ -49,6 +48,26 @@ const ExportProductInDLPP = () => {
                     type="text"
                     className="input"
                     placeholder="Số điện thoại"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Địa chỉ</label>
+                <div className="control">
+                  <input
+                    type="text"
+                    className="input"
+                    placeholder="Địa chỉ"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Ngày bán</label>
+                <div className="control">
+                  <input
+                    type="date"
+                    className="input"
+                    placeholder="Ngày bán"
                   />
                 </div>
               </div>

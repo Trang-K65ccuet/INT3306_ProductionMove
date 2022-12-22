@@ -15,11 +15,10 @@ const AddProductInDLPP = () => {
               <div className="field">
                 <label className="label">Sản phẩm</label>
                 <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    placeholder="Sản phẩm"
-                  />
+                <select className="input">
+                  <option value="DELL">Máy tính Dell</option>
+                  <option value="HP">Máy tính HP</option>
+                </select>
                 </div>
               </div>
               <div className="field">
@@ -35,11 +34,10 @@ const AddProductInDLPP = () => {
               <div className="field">
                 <label className="label">Cơ sở sản xuất</label>
                 <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    placeholder="Cơ sở sản xuất"
-                  />
+                <select className="input">
+                  <option value="CS1">Cơ sở 1</option>
+                  <option value="CS2">Cơ sở 2</option>
+                </select>
                 </div>
               </div>
 
