@@ -5,10 +5,31 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import SellIcon from '@mui/icons-material/Sell';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import "./widget.scss";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Widget = ({ type }) => {
+  const [productline, setProductline] = useState([]);
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    getProductline();
+    getUser();
+  }, []);
+
+  const productlineCount = productline.length;  
+  const getProductline = async () => {
+    const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
+    setProductline(response.data);  
+  }
+
+  const userCount = user.length;
+  const getUser= async () => {
+    const response = await axios.get("http://localhost:5000/users",{withCredentials: true});
+    setUser(response.data);
+  };
+
   let data;
-  // temp
   const amount = 500;
   const diff = 30;
 
@@ -16,7 +37,7 @@ const Widget = ({ type }) => {
     case "users":
       data = {
         title: "NGƯỜI DÙNG",
-        isMoney: false,
+        value:userCount,
         link: "Tài khoản được kích hoạt",
         icon: (
           <PersonOutlineOutlinedIcon
@@ -29,7 +50,7 @@ const Widget = ({ type }) => {
       case "products":
         data = {
           title: "SẢN PHẨM",
-          isMoney: false,
+          value: productlineCount,
           link: "Số mặt hàng quản lý",
           icon: (
             <ProductionQuantityLimitsIcon
@@ -42,7 +63,7 @@ const Widget = ({ type }) => {
         case "sold":
           data = {
             title: "ĐÃ BÁN",
-            isMoney: false,
+            value:amount,
             link: "Tổng sản phẩm đã bán",
             icon: (
               <SellIcon
@@ -55,7 +76,7 @@ const Widget = ({ type }) => {
         case "error":
           data = {
             title: "LỖI",
-            isMoney: false,
+            value: amount,
             link: "Số sản phẩm bảo hành",
             icon: (
               <WarningAmberIcon
@@ -65,29 +86,26 @@ const Widget = ({ type }) => {
             ),
           };
         break;
-
     default:
       break;
   }
-
-  return (
-    <div className="widget">
-      <div className="left">
-        <span className="title">{data.title}</span>
-        <span className="counter">
-          {data.isMoney && "$"} {amount}
-        </span>
-        <span className="link">{data.link}</span>
-      </div>
-      <div className="right">
-        <div className="percentage positive">
-          <KeyboardArrowUpIcon />
-          {diff}%
+    return (
+      <div className="widget">
+        <div className="left">
+          <span className="title">{data.title}</span>
+          <span className="counter">{data.value}</span>
+          <span className="link">{data.link}</span>
         </div>
-        {data.icon}
+        <div className="right">
+          <div className="percentage positive">
+            <KeyboardArrowUpIcon />
+            {diff}%
+          </div>
+          {data.icon}
+        </div>
       </div>
-    </div>
-  );
+    );
+
 };
 
 export default Widget;

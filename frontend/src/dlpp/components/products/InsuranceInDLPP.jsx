@@ -1,8 +1,22 @@
 import React from "react";
 import Layout from "../../pages/Layout";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 
 const InsuranceInDLPP = () => {
+  const [productline, setProductline] = useState([]);
+
+  useEffect(() => {
+    getProductline();
+  }, []);
+
+  const getProductline = async () => {
+    const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
+    console.log(response.data); 
+    setProductline(response.data);  
+  };
+
   return (
     <Layout>
       <div>
@@ -12,6 +26,18 @@ const InsuranceInDLPP = () => {
           <div className="content">
             <form>
               <p className="has-text-centered"></p>
+
+              <div className="field">
+                <label className="label">Sản phẩm</label>
+                <div className="control">
+                  <select className="input">
+                  {productline.map((product) => (
+                      <option>{product.description}</option>
+                  ))}
+                  </select>
+                </div>
+              </div>
+
               <div className="field">
                 <label className="label">Mã sản phẩm</label>
                 <div className="control">
@@ -19,27 +45,6 @@ const InsuranceInDLPP = () => {
                     type="text"
                     className="input"
                     placeholder="Mã sản phẩm"
-                  />
-                </div>
-              </div>
-
-              <div className="field">
-                <label className="label">Họ tên khách hàng</label>
-                <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    placeholder="Cơ sở sản xuất"
-                  />
-                </div>
-              </div>
-              <div className="field">
-                <label className="label">Số điện thoại</label>
-                <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    placeholder="Số điện thoại"
                   />
                 </div>
               </div>

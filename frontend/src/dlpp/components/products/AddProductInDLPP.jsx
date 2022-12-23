@@ -1,8 +1,32 @@
 import React from "react";
 import Layout from "../../pages/Layout";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 
 const AddProductInDLPP = () => {
+  const [productline, setProductline] = useState([]);
+  const [cssx, setCssx] = useState([]);
+
+  useEffect(() => {
+    getProductline();
+  }, []);
+
+  useEffect(() => {
+    getCSSX();
+  }, []);
+
+  const getProductline = async () => {
+    const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
+    console.log(response.data); 
+    setProductline(response.data);  
+  };
+
+  const getCSSX = async () => {
+    const response = await axios.get("http://localhost:5000/manufactures/all",{withCredentials: true});
+    console.log(response.data); 
+    setCssx(response.data);  
+  };
   return (
     <Layout>
       <div>
@@ -16,8 +40,9 @@ const AddProductInDLPP = () => {
                 <label className="label">Sản phẩm</label>
                 <div className="control">
                 <select className="input">
-                  <option value="DELL">Máy tính Dell</option>
-                  <option value="HP">Máy tính HP</option>
+                {productline.map((product) => (
+                    <option>{product.description}</option>
+                ))}
                 </select>
                 </div>
               </div>
@@ -35,8 +60,9 @@ const AddProductInDLPP = () => {
                 <label className="label">Cơ sở sản xuất</label>
                 <div className="control">
                 <select className="input">
-                  <option value="CS1">Cơ sở 1</option>
-                  <option value="CS2">Cơ sở 2</option>
+                {cssx.map((cssx) => (
+                    <option>{cssx.name}</option>
+                ))}
                 </select>
                 </div>
               </div>

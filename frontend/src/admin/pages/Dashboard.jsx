@@ -1,6 +1,6 @@
 import Layout from "./Layout";
 import Welcome from "../components/Welcome";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile} from "../../all/features/authSlice";
 import Widget from "../widget/Widget";
@@ -9,22 +9,8 @@ import Chart from "../chart/Chart";
 import "./pages.css"
 
 
+
 const Dashboard = () => {
-  const dispatch = useDispatch();
-  const { user } = useSelector(
-    (state) => state.auth
-  );
-
-  useEffect(() => {
-    getProfile();
-  
-  }, [dispatch, user]);
-
-  const Auth = (e) => {
-    e.preventDefault();
-    dispatch(getProfile);
-  };
-
   return (
     <Layout>
       <div className="widgets">
