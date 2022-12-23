@@ -1,8 +1,22 @@
 import React from "react";
 import Layout from "../../pages/Layout";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 
 const AddProductInCSSX = () => {
+  const [productline, setProductline] = useState([]);
+
+  useEffect(() => {
+    getProductline();
+  }, []);
+
+  const getProductline = async () => {
+    const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
+    console.log(response.data); 
+    setProductline(response.data);  
+  };
+
   return (
     <Layout>
       <div>
@@ -15,11 +29,11 @@ const AddProductInCSSX = () => {
               <div className="field">
                 <label className="label">Sản phẩm</label>
                 <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    placeholder="Sản phẩm"
-                  />
+                <select className="input">
+                {productline.map((product) => (
+                    <option>{product.description}</option>
+                ))}
+                </select>
                 </div>
               </div>
               <div className="field">

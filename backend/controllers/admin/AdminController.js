@@ -55,7 +55,7 @@ export const updateUser = async (req, res) => {
 export const postUser = async(req, res) => {
     console.log(req.body);
     const {name,username,position,password, confpassword} = req.body;
-    const existed = await User.findAndCountAll({
+    const existed = await User.findOne({
         attributes:['id','name','username','position','password'],
         where: {
             username: req.body.username

@@ -1,8 +1,32 @@
 import React from "react";
 import Layout from "../../pages/Layout";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 
 const AddProductInDLPP = () => {
+  const [productline, setProductline] = useState([]);
+  const [cssx, setCssx] = useState([]);
+
+  useEffect(() => {
+    getProductline();
+  }, []);
+
+  useEffect(() => {
+    getCSSX();
+  }, []);
+
+  const getProductline = async () => {
+    const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
+    console.log(response.data); 
+    setProductline(response.data);  
+  };
+
+  const getCSSX = async () => {
+    const response = await axios.get("http://localhost:5000/manufactures/all",{withCredentials: true});
+    console.log(response.data); 
+    setCssx(response.data);  
+  };
   return (
     <Layout>
       <div>
@@ -15,11 +39,11 @@ const AddProductInDLPP = () => {
               <div className="field">
                 <label className="label">Sản phẩm</label>
                 <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    placeholder="Sản phẩm"
-                  />
+                <select className="input">
+                {productline.map((product) => (
+                    <option>{product.description}</option>
+                ))}
+                </select>
                 </div>
               </div>
               <div className="field">
@@ -35,11 +59,11 @@ const AddProductInDLPP = () => {
               <div className="field">
                 <label className="label">Cơ sở sản xuất</label>
                 <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    placeholder="Cơ sở sản xuất"
-                  />
+                <select className="input">
+                {cssx.map((cssx) => (
+                    <option>{cssx.name}</option>
+                ))}
+                </select>
                 </div>
               </div>
 

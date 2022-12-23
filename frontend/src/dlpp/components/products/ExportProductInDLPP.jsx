@@ -1,8 +1,20 @@
 import React from "react";
 import Layout from "../../pages/Layout";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const ExportProductInDLPP = () => {
+  const [productline, setProductline] = useState([]);
+
+  useEffect(() => {
+    getProductline();
+  }, []);
+
+  const getProductline = async () => {
+    const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
+    console.log(response.data); 
+    setProductline(response.data);  
+  };
   return (
     <Layout>
       <div>
@@ -15,11 +27,11 @@ const ExportProductInDLPP = () => {
               <div className="field">
                 <label className="label">Sản phẩm</label>
                 <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    placeholder="Sản phẩm"
-                  />
+                <select className="input">
+                {productline.map((product) => (
+                    <option>{product.description}</option>
+                ))}
+                </select>
                 </div>
               </div>
               <div className="field">
@@ -49,6 +61,26 @@ const ExportProductInDLPP = () => {
                     type="text"
                     className="input"
                     placeholder="Số điện thoại"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Địa chỉ</label>
+                <div className="control">
+                  <input
+                    type="text"
+                    className="input"
+                    placeholder="Địa chỉ"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Ngày bán</label>
+                <div className="control">
+                  <input
+                    type="date"
+                    className="input"
+                    placeholder="Ngày bán"
                   />
                 </div>
               </div>
