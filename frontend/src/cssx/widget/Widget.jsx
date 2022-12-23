@@ -5,8 +5,22 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import SellIcon from '@mui/icons-material/Sell';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import "./widget.scss";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Widget = ({ type }) => {
+  const [productCSSX, setProductCSSX] = useState([]);
+
+  useEffect(() => {
+    getProductCSSX();
+  }, []);
+
+  const productCount = productCSSX.length;  
+  const getProductCSSX = async () => {
+    const response = await axios.get("http://localhost:5000/manufactures/items",{withCredentials: true});
+    setProductCSSX(response.data);  
+  }
+
   let data;
   // temp
   const amount = 500;
@@ -16,7 +30,7 @@ const Widget = ({ type }) => {
       case "products":
         data = {
           title: "SẢN PHẨM",
-          isMoney: false,
+          value:productCount,
           link: "Sản phẩm trong kho",
           icon: (
             <ProductionQuantityLimitsIcon
@@ -29,7 +43,7 @@ const Widget = ({ type }) => {
         case "import":
           data = {
             title: "NHẬP",
-            isMoney: false,
+            value:amount,
             link: "Sản phẩm đã nhập",
             icon: (
               <PublishIcon
@@ -42,7 +56,7 @@ const Widget = ({ type }) => {
         case "export":
           data = {
             title: "XUẤT",
-            isMoney: false,
+            value:amount,
             link: "Sản phẩm đã xuất cho đại lý",
             icon: (
               <SellIcon
@@ -55,7 +69,7 @@ const Widget = ({ type }) => {
         case "error":
           data = {
             title: "LỖI",
-            isMoney: false,
+            value: amount,
             link: "Sản phẩm không thể bảo hành",
             icon: (
               <WarningAmberIcon
@@ -74,9 +88,7 @@ const Widget = ({ type }) => {
     <div className="widget">
       <div className="left">
         <span className="title">{data.title}</span>
-        <span className="counter">
-          {data.isMoney && "$"} {amount}
-        </span>
+        <span className="counter">{data.value}</span>
         <span className="link">{data.link}</span>
       </div>
       <div className="right">

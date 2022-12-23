@@ -16,7 +16,7 @@ const ProductListCSSX = () => {
   return (
     <div>
       <h1 className="title">Sản phẩm</h1>
-      <h2 className="subtitle">Danh sách các sản phẩm và số lượng</h2>
+      <h2 className="subtitle">Danh sách các sản phẩm của cơ sở sản xuất</h2>
       <table className="table is-striped is-fullwidth">
         <thead>
           <tr>
