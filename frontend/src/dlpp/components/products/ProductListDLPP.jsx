@@ -1,6 +1,34 @@
-import React from "react";;
+import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const ProductListDLPP = () => {
+
+  //return id
+  const [profile, setProfile] = useState([]);
+  useEffect(() => {
+    getProfile();
+  }, []);
+  const getProfile = async () => {
+    const response = await axios.get("http://localhost:5000/profile", {withCredentials: true});
+    setProfile(response.data);
+  };
+
+  const id = profile.id;
+  //const item_dlpp = "http://localhost:5000/lot/item/"+ id;
+  console.log("http://localhost:5000/lot/item/" + id);
+  //return product list
+  const [productDLPP, setProductDLPP] = useState([]);
+
+  useEffect(() => {
+    getProductDLPP();
+  }, []);
+
+  const getProductDLPP = async () => {
+    const response = await axios.get("http://localhost:5000/lot/item/" + id, {withCredentials: true});
+    setProductDLPP(response.data);
+  };
+
   return (
     <div>
       <h1 className="title">Sản phẩm</h1>
@@ -11,17 +39,10 @@ const ProductListDLPP = () => {
             <th>STT</th>
             <th>Sản phẩm</th>
             <th>Dòng dản phẩm</th>
-            <th></th>
             <th>Số lượng</th>
           </tr>
         </thead>
         <tbody>
-        <tr>
-              <td>1</td>
-              <td>DELL1</td>
-              <td>Máy tính Dell</td>
-              <td>100</td>
-        </tr>
         </tbody>
       </table>
     </div>
