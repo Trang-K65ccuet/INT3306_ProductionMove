@@ -19,7 +19,7 @@ export const getProductitemByManufacture = async (req, res) => {
     try {
         const productItemByCssx = await ProductItem.findAll({
             where: {
-                manufacture: req.params.cssx
+                manufactureid: req.Id
             }
         })
         return res.status(200).json({productItemByCssx});
