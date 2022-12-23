@@ -28,6 +28,10 @@ const Transaction = database.define('transaction', {
     dateOfTransaction: {
         type: DataTypes.DATE,
         allowNull: false
+    },
+    expiredDay: {
+        type: DataTypes.DATE,
+        allowNull: false
     }
 
 }, {

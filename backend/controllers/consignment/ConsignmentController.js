@@ -6,6 +6,7 @@ import {QueryTypes} from 'sequelize';
 import CustomerDetail from '../../models/transaction/CustomerDetailModel.js';
 import Transaction from '../../models/transaction/TransactionModel.js';
 import { response } from "express";
+import ConsignmentRequest from "../../models/consignment/ConsignmentRequestModel.js";
 // dưới đây là những chức năng mà đại lý phân phối có quyên thực hiện
 export const getProductLotByDistributor = async (req, res) => {
     const distributorId = req.params.id;
@@ -105,4 +106,35 @@ export const sendProductToCustomer = async(req, res) => {
      res.status(400).json(error);
 
    }
+}
+// gửi yêu cầu nhập hàng tới cơ sở sản xuất
+export const sendRequest = async (req, res) => {
+    const {productline, quantity, manufactureid} = req.body;
+    try {
+        await ConsignmentRequest.create({
+            productline: productline,
+            quantity: quantity,
+            distributorid: req.Id,
+            manufactureid: manufactureid
+        })
+        return res.status(200).json({msg: "Gửi yêu cầu nhập hàng thành công đến cơ sở sx "})
+    } catch (error) {
+        return res.status(200).json({msg: error})
+    }
+} 
+// chuyển sản phẩm cần bảo hành về kho
+export const getFaultItemFromCus = async (req, res) => {
+    const {productcode} = req.body;
+    try {
+        await ProductItem.update({
+            status: 3
+        }, {
+            where: {
+                productcode: productcode
+            }
+        })
+       return res.status(200).json({msg: "Lấy sản phẩm cần bảo hành thành côn, có code là" + productcode}) 
+    } catch (error) {
+        
+    }
 }
