@@ -3,6 +3,7 @@ import { authorizationUser,checkAdmin,checkCssx } from "../../middleware/AuthUse
 import express from 'express';
 const itemRoute = express.Router();
 
+itemRoute.get('/productitem/all', authorizationUser,checkAdmin,getProductItem);
 itemRoute.post('/productitem/add',authorizationUser,checkCssx,addProductItemList);
 itemRoute.post('/productitem/send',authorizationUser, checkCssx, sendListProductItem )
 export default itemRoute;

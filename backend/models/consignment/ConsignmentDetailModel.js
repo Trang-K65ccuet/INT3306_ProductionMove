@@ -25,4 +25,6 @@ export const ConsignmentDetail = database.define('consignmentdetail',{
     type: DataTypes.DATE,
     allowNull: false
   }
+}, {
+  timestamps: false
 });

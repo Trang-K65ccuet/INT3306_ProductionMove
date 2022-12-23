@@ -13,6 +13,8 @@ import { DataTypes } from "sequelize";
         allowNull: true
     }
     
+}, {
+  timestamps: false
 });
 database.sync().then(() => {
     console.log('table created successfully!');

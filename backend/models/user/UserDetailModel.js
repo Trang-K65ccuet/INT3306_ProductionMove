@@ -20,8 +20,10 @@ const UserDetail = database.define("userdetail", {
         allowNull: false 
     },
     email: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: true
     }
+}, {
+    timestamps: false
 });
 export default UserDetail;

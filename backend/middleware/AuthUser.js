@@ -28,8 +28,12 @@ export const checkAdmin = async (req, res, next) => {
    if(req.userPosition == 'admin') return next();
    return res.status(403).json({msg: req.userPosition + " Không có quyền truy cập"})
 }
-
+// check xem người dùng có phải là cơ sở sản xuất không
 export const checkCssx = async (req, res, next) => {
   if (req.userPosition == 'cssx') return next();
   return res.status(403).json({msg: req.userPosition + " không được phép tạo các lô hàng"})
+}
+
+export const checkConsignment = async(req, res, next) => {
+
 }

@@ -43,24 +43,25 @@ export const updateUser = async (req, res) => {
             position: position,
             password: password
         }, {where : {
-            id: user.id
+            id: req.params.id
         }})
+        return res.status(200).json({msg: "Update người dùng thành công!"})
     } catch (error) {
-        
+        return res.status(200).json({msg: error})
     }
 
     
 }
 export const postUser = async(req, res) => {
-    const {name,username,position,password, confpassword} = req.body;
-    const existed = await User.findOne({
-        attributes:['id','name','username','position','password'],
+    const {name,username,position,password, confpassword, status} = req.body;
+    const existed = await User.findAndCountAll({
+       
         where: {
             username: req.body.username
         }
 
     })
-    if(existed) return res.status(400).json({msg: "Tài khoản username đã tồn tại. Vui lòng chọn username khác!"});
+    if(existed.count != 0) return res.status(400).json({msg:  existed + (await existed).count});
     if(password !== confpassword) return res.status(400).json({msg: "Password khác conf"});
     const hashPassword = await argon2.hash(password);
     try {
@@ -70,6 +71,7 @@ export const postUser = async(req, res) => {
             username: username,
             position: position,
             password: hashPassword,
+            status: status
             
         });
         res.status(201).json({msg: "Tạo user thành công"});

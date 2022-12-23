@@ -16,28 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `customerdetails`
+-- Table structure for table `consignmentdetails`
 --
 
-DROP TABLE IF EXISTS `customerdetails`;
+DROP TABLE IF EXISTS `consignmentdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customerdetails` (
-  `customerId` int NOT NULL AUTO_INCREMENT,
-  `customerName` varchar(255) NOT NULL,
-  `customerPhoneNumber` varchar(255) NOT NULL,
-  `customerAddress` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`customerId`)
+CREATE TABLE `consignmentdetails` (
+  `productcode` varchar(255) NOT NULL,
+  `lot` int NOT NULL,
+  `createdAt` datetime NOT NULL,
+  PRIMARY KEY (`productcode`),
+  KEY `lot` (`lot`),
+  CONSTRAINT `consignmentdetails_ibfk_1` FOREIGN KEY (`productcode`) REFERENCES `productitems` (`productcode`),
+  CONSTRAINT `consignmentdetails_ibfk_2` FOREIGN KEY (`lot`) REFERENCES `consignments` (`lot`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `customerdetails`
+-- Dumping data for table `consignmentdetails`
 --
 
-LOCK TABLES `customerdetails` WRITE;
-/*!40000 ALTER TABLE `customerdetails` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customerdetails` ENABLE KEYS */;
+LOCK TABLES `consignmentdetails` WRITE;
+/*!40000 ALTER TABLE `consignmentdetails` DISABLE KEYS */;
+INSERT INTO `consignmentdetails` VALUES ('DELL0',1,'2022-12-15 16:40:57'),('HP0',2,'2022-12-15 17:45:04'),('HP1',2,'2022-12-15 17:45:04'),('HP2',2,'2022-12-15 17:45:04');
+/*!40000 ALTER TABLE `consignmentdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-17  9:52:03
+-- Dump completed on 2022-12-23 13:35:39

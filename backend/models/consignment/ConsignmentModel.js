@@ -31,4 +31,6 @@ export const Consignment = database.define('consignment', {
         }
     }
 
-});
+}, {
+    timestamps: false
+  });
