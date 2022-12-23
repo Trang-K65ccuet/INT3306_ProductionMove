@@ -19,10 +19,10 @@ export const getProductitemByManufacture = async (req, res) => {
     try {
         const productItemByCssx = await ProductItem.findAll({
             where: {
-                manufacture: req.params.cssx
+                manufactureid: req.Id
             }
         })
-        return res.status(200).json({productItemByCssx});
+        return res.status(200).json(productItemByCssx);
         
     } catch (error) {
         return res.status(500).json({msg : error.message});
@@ -40,4 +40,52 @@ export const getAllRequestByManufacture = async (req, res) => {
    } catch (error) {
     return res.status(400).json({msg: error})
    } 
+}
+//
+export const sendListProductItem = async (req, res) => {
+    try {
+        
+        const {quantity, productline, distributorid, exportday} = req.body;
+        const existedProductInStock = await ProductItem.findAndCountAll({
+            where: {
+                productline: productline,
+                status: 0
+            }
+        
+        
+        });
+        const lo = await Consignment.findAndCountAll();
+        var lots = lo.count;
+
+        if (quantity >  existedProductInStock.count) {
+            return res.status(400).json({msg: "yêu cầu vượt quá số lượng trong kho"})
+        };
+        await Consignment.create({
+            lot: lots + 1,
+            quantity: quantity,
+            distributorid: distributorid,
+            manufactureid: req.Id,
+        })
+        let i = 0;
+        for (i; i < quantity; i++) {
+            const item = existedProductInStock.rows.at(i);
+           
+            await ProductItem.update({
+                status: 1
+            }, {where: {
+                productcode: item.productcode
+            }});
+            
+            await ConsignmentDetail.create({
+                productcode: item.productcode,
+                lot: lots + 1,
+                exportday: exportday
+               });
+        }
+        
+        res.status(200).json({msg: "Gửi thành công " + quantity + " sản phẩm ở danh mục có lô hàng "+ (lots + 1)})
+    } catch (error) {
+        return res.status(500).json({msg: error.message});
+    }
+    
 }
