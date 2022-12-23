@@ -28,10 +28,9 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
+  `status` tinyint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +39,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Mah','manhacd','admin','$argon2id$v=19$m=65536,t=3,p=4$ABWWNBbVutCfkk+k1hXt4A$QkmAPka6Y+1zVvLYy6zt4nIdKNC4dN3oQdH4fpIMQf4','2022-11-17 15:49:50','2022-11-17 15:49:50'),(2,'Mah','manhcd','admin','$argon2id$v=19$m=65536,t=3,p=4$XHtDAqoegPP27K10fNZRhw$i39gzz2DjT7EOHwGGiGrlAOq1JJxjJj+dK8kwQ7N+yM','2022-11-18 04:34:50','2022-11-18 04:34:50'),(3,'Manha','mnhacd','admin','$argon2id$v=19$m=65536,t=3,p=4$ycp5egsSZ432Llv4s+P9qw$k5UWM3QpstklFqwrlexTMLdvCdrCMwHWdW7gwCji7ck','2022-11-26 04:19:17','2022-11-26 04:19:17'),(4,'M','manh123','cssx','$argon2id$v=19$m=65536,t=3,p=4$ABWWNBbVutCfkk+k1hXt4A$QkmAPka6Y+1zVvLYy6zt4nIdKNC4dN3oQdH4fpIMQf4','2022-11-28 03:47:22','2022-11-28 03:47:22'),(5,'M','manhdlpp','dlpp','$argon2id$v=19$m=65536,t=3,p=4$Aja4tLZO1j5mjk+rQM7a8A$SMo6nMI5AEV4cv58XCQXQdScBTDXThDT4IxSL/Nf2nY','2022-11-28 03:54:34','2022-11-28 03:54:34'),(6,'M','manhttbh','ttbh','$argon2id$v=19$m=65536,t=3,p=4$IAOwpSI4v81XANEwNal4bA$tSYTBFYbqutfktsUcKx9pBKU1Mem/tQIwGOHIY8K0OA','2022-11-28 03:55:30','2022-11-28 03:55:30');
+INSERT INTO `users` VALUES (1,'Mah','manhacd','admin','$argon2id$v=19$m=65536,t=3,p=4$ABWWNBbVutCfkk+k1hXt4A$QkmAPka6Y+1zVvLYy6zt4nIdKNC4dN3oQdH4fpIMQf4',2),(3,'M','sf','cssx','a',0),(4,'M','manh123','cssx','$argon2id$v=19$m=65536,t=3,p=4$ABWWNBbVutCfkk+k1hXt4A$QkmAPka6Y+1zVvLYy6zt4nIdKNC4dN3oQdH4fpIMQf4',0),(5,'M','man','dlpp','$argon2id$v=19$m=65536,t=3,p=4$LiDf7T0kwmrK/0z3ZAuf3g$4hAlJdvbkERRkV7FeRuKIwr7IuuHeuL/J55JaPszS/Q',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-17  9:52:02
+-- Dump completed on 2022-12-23 13:35:39

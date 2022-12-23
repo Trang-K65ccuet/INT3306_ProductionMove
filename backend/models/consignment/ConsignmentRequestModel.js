@@ -1,5 +1,5 @@
 import { database } from "../../config/Database.js";
-import { DataTypes } from "sequelize";
+import { DataTypes, INTEGER } from "sequelize";
 import { ProductLine } from "../product/ProductLineModel.js";
 import User from "../user/UserModel.js";
 
@@ -34,6 +34,10 @@ const ConsignmentRequest = database.define('consignmentrequests', {
             model: User,
             key: 'id'
         }
+    },
+    status: {
+        type: INTEGER,
+        allowNull: false
     }
 }, {
     timestamps: false

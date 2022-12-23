@@ -23,5 +23,7 @@ const UserDetail = database.define("userdetail", {
         type: DataTypes.STRING,
         allowNull: true
     }
+}, {
+    timestamps: false
 });
 export default UserDetail;

@@ -16,32 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `transactions`
+-- Table structure for table `consignments`
 --
 
-DROP TABLE IF EXISTS `transactions`;
+DROP TABLE IF EXISTS `consignments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transactions` (
-  `transactionId` int NOT NULL AUTO_INCREMENT,
-  `productcode` varchar(255) NOT NULL,
-  `customerId` int DEFAULT NULL,
-  `dateOfTransaction` datetime NOT NULL,
-  PRIMARY KEY (`transactionId`),
-  KEY `productcode` (`productcode`),
-  KEY `customerId` (`customerId`),
-  CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`productcode`) REFERENCES `consignmentdetails` (`productcode`),
-  CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`customerId`) REFERENCES `customerdetails` (`customerId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `consignments` (
+  `lot` int NOT NULL AUTO_INCREMENT,
+  `quantity` int NOT NULL,
+  `distributorid` int NOT NULL,
+  `manufactureid` int NOT NULL,
+  PRIMARY KEY (`lot`),
+  KEY `manufactureid` (`manufactureid`),
+  CONSTRAINT `consignments_ibfk_1` FOREIGN KEY (`manufactureid`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `transactions`
+-- Dumping data for table `consignments`
 --
 
-LOCK TABLES `transactions` WRITE;
-/*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
+LOCK TABLES `consignments` WRITE;
+/*!40000 ALTER TABLE `consignments` DISABLE KEYS */;
+INSERT INTO `consignments` VALUES (1,1,5,4),(2,3,5,4);
+/*!40000 ALTER TABLE `consignments` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-17  9:52:03
+-- Dump completed on 2022-12-23 13:35:40

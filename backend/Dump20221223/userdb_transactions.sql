@@ -16,33 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `consignments`
+-- Table structure for table `transactions`
 --
 
-DROP TABLE IF EXISTS `consignments`;
+DROP TABLE IF EXISTS `transactions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `consignments` (
-  `lot` int NOT NULL AUTO_INCREMENT,
-  `quantity` int NOT NULL,
-  `distributorid` int NOT NULL,
-  `manufactureid` int NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`lot`),
-  KEY `manufactureid` (`manufactureid`),
-  CONSTRAINT `consignments_ibfk_1` FOREIGN KEY (`manufactureid`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `transactions` (
+  `transactionId` int NOT NULL AUTO_INCREMENT,
+  `productcode` varchar(255) NOT NULL,
+  `customerId` int DEFAULT NULL,
+  `dateOfTransaction` datetime NOT NULL,
+  PRIMARY KEY (`transactionId`),
+  KEY `productcode` (`productcode`),
+  KEY `customerId` (`customerId`),
+  CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`productcode`) REFERENCES `consignmentdetails` (`productcode`),
+  CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`customerId`) REFERENCES `customerdetails` (`customerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `consignments`
+-- Dumping data for table `transactions`
 --
 
-LOCK TABLES `consignments` WRITE;
-/*!40000 ALTER TABLE `consignments` DISABLE KEYS */;
-INSERT INTO `consignments` VALUES (1,1,1,4,'2022-12-15 16:40:57','2022-12-15 16:40:57'),(2,3,5,4,'2022-12-15 17:45:04','2022-12-15 17:45:04');
-/*!40000 ALTER TABLE `consignments` ENABLE KEYS */;
+LOCK TABLES `transactions` WRITE;
+/*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+INSERT INTO `transactions` VALUES (1,'DELL0',36,'2022-11-12 00:00:00'),(2,'HP0',36,'2022-11-12 00:00:00'),(8,'HP1',36,'2022-11-12 00:00:00');
+/*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-17  9:52:02
+-- Dump completed on 2022-12-23 13:35:38

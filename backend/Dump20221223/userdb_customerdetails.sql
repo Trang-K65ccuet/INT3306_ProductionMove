@@ -16,31 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `userdetails`
+-- Table structure for table `customerdetails`
 --
 
-DROP TABLE IF EXISTS `userdetails`;
+DROP TABLE IF EXISTS `customerdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `userdetails` (
-  `id` int NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `phonenumber` int NOT NULL,
-  `email` int DEFAULT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `userdetails_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `customerdetails` (
+  `customerId` int NOT NULL AUTO_INCREMENT,
+  `customerName` varchar(255) NOT NULL,
+  `customerPhoneNumber` varchar(255) NOT NULL,
+  `customerAddress` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`customerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `userdetails`
+-- Dumping data for table `customerdetails`
 --
 
-LOCK TABLES `userdetails` WRITE;
-/*!40000 ALTER TABLE `userdetails` DISABLE KEYS */;
-/*!40000 ALTER TABLE `userdetails` ENABLE KEYS */;
+LOCK TABLES `customerdetails` WRITE;
+/*!40000 ALTER TABLE `customerdetails` DISABLE KEYS */;
+INSERT INTO `customerdetails` VALUES (1,'a','123','ads'),(2,'abc','123456','Phường sd'),(3,'abd','123456','Phường sd'),(4,'Phan Đức Mạnh','0799123599','Hà Tĩnh'),(36,'PHan Manh','0123457','Hà Tĩnh');
+/*!40000 ALTER TABLE `customerdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-17  9:52:02
+-- Dump completed on 2022-12-23 13:35:37
