@@ -22,7 +22,7 @@ export const getProductitemByManufacture = async (req, res) => {
                 manufactureid: req.Id
             }
         })
-        return res.status(200).json({productItemByCssx});
+        return res.status(200).json(productItemByCssx);
         
     } catch (error) {
         return res.status(500).json({msg : error.message});
