@@ -41,7 +41,7 @@ const AddProductInDLPP = () => {
                 <div className="control">
                 <select className="input">
                 {productline.map((product) => (
-                    <option>{product.description}</option>
+                    <option>{product.productline}</option>
                 ))}
                 </select>
                 </div>
