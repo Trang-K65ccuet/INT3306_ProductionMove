@@ -14,8 +14,8 @@ const ProductList = () => {
     setProductLines(response.data); 
   }
 
-  const deleteProductLine = async (productLine) => {
-    await axios.delete(`http://localhost:5000/productline/delete/${productLine}`, {withCredentials: true})
+  const deleteProductLine = async () => {
+    await axios.delete(`http://localhost:5000/productline/delete`, {withCredentials: true})
     getProductLines(); 
   }
   
@@ -32,10 +32,11 @@ const ProductList = () => {
             <th>STT</th>
             <th>Tên dòng sản phẩm</th>
             <th>Mô tả</th>
+            <th>Tùy chọn</th>
           </tr>
         </thead>
         <tbody>
-          {productLines.map((productLine, index) => {
+          {productLines.map((productLine, index) => (
             <tr key={productLine.productline}>
             <td>{index + 1}</td>
             <td>{productLine.productline}</td>
@@ -48,14 +49,14 @@ const ProductList = () => {
                 Edit
               </Link>
               <button
-                onClick={() => deleteProductLine(productLine.productline)}
+                onClick={() => deleteProductLine()}
                 className="button is-small is-danger"
               >
                 Delete
               </button>
             </td>
           </tr>
-          })}
+          ))}
         </tbody>
       </table>
     </div>

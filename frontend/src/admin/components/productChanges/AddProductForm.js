@@ -19,7 +19,7 @@ const AddProductForm = () => {
         productline: productline,
         description: description,
       }, {withCredentials: true});
-      navigate("admin/products");
+      navigate("/admin/products");
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
