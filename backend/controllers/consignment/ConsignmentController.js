@@ -5,8 +5,11 @@ import { database } from "../../config/Database.js";
 import {QueryTypes} from 'sequelize';
 import CustomerDetail from '../../models/transaction/CustomerDetailModel.js';
 import Transaction from '../../models/transaction/TransactionModel.js';
+import Warranty from "../../models/warranty/WarrantyModel.js";
 import { response } from "express";
 import ConsignmentRequest from "../../models/consignment/ConsignmentRequestModel.js";
+import User from "../../models/user/UserModel.js";
+
 // dưới đây là những chức năng mà đại lý phân phối có quyên thực hiện
 export const getProductLotByDistributor = async (req, res) => {
     const distributorId = req.params.id;
@@ -125,6 +128,12 @@ export const sendRequest = async (req, res) => {
 // chuyển sản phẩm cần bảo hành về kho
 export const getFaultItemFromCus = async (req, res) => {
     const {productcode} = req.body;
+    const find = await ProductItem.findAndCountAll({
+        where: {
+            productcode: productcode
+        }
+    })
+    if (find.count == 0) return res.status(400).json({msg: "Không có sản phẩm này trong kho"})
     try {
         await ProductItem.update({
             status: 3
@@ -133,8 +142,92 @@ export const getFaultItemFromCus = async (req, res) => {
                 productcode: productcode
             }
         })
-       return res.status(200).json({msg: "Lấy sản phẩm cần bảo hành thành côn, có code là" + productcode}) 
+       return res.status(200).json({msg: "Lấy sản phẩm cần bảo hành thành công, có code là" + productcode}) 
     } catch (error) {
-        
+       return res.status(400).json({msg: error})
+    }
+}
+export const getItemNeedWarrantyByConsignment = async (req, res) => {
+    const sql = "SELECT productitems.productcode, productline, consignments. lot, image, status FROM productitems INNER JOIN consignmentdetails ON productitems.productcode = consignmentdetails.productcode " 
+    + "INNER JOIN consignments ON consignments.lot = consignmentdetails.lot WHERE status = 3 AND distributorid = :manu_id";
+    try {
+        const allit = await database.query(sql,{
+            replacements: {manu_id: req.Id},
+        type: QueryTypes.SELECT});
+        return res.status(200).json(allit);
+    } catch (error) {
+        return res.status(400).json({msg: error});
+    }
+   
+// gửi sản phẩm lỗi cần bh từ đại lý pp đến trung tâm bh
+}
+export const sendFaultItemToWarrantyAgent = async (req, res) => {
+    const {productcode, warrantyAgentId, dateOfGuarantee} = req.body;
+    const findAgent = await User.findAndCountAll({where:{
+        id: warrantyAgentId,
+        position: 'ttbh'
+    }});
+    if (findAgent.count == 0) return res.status(400).json({msg: "Không tồn tại ttbh này"});
+    const it = await ProductItem.findAndCountAll({
+        where: {
+            productcode: productcode,
+            status : 3
+        }
+    })
+    if (it.count == 0) {
+        return res.status(400).json({msg: "không tồn tại sp trong danh sách cần bảo hành"});
+    }
+    try {
+       await Warranty.create({
+        productcode: productcode,
+        warrantyAgentId: warrantyAgentId,
+        dateOfGuarantee: dateOfGuarantee
+       })
+       await ProductItem.update({status: 4}, {
+        where: {
+           productcode: productcode 
+        }
+       })
+       return res.status(200).json({msg: "Gửi sản phẩm đến đại lý bảo hành thành công, sp có code là "+ productcode})
+    } catch (error) {
+       return res.status(400).json({msg: error})
+    }
+}
+//Lấy ra tất cả các sản phẩm đã bảo hành xong
+export const allFixedItem = async (req, res) => {
+    try {
+       const sql = "SELECT productitems.productcode, productline, consignmentdetails.lot, status FROM productitems INNER JOIN "
+       + "consignmentdetails ON consignmentdetails.productcode = productitems.productcode INNER JOIN consignments ON consignmentdetails.lot = "
+       + "consignments.lot WHERE status = 5 AND consignments.distributorid = :distr_butor";
+       const allfixed = await database.query(sql, {replacements: {
+        distr_butor : req.Id
+       },   type: QueryTypes.SELECT});
+       return res.status(200).json(allfixed);
+    } catch (error) {
+       return res.status(400).json({msg: error})
+    }
+}
+// Trả lại khách hàng
+export const sendItemBack = async (req, res) => {
+    const {productcode} = req.body;
+    try {
+        const item = await ProductItem.findAndCountAll({
+            where: {
+                productcode: productcode,
+                status: 5
+            }
+        })
+        if(item.count == 0) {
+            return res.status(400).json({msg: "Không có sp này trong danh sách bảo hành thành công"});
+        }
+        await ProductItem.update({status: 6}, {
+            where: {
+                productcode: productcode,
+                status: 5
+            }
+        })
+        return res.status(200).json({msg: "Gửi trả lại sản phẩm cho khách hàng thành công"});
+    } catch (error) {
+           return res.status(400).json({msg: error});  
     }
 }
