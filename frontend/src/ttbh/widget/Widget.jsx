@@ -5,8 +5,22 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import SellIcon from '@mui/icons-material/Sell';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import "./widget.scss";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Widget = ({ type }) => {
+  const [item, setItem] = useState([]);
+
+  useEffect(() => {
+    getItem();
+  }, []);
+
+  const countItem = item.length;
+  const getItem = async () => {
+    const response = await axios.get("http://localhost:5000/warranty/allitem", {withCredentials: true});
+    setItem(response.data);
+  };
+
   let data;
   // temp
   const amount = 500;
@@ -16,7 +30,7 @@ const Widget = ({ type }) => {
       case "products":
         data = {
           title: "SẢN PHẨM",
-          isMoney: false,
+          value: countItem ,
           link: "Sản phẩm được yêu cầu bảo hành",
           icon: (
             <ProductionQuantityLimitsIcon
@@ -29,7 +43,7 @@ const Widget = ({ type }) => {
         case "insurance":
           data = {
             title: "ĐÃ BẢO HÀNH",
-            isMoney: false,
+            value: amount ,
             link: "Sản phẩm đã bảo hành thành công",
             icon: (
               <SellIcon
@@ -42,7 +56,7 @@ const Widget = ({ type }) => {
         case "error":
           data = {
             title: "LỖI",
-            isMoney: false,
+            value: amount ,
             link: "Sản phẩm không thể bảo hành",
             icon: (
               <WarningAmberIcon
@@ -61,9 +75,7 @@ const Widget = ({ type }) => {
     <div className="widget">
       <div className="left">
         <span className="title">{data.title}</span>
-        <span className="counter">
-          {data.isMoney && "$"} {amount}
-        </span>
+        <span className="counter">{data.value}</span>
         <span className="link">{data.link}</span>
       </div>
       <div className="right">

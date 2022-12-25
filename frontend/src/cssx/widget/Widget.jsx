@@ -21,29 +21,26 @@ const Widget = ({ type }) => {
     setProductCSSX(response.data);  
   }
 
+  const [exportCSSX, setExport] = useState([]);
+  useEffect(() => {
+    getExport();
+  }, []);
+  const getExport = async () => {
+    const response = await axios.get("http://localhost:5000/manufacture/lot", {withCredentials: true});
+    setExport(response.data);
+  };
+  const exportCount = exportCSSX.length;
+
   let data;
   // temp
   const amount = 500;
   const diff = 30;
 
   switch (type) {
-      case "products":
-        data = {
-          title: "SẢN PHẨM",
-          value:productCount,
-          link: "Sản phẩm trong kho",
-          icon: (
-            <ProductionQuantityLimitsIcon
-              className="icon"
-              style={{color: "crimson", backgroundColor: "#ff000033"}}
-            />
-          ),
-        };
-        break;
         case "import":
           data = {
             title: "NHẬP",
-            value:amount,
+            value:productCount,
             link: "Sản phẩm đã nhập",
             icon: (
               <PublishIcon
@@ -56,8 +53,8 @@ const Widget = ({ type }) => {
         case "export":
           data = {
             title: "XUẤT",
-            value:amount,
-            link: "Sản phẩm đã xuất cho đại lý",
+            value:exportCount,
+            link: "Lô đã xuất cho đại lý",
             icon: (
               <SellIcon
                 className="icon"

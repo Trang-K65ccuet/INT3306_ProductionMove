@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const ProductListDLPP = () => {
-
-
   const [productDLPP, setProductDLPP] = useState([]);
 
   useEffect(() => {
@@ -27,6 +25,9 @@ const ProductListDLPP = () => {
       case 6: return "Đã bảo hành và trả cho khách hàng";
       case 7: return "Cần trả về nhà máy";
       case 8: return "Đã chuyển về cơ sở sản xuất";
+      case 9: return "Lỗi, cần triệu hồi";
+      case 10: return "Hết thời gian bảo hành"
+      case 11: return "Trả lại cơ sở sản xuất"
     }
   }
 

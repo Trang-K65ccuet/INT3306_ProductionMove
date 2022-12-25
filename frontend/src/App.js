@@ -37,7 +37,6 @@ import StatisticTTBH from "./ttbh/pages/Statistic";
 import ProductsTTBH from "./ttbh/pages/Insurance/Products";
 import SuccessfulTTBH from "./ttbh/pages/Insurance/Successful";
 import ErrorsTTBH from "./ttbh/pages/Insurance/Errors";
-import ImportInTTBH from "./ttbh/components/insurance/ImportInTTBH";
 import StatusInTTBH from "./ttbh/components/insurance/StatusINTTBH";
 
 
@@ -88,7 +87,6 @@ function App() {
           <Route path="/ttbh/products" element={<ProductsTTBH />} />
           <Route path="/ttbh/successful" element={<SuccessfulTTBH />} />
           <Route path="/ttbh/errors" element={<ErrorsTTBH />} />
-          <Route path="/ttbh/products/import" element={<ImportInTTBH />} />
           <Route path="/ttbh/products/status" element={<StatusInTTBH />} />
           
         </Routes>
