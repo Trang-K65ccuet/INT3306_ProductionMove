@@ -3,6 +3,8 @@ import { Consignment } from "../../models/consignment/ConsignmentModel.js";
 import { ConsignmentDetail } from "../../models/consignment/ConsignmentDetailModel.js";
 import { ProductItem } from "../../models/product/ProductItemModel.js";
 import User from "../../models/user/UserModel.js";
+import { database } from "../../config/Database.js";
+import { QueryTypes } from "sequelize";
 // lấy ra tất cả các cssx
 export const getManufactures = async (req, res) => {
 try {
@@ -31,6 +33,7 @@ export const getProductitemByManufacture = async (req, res) => {
     }
 };
 
+// lấy ra tất cả các yêu cầu nhập hàng
 export const getAllRequestByManufacture = async (req, res) => {
    try {
     const allrequest = await ConsignmentRequest.findAll({
@@ -43,7 +46,7 @@ export const getAllRequestByManufacture = async (req, res) => {
     return res.status(400).json({msg: error})
    } 
 }
-//
+// gửi lô hàng
 export const sendListProductItem = async (req, res) => {
     try {
         
@@ -90,4 +93,29 @@ export const sendListProductItem = async (req, res) => {
         return res.status(500).json({msg: error.message});
     }
     
+}
+// lấy ra tất cả các lô hàng của cơ sở sản xuất đã chuyển đi
+export const allLotsHaveSent = async (req, res) => {
+    const sql = "SELECT lot, quantity, users.name FROM consignments LEFT JOIN users ON users.id = consignments.distributorid WHERE consignments.manufactureid = :mn_id";
+   try {
+    const all = await database.query(sql, {replacements: {
+        mn_id: req.Id
+    }, type: QueryTypes.SELECT})
+    return res.status(200).json(all);
+   } catch (error) {
+    return res.status(400).json({msg: error});
+   }
+}
+// chi tiết lô hàng
+export const lotDetail = async (req, res) => {
+    const {lot} = req.body;
+    try {
+      const sql = "SELECT * FROM productitems LEFT JOIN consignmentdetails ON productitems.productcode = consignmentdetails.productcode WHERE lot = :l_ot";
+      const detail = database.query(sql, {replacements: {
+        l_ot: lot
+      }, type: QueryTypes.SELECT});
+      return res.status(200).json(detail);
+    } catch (error) {
+      return res.status(400).json({msg: error});
+    }
 }
