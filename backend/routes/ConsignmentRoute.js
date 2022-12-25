@@ -1,20 +1,20 @@
 import express from "express";
 import { authorizationUser, checkConsignment } from "../middleware/AuthUser.js";
 import {getProductLotByDistributor, getProductItemByDistributor, sendProductToCustomer, getFaultItemFromCus, getItemNeedWarrantyByConsignment
-, sendFaultItemToWarrantyAgent, allFixedItem, sendItemBack} from '../controllers/consignment/ConsignmentController.js';
+, sendFaultItemToWarrantyAgent, allFixedItem, sendItemBack, allItemSelled} from '../controllers/consignment/ConsignmentController.js';
 
 const consignmentRouter = express.Router();
 // lấy ra tất cả lô hàng của người dùng
 consignmentRouter.get('/lot/:id',authorizationUser, getProductLotByDistributor);
 
 // lấy ra tất cả các sản phẩm ở đại lý phân phối
-consignmentRouter.get('/lot/get/item',authorizationUser,getProductItemByDistributor);
+consignmentRouter.get('/lot/get/item',authorizationUser,checkConsignment,getProductItemByDistributor);
 
 // đại lý phân phối gửi sản phẩm cho khách hàng
-consignmentRouter.post('/consignment/send', authorizationUser, sendProductToCustomer);
+consignmentRouter.post('/consignment/send', authorizationUser,checkConsignment, sendProductToCustomer);
 
 //tất cả các sản phẩm đã bán của đại lý phân phối
-
+consignmentRouter.get('/consignment/sell',authorizationUser,checkConsignment,allItemSelled);
 // đại lý phân phối nhập lại các sản phẩm đã bán bị lỗi
 consignmentRouter.post('/productitem/importfaultproduct', authorizationUser, checkConsignment,getFaultItemFromCus);
 

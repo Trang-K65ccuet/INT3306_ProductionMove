@@ -110,53 +110,20 @@ export const sendProductToCustomer = async(req, res) => {
     return res.status(400).json({msg: error})
    }   
 
-//    try {
-//     const findexist = await CustomerDetail.findOne({
-//         where: {
-//             customerPhoneNumber: customerphone
-//         }
-//     });
-//     if(findexist.length == 0) {
-//     const customer = await CustomerDetail.create({
-//         customerName: customername,
-//         customerPhoneNumber: customerphone,
-//         customerAddress: customeraddress
-//     });
-//     findexist = customer;
-// }
-//     const quer = "SELECT * FROM consignmentdetails Left Join consignments ON consignmentdetails.lot " 
-//     + "= consignments.lot left join productitems ON consignmentdetails.productcode = productitems.productcode WHERE status = 1 AND productline = :product_line";
-//     const getItemAvailable = await database.query(quer, {
-//                     replacements: {product_line: productline},
-//                type: QueryTypes.SELECT}); 
-//                var i = 0;
-//                for(i; i< quantity; i++) {
-//                            try {
-//                                 ProductItem.update({
-//                                     status: 2
-//                                 }, {
-//                                     where: {
-//                                         productcode: getItemAvailable.at(i).productcode  
-//                                     }
-//                                 })
-                               
-//                                 await Transaction.create({
-//                                     productcode: getItemAvailable.at(i).productcode,
-//                                     customerId: findexist.customerId,
-//                                     dateOfTransaction: date
-//                                 })
-//                             } catch (error) {
-//                                 return res.status(400).json({msg: error + getItemAvailable.length })
-//                             }
-                            
-//                           }  
-
-//     return res.status(200).json({msg: "Gửi sản phẩm thành công cho khách hàng " + findexist.customerName});
-
-//   } catch (error) {
-//      return res.status(400).json(error);
-
-//    }
+}
+// tất cả các sản phẩm đã bán, mọi tình trạng
+export const allItemSelled = async (req, res) => {
+    const sql = "SELECT DISTINCT * FROM productitems LEFT JOIN transactions ON productitems.productcode = transactions.productcode "
+    + "LEFT JOIN consignmentdetails ON consignmentdetails.productcode = transactions.productcode LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot "
+    + "WHERE consignments.distributorid = :dis_id";
+    try {
+        const allSellItem = await database.query(sql, {replacements: {
+            dis_id: req.Id
+        }, type: QueryTypes.SELECT});
+        return res.status(200).json(allSellItem);
+    } catch (error) {
+        return res.status(400).json({msg: error});
+    }
 }
 // gửi yêu cầu nhập hàng tới cơ sở sản xuất
 export const sendRequest = async (req, res) => {
@@ -173,6 +140,7 @@ export const sendRequest = async (req, res) => {
         return res.status(200).json({msg: error})
     }
 } 
+
 // chuyển sản phẩm cần bảo hành về kho
 export const getFaultItemFromCus = async (req, res) => {
     const {productcode} = req.body;
