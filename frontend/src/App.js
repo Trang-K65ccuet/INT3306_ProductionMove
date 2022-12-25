@@ -31,6 +31,7 @@ import ImportProductInDLPP from "./dlpp/components/products/ImportProductInDLPP"
 import ExportProductInDLPP from "./dlpp/components/products/ExportProductInDLPP";
 import FinishedInDLPP from "./dlpp/components/products/FinishedInDLPP";
 import NewInsuranceInDLPP from "./dlpp/components/products/NewInsuranceInDLPP";
+import SendInsuranceDLPP from "./dlpp/components/products/SendInsuranceDLPP";
 
 
 import DashboardTTBH from "./ttbh/pages/Dashboard";
@@ -82,6 +83,7 @@ function App() {
           <Route path="/dlpp/export/new" element={<ExportProductInDLPP />} />
           <Route path="/dlpp/insurance/finished" element={<FinishedInDLPP />} />
           <Route path="/dlpp/insurance/new" element={<NewInsuranceInDLPP />} />
+          <Route path="/dlpp/insurance/send" element={<SendInsuranceDLPP />} />
 
           //TTBH
           <Route path="/ttbh/dashboard" element={<DashboardTTBH />} />

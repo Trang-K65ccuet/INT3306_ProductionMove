@@ -38,6 +38,9 @@ const InsuranceDLPP = () => {
             <Link to="/dlpp/insurance/new" className="button is-primary mb-2">
               Tạo mới
             </Link>
+            <Link to="/dlpp/insurance/send" className="button is-primary mb-2">
+              Chuyển tới trung tâm bảo hành
+            </Link>
             <Link to="/dlpp/insurance/finished" className="button is-primary mb-2">
               Đã bảo hành
             </Link>
