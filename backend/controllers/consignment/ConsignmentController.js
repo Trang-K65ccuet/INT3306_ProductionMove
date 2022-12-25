@@ -59,56 +59,104 @@ export const getProductItemByDistributor = async (req, res) => {
 }
 // gửi hàng tới người nhận là khách hàng
 export const sendProductToCustomer = async(req, res) => {
-   const {productline, quantity, customername, customerphone, customeraddress, date} = req.body;
+   const {productline, quantity, customername, customerphone, customeraddress, date, timeExpired} = req.body;
    const distributorid = req.Id;
-
    try {
-    const findexist = await CustomerDetail.findOne({
+    const findexist = await CustomerDetail.findAndCountAll({
         where: {
-            customerPhoneNumber: customerphone
-        }
-    });
-    if(findexist.length == 0) {
-    const customer = await CustomerDetail.create({
-        customerName: customername,
-        customerPhoneNumber: customerphone,
-        customerAddress: customeraddress
-    });
-    findexist = customer;
-}
-    const quer = "SELECT * FROM consignmentdetails Left Join consignments ON consignmentdetails.lot " 
-    + "= consignments.lot left join productitems ON consignmentdetails.productcode = productitems.productcode WHERE status = 1 AND productline = :product_line";
+                    customerPhoneNumber: customerphone
+               }
+    })
+    if(findexist.count == 0) {
+        await CustomerDetail.create({
+            customerName: customername,
+            customerPhoneNumber: customerphone,
+            customerAddress: customeraddress
+        })
+    }
+    const quer = "SELECT * FROM consignmentdetails  INNER JOIN consignments ON consignmentdetails.lot " 
+    + "= consignments.lot INNER JOIN productitems ON consignmentdetails.productcode = productitems.productcode WHERE status = 1 AND productline = :product_line";
     const getItemAvailable = await database.query(quer, {
-                    replacements: {product_line: productline},
-               type: QueryTypes.SELECT}); 
-               var i = 0;
-               for(i; i< quantity; i++) {
-                           try {
-                                ProductItem.update({
-                                    status: 2
-                                }, {
-                                    where: {
-                                        productcode: getItemAvailable.at(i).productcode  
-                                    }
-                                })
-                               
-                                await Transaction.create({
+                     replacements: {product_line: productline},
+                     type: QueryTypes.SELECT}); 
+    var i = 0;
+    if(quantity > getItemAvailable.length) return res.status(400).json({msg: "Vượt quá số lượng trong kho, yêu cầu: "+ quantity + " ,trong kho: "+ getItemAvailable.length});
+    else{
+        for(i; i< quantity; i++) {
+                    try {
+                            ProductItem.update({
+                                     status: 2
+                                            }, {
+                                      where: {
+                                       productcode: getItemAvailable.at(i).productcode  
+                                     }
+                                     })
+                                           
+                                     await Transaction.create({
                                     productcode: getItemAvailable.at(i).productcode,
                                     customerId: findexist.customerId,
-                                    dateOfTransaction: date
-                                })
-                            } catch (error) {
-                                return res.status(400).json({msg: error + getItemAvailable.length })
-                            }
+                                    dateOfTransaction: date,
+                                    expiredDay: timeExpired
+                                            })
+                                        } catch (error) {
+                                            return res.status(400).json({msg: error + getItemAvailable.length })
+                                        }
+                                        
+                                      }  
+            
+    }
+    res.status(200).json({msg: "Gửi sp thành công"})
+} catch (error) {
+    return res.status(400).json({msg: error})
+   }   
+
+//    try {
+//     const findexist = await CustomerDetail.findOne({
+//         where: {
+//             customerPhoneNumber: customerphone
+//         }
+//     });
+//     if(findexist.length == 0) {
+//     const customer = await CustomerDetail.create({
+//         customerName: customername,
+//         customerPhoneNumber: customerphone,
+//         customerAddress: customeraddress
+//     });
+//     findexist = customer;
+// }
+//     const quer = "SELECT * FROM consignmentdetails Left Join consignments ON consignmentdetails.lot " 
+//     + "= consignments.lot left join productitems ON consignmentdetails.productcode = productitems.productcode WHERE status = 1 AND productline = :product_line";
+//     const getItemAvailable = await database.query(quer, {
+//                     replacements: {product_line: productline},
+//                type: QueryTypes.SELECT}); 
+//                var i = 0;
+//                for(i; i< quantity; i++) {
+//                            try {
+//                                 ProductItem.update({
+//                                     status: 2
+//                                 }, {
+//                                     where: {
+//                                         productcode: getItemAvailable.at(i).productcode  
+//                                     }
+//                                 })
+                               
+//                                 await Transaction.create({
+//                                     productcode: getItemAvailable.at(i).productcode,
+//                                     customerId: findexist.customerId,
+//                                     dateOfTransaction: date
+//                                 })
+//                             } catch (error) {
+//                                 return res.status(400).json({msg: error + getItemAvailable.length })
+//                             }
                             
-                          }  
+//                           }  
 
-    res.status(200).json({msg: "Gửi sản phẩm thành công cho khách hàng " + findexist.customerName});
+//     return res.status(200).json({msg: "Gửi sản phẩm thành công cho khách hàng " + findexist.customerName});
 
-  } catch (error) {
-     res.status(400).json(error);
+//   } catch (error) {
+//      return res.status(400).json(error);
 
-   }
+//    }
 }
 // gửi yêu cầu nhập hàng tới cơ sở sản xuất
 export const sendRequest = async (req, res) => {

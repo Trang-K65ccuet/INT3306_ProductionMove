@@ -13,6 +13,8 @@ consignmentRouter.get('/lot/get/item',authorizationUser,getProductItemByDistribu
 // đại lý phân phối gửi sản phẩm cho khách hàng
 consignmentRouter.post('/consignment/send', authorizationUser, sendProductToCustomer);
 
+//tất cả các sản phẩm đã bán của đại lý phân phối
+
 // đại lý phân phối nhập lại các sản phẩm đã bán bị lỗi
 consignmentRouter.post('/productitem/importfaultproduct', authorizationUser, checkConsignment,getFaultItemFromCus);
 
