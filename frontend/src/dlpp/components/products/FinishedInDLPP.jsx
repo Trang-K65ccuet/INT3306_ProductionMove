@@ -2,14 +2,14 @@ import Layout from "../../pages/Layout";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const FinishedInDLPP = () => {
   const [finished, setFinished] = useState([]);
-
   useEffect(() => {
     getFinished();
   }, []);
-
   const getFinished = async () => {
     const response = await axios.get("http://localhost:5000/productitem/allfixeditem", {withCredentials: true});
     setFinished(response.data);
@@ -57,9 +57,16 @@ const FinishedInDLPP = () => {
                   <td>{product.lot}</td>
                   <td>{returnStatus(product.status)}</td>
                   <td>
-                  <Link className="button is-small is-info">
-                    Trả cho khách hàng
-                  </Link>
+                  <button 
+                    onClick={axios.post("http://localhost:5000/producitem/sendbackitem",
+                      {
+                        productcode:product.productcode,
+                      },
+                      { withCredentials: true })}
+                    className="button is-small is-info"
+                  >
+                      Trả cho khách hàng
+                  </button>
                   </td>
                 </tr>
                 ))}
