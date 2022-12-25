@@ -19,7 +19,7 @@ export const getProductLotByDistributor = async (req, res) => {
                 distributorid: distributorId
             }
         });
-        res.status(200).json({getall})
+        res.status(200).json(getall)
     } catch (error) {
         res.status(400).json({msg: "Xảy ra lỗi không lấy được số lô sản xuất"})
     }
