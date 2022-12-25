@@ -8,6 +8,7 @@ import loginrouter from "./routes/LoginRoute.js";
 import itemRoute from "./routes/productRoute/ProductItemRoute.js";
 import consignmentRouter from "./routes/ConsignmentRoute.js";
 import manufactureRouter from "./routes/ManufactureRoute.js";
+import warrantyRouter from "./routes/WarrantyRoute.js";
 import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
 
@@ -34,6 +35,8 @@ app.use(itemRoute);
 app.use(consignmentRouter);
 //
 app.use(manufactureRouter);
+//route cho trung tâm bảo hành
+app.use(warrantyRouter);
 app.listen(5000);
 
 
