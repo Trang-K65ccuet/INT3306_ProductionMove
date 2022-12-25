@@ -1,5 +1,6 @@
 import ConsignmentRequest from "../../models/consignment/ConsignmentRequestModel.js";
 import { Consignment } from "../../models/consignment/ConsignmentModel.js";
+import { ConsignmentDetail } from "../../models/consignment/ConsignmentDetailModel.js";
 import { ProductItem } from "../../models/product/ProductItemModel.js";
 import User from "../../models/user/UserModel.js";
 // lấy ra tất cả các cssx

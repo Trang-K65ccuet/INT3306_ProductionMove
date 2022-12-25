@@ -12,7 +12,7 @@ import User from "../../models/user/UserModel.js";
 
 // dưới đây là những chức năng mà đại lý phân phối có quyên thực hiện
 export const getProductLotByDistributor = async (req, res) => {
-    const distributorId = req.params.id;
+    const distributorId = req.Id;
     try {
         const getall = await Consignment.findAll({
             where: {

@@ -5,7 +5,7 @@ import {getProductLotByDistributor, getProductItemByDistributor, sendProductToCu
 
 const consignmentRouter = express.Router();
 // lấy ra tất cả lô hàng của người dùng
-consignmentRouter.get('/lot/:id',authorizationUser, getProductLotByDistributor);
+consignmentRouter.get('/lots',authorizationUser,checkConsignment,getProductLotByDistributor);
 
 // lấy ra tất cả các sản phẩm ở đại lý phân phối
 consignmentRouter.get('/lot/get/item',authorizationUser,checkConsignment,getProductItemByDistributor);
