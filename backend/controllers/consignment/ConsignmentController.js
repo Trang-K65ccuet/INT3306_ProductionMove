@@ -2,7 +2,7 @@ import { Consignment } from "../../models/consignment/ConsignmentModel.js";
 import { ConsignmentDetail } from "../../models/consignment/ConsignmentDetailModel.js";
 import { ProductItem } from "../../models/product/ProductItemModel.js";
 import { database } from "../../config/Database.js";
-import {QueryTypes} from 'sequelize';
+import {DataTypes, QueryTypes} from 'sequelize';
 import CustomerDetail from '../../models/transaction/CustomerDetailModel.js';
 import Transaction from '../../models/transaction/TransactionModel.js';
 import Warranty from "../../models/warranty/WarrantyModel.js";
@@ -12,14 +12,14 @@ import User from "../../models/user/UserModel.js";
 
 // dưới đây là những chức năng mà đại lý phân phối có quyên thực hiện
 export const getProductLotByDistributor = async (req, res) => {
-    const distributorId = req.params.id;
+    const distributorId = req.Id;
     try {
-        const getall = await Consignment.findAll({
-            where: {
-                distributorid: distributorId
-            }
-        });
-        res.status(200).json({getall})
+        const sql = "SELECT lot, quantity, users.name FROM consignments LEFT JOIN users ON consignments.manufactureid = users.id WHERE consignments.distributorid = :dis_id";
+
+        const getall = await database.query(sql, {replacements: {
+            dis_id: distributorId
+        }, type: QueryTypes.SELECT});
+        res.status(200).json(getall)
     } catch (error) {
         res.status(400).json({msg: "Xảy ra lỗi không lấy được số lô sản xuất"})
     }
