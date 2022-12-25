@@ -13,7 +13,6 @@ const ExportProductInDLPP = () => {
 
   const getProductline = async () => {
     const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
-    console.log(response.data); 
     setProductline(response.data);  
   };
 
