@@ -26,6 +26,7 @@ const ExportProductInDLPP = () => {
   const [customername, setName] = useState("");
   const [customerphone, setPhone] = useState("");
   const [customeraddress, setAddress] = useState("");
+  const [timeExpired, setTimeExpired] = useState("");
   const [date, setDate] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
@@ -41,6 +42,7 @@ const ExportProductInDLPP = () => {
           customerphone: customerphone, 
           customeraddress: customeraddress, 
           date:date,
+          timeExpired:timeExpired,
         },
         { withCredentials: true }
       );
@@ -130,6 +132,18 @@ const ExportProductInDLPP = () => {
                     onChange={(e) => setDate(e.target.value)}
                     className="input"
                     placeholder="Ngày bán"
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label className="label">Số ngày bảo hành</label>
+                <div className="control">
+                  <input
+                    type="number"
+                    value = {timeExpired}
+                    onChange={(e) => setTimeExpired(e.target.value)}
+                    className="input"
+                    placeholder="Số ngày bảo hành"
                   />
                 </div>
               </div>
