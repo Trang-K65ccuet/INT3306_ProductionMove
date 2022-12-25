@@ -20,6 +20,13 @@ const Userlist = () => {
     getUsers();
   };
 
+  function replacePos(pos) {
+    if(pos == "admin") return "Ban điều hành";
+    if(pos == "cssx") return "Cơ sở sản xuất";
+    if(pos == "dlpp") return "Đại lý phân phối";
+    if(pos == "ttbh") return "Trung tâm bảo hành"
+  }
+
   return (
     <div>
       <h1 className="title">Người dùng</h1>
@@ -43,7 +50,7 @@ const Userlist = () => {
               <td>{index + 1}</td>
               <td>{user.name}</td>
               <td>{user.username}</td>
-              <td>{user.position}</td>
+              <td>{replacePos(user.position)}</td>
               <td>
                 <Link
                   to={`edit/${user.id}`}

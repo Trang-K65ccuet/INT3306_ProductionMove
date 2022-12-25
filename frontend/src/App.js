@@ -29,7 +29,6 @@ import InsuranceDLPP from "./dlpp/pages/Products/Insurance";
 import AddProductInDLPP from "./dlpp/components/products/AddProductInDLPP";
 import ImportProductInDLPP from "./dlpp/components/products/ImportProductInDLPP";
 import ExportProductInDLPP from "./dlpp/components/products/ExportProductInDLPP";
-import InsuranceInDLPP from "./dlpp/components/products/InsuranceInDLPP";
 import FinishedInDLPP from "./dlpp/components/products/FinishedInDLPP";
 
 
@@ -81,7 +80,6 @@ function App() {
           <Route path="/dlpp/import/add" element={<AddProductInDLPP />} />
           <Route path="/dlpp/import/import" element={<ImportProductInDLPP />} />
           <Route path="/dlpp/export/new" element={<ExportProductInDLPP />} />
-          <Route path="/dlpp/insurance/new" element={<InsuranceInDLPP />} />
           <Route path="/dlpp/insurance/finished" element={<FinishedInDLPP />} />
 
           //TTBH

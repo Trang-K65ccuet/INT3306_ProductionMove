@@ -23,6 +23,7 @@ const AddUserForm = () => {
           position: position,
           password: password,
           confpassword: confpassword,
+          status:1,
         },
         { withCredentials: true }
       );

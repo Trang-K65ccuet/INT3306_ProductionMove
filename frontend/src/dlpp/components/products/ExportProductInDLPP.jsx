@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../../pages/Layout";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ExportProductInDLPP = () => {
   const [productline, setProductline] = useState([]);
@@ -15,6 +16,41 @@ const ExportProductInDLPP = () => {
     console.log(response.data); 
     setProductline(response.data);  
   };
+
+
+  useEffect(() => {
+    getSendCustomer();
+  }, []);
+  const [chooseProductline, setChooseProductline] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [customername, setName] = useState("");
+  const [customerphone, setPhone] = useState("");
+  const [customeraddress, setAddress] = useState("");
+  const [date, setDate] = useState("");
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
+  const getSendCustomer = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        "http://localhost:5000/consignment/send",
+        {
+          productline:chooseProductline, 
+          quantity:quantity, 
+          customername: customername,
+          customerphone: customerphone, 
+          customeraddress: customeraddress, 
+          date:date,
+        },
+        { withCredentials: true }
+      );
+      navigate('/dlpp/export');
+    } catch (error) {
+      if (error.response) {
+        setMsg(error.response.data.msg);
+      }
+    }
+  };
   return (
     <Layout>
       <div>
@@ -22,15 +58,18 @@ const ExportProductInDLPP = () => {
       <div className="card is-shadowless">
         <div className="card-content">
           <div className="content">
-            <form>
+            <form onSubmit={getSendCustomer}>
               <p className="has-text-centered"></p>
               <div className="field">
                 <label className="label">Sản phẩm</label>
                 <div className="control">
-                <select className="input">
-                {productline.map((product) => (
-                    <option>{product.productline}</option>
-                ))}
+                <select 
+                  value = {chooseProductline} 
+                  onChange={(e) => setChooseProductline(e.target.value)}
+                  className="input">
+                  {productline.map((product) => (
+                      <option>{product.productline}</option>
+                  ))}
                 </select>
                 </div>
               </div>
@@ -39,6 +78,8 @@ const ExportProductInDLPP = () => {
                 <div className="control">
                   <input
                     type="number"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
                     className="input"
                     placeholder="Số lượng"
                   />
@@ -49,6 +90,8 @@ const ExportProductInDLPP = () => {
                 <div className="control">
                   <input
                     type="text"
+                    value = {customername}
+                    onChange={(e) => setName(e.target.value)}
                     className="input"
                     placeholder="Họ tên khách hàng"
                   />
@@ -59,6 +102,8 @@ const ExportProductInDLPP = () => {
                 <div className="control">
                   <input
                     type="text"
+                    value={customerphone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="input"
                     placeholder="Số điện thoại"
                   />
@@ -69,6 +114,8 @@ const ExportProductInDLPP = () => {
                 <div className="control">
                   <input
                     type="text"
+                    value={customeraddress}
+                    onChange={(e) => setAddress(e.target.value)}
                     className="input"
                     placeholder="Địa chỉ"
                   />
@@ -79,6 +126,8 @@ const ExportProductInDLPP = () => {
                 <div className="control">
                   <input
                     type="date"
+                    value = {date}
+                    onChange={(e) => setDate(e.target.value)}
                     className="input"
                     placeholder="Ngày bán"
                   />

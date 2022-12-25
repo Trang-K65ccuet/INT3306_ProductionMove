@@ -20,6 +20,9 @@ const ExportProductsDLPP = () => {
                   <th>Số lượng</th>
                   <th>Họ tên khách hàng</th>
                   <th>Số điện thoại</th>
+                  <th>Địa chỉ</th>
+                  <th>Ngày bán</th>
+                  <th>Hành động</th>
                 </tr>
               </thead>
               <tbody>
@@ -29,6 +32,15 @@ const ExportProductsDLPP = () => {
                     <td>1</td>
                     <td>Phan Đức Mạnh</td>
                     <td>026265811</td>
+                    <td>Hanoi</td>
+                    <td>2022-11-11</td>
+                    <td>                
+                      <Link
+                        className="button is-small is-danger"
+                      >
+                        Bảo hành
+                      </Link>
+                </td>
                   </tr>
               </tbody>
             </table>

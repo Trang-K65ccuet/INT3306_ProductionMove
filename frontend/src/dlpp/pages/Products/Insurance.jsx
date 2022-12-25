@@ -8,9 +8,6 @@ const InsuranceDLPP = () => {
     <Layout>
           <div>
             <h1 className="title">Bảo hành</h1>
-            <Link to="/dlpp/insurance/new" className="button is-primary mb-2">
-              Tạo mới
-            </Link>
             <Link to="/dlpp/insurance/finished" className="button is-primary mb-2">
               Đã bảo hành
             </Link>
