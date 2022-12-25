@@ -5,23 +5,12 @@ import axios from "axios";
 
 
 const ImportProductsDLPP = () => {
-  //Return ID
-  const [profile, setProfile] = useState([]);
-  useEffect(() => {
-    getProfile();
-  }, []);
-  const getProfile = async () => {
-    const response = await axios.get(`http://localhost:5000/profile`,{withCredentials: true});
-    setProfile(response.data);  
-  };
-
-//Lot
   const [lot, setLot] = useState([]);
   useEffect(() => {
     getLot();
   }, []);
   const getLot = async () => {
-    const response = await axios.get(`http://localhost:5000/lot/${profile.id}`,{withCredentials: true});
+    const response = await axios.get("http://localhost:5000/lots",{withCredentials: true});
     setLot(response.data);  
   };
 
@@ -46,7 +35,14 @@ const ImportProductsDLPP = () => {
                 </tr>
               </thead>
               <tbody>
-
+                {lot.map((lot, index) => (
+                  <tr key={lot.lot}>
+                  <td>{index + 1}</td>
+                  <td>{lot.lot}</td>
+                  <td>{lot.quantity}</td>
+                  <td>{lot.name}</td>
+                </tr>
+                ))}
               </tbody>
             </table>
          </div>

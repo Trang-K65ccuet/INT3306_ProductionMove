@@ -11,16 +11,45 @@ import axios from "axios";
 const Widget = ({ type }) => {
 
   const [productDLPP, setProductDLPP] = useState([]);
-
   useEffect(() => {
     getProductDLPP();
   }, []);
-
   const productCount = productDLPP.length;  
   const getProductDLPP = async () => {
     const response = await axios.get("http://localhost:5000/lot/get/item",{withCredentials: true});
     setProductDLPP(response.data);  
   }
+
+  const [lot, setLot] = useState([]);
+  useEffect(() => {
+    getLot();
+  }, []);
+  const lotCount = lot.length;  
+  const getLot = async () => {
+    const response = await axios.get("http://localhost:5000/lots",{withCredentials: true});
+    setLot(response.data);  
+  }
+
+  const [sell, setSell] = useState([]);
+  useEffect(() => {
+    getSell();
+  }, []);
+  const sellCount = sell.length;  
+  const getSell = async () => {
+    const response = await axios.get("http://localhost:5000/consignment/sell",{withCredentials: true});
+    setSell(response.data);  
+  }
+
+  const [error, setError] = useState([]);
+  useEffect(() => {
+    getError();
+  }, []);
+  const errorCount = error.length;  
+  const getError = async () => {
+    const response = await axios.get("http://localhost:5000/productitem/faultiteminstock",{withCredentials: true});
+    setError(response.data);  
+  }
+
   let data;
   // temp
   const amount = 500;
@@ -43,8 +72,8 @@ const Widget = ({ type }) => {
         case "import":
           data = {
             title: "NHẬP",
-            value:amount,
-            link: "Sản phẩm đã nhập",
+            value:lotCount,
+            link: "Lô đã nhập",
             icon: (
               <PublishIcon
                 className="icon"
@@ -56,7 +85,7 @@ const Widget = ({ type }) => {
         case "export":
           data = {
             title: "BÁN",
-            value:amount,
+            value:sellCount,
             link: "Sản phẩm đã bán cho khách hàng",
             icon: (
               <SellIcon
@@ -69,7 +98,7 @@ const Widget = ({ type }) => {
         case "error":
           data = {
             title: "LỖI",
-            value:amount,
+            value:errorCount,
             link: "Sản phẩm cần bảo hành",
             icon: (
               <WarningAmberIcon

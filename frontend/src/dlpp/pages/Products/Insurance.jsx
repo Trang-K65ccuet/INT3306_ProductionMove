@@ -5,7 +5,6 @@ import axios from "axios";
 
 
 const InsuranceDLPP = () => {
-    //Return ID
     const [item, setItem] = useState([]);
     useEffect(() => {
       getItem();
