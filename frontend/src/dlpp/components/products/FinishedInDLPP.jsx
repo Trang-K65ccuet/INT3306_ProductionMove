@@ -1,7 +1,36 @@
 import Layout from "../../pages/Layout";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const FinishedInDLPP = () => {
+  const [finished, setFinished] = useState([]);
+
+  useEffect(() => {
+    getFinished();
+  }, []);
+
+  const getFinished = async () => {
+    const response = await axios.get("http://localhost:5000/productitem/allfixeditem", {withCredentials: true});
+    setFinished(response.data);
+  };
+
+  function returnStatus(status) {
+    switch(status) {
+      case 0: return "Mới sản xuất";
+      case 1: return "Đã nhập vào đại lý";
+      case 2: return "Đã bán";
+      case 3: return "Lỗi";
+      case 4: return "Đang bảo hành";
+      case 5: return "Đã bảo hành";
+      case 6: return "Đã bảo hành và trả cho khách hàng";
+      case 7: return "Cần trả về nhà máy";
+      case 8: return "Đã chuyển về cơ sở sản xuất";
+      case 9: return "Lỗi, cần triệu hồi";
+      case 10: return "Hết thời gian bảo hành"
+      case 11: return "Trả lại cơ sở sản xuất"
+    }
+  }
 
   return (
     <Layout>
@@ -12,27 +41,28 @@ const FinishedInDLPP = () => {
               <thead>
                 <tr>
                   <th>STT</th>
-                  <th>Mã bảo hành</th>
                   <th>Mã sản phẩm</th>
                   <th>Sản phẩm</th>
-                  <th>Khách hàng</th>
-                  <th>Số điện thoại</th>
+                  <th>Lô</th>
+                  <th>Trạng thái</th>
                   <th>Hành động</th>
-                  
                 </tr>
               </thead>
               <tbody>
-              <tr>
-                    <td>1</td>
-                    <td>BH1</td>
-                    <td>DELL123</td>
-                    <td>DELL1</td>
-                    <td>Phan Đức Mạnh</td>
-                    <td>0123456789</td>
-                    <td>
-                        <button className="button is-small is-info">Trả cho khách hàng</button>
-                    </td>
-                  </tr>
+                {finished.map((product, index) => (
+                  <tr key={product.productcode}>
+                  <td>{index + 1}</td>
+                  <td>{product.productcode}</td>
+                  <td>{product.productline}</td>
+                  <td>{product.lot}</td>
+                  <td>{returnStatus(product.status)}</td>
+                  <td>
+                  <Link className="button is-small is-info">
+                    Trả cho khách hàng
+                  </Link>
+                  </td>
+                </tr>
+                ))}
               </tbody>
             </table>
     </div>
