@@ -36,11 +36,10 @@ export const getProductitemByManufacture = async (req, res) => {
 // lấy ra tất cả các yêu cầu nhập hàng
 export const getAllRequestByManufacture = async (req, res) => {
    try {
-    const allrequest = await ConsignmentRequest.findAll({
-        where: {
-            manufactureid : req.Id
-        }
-    })
+    const sql = "SELECT productline, quantity,consignmentid, users.name, consignmentrequests.status FROM consignmentrequests LEFT JOIN users ON users.id = consignmentrequests.consignmentid WHERE consignmentrequests.manufactureid = :manu_id";
+    const allrequest = await database.query(sql, {replacements: {
+        manu_id: req.Id
+    }, type: QueryTypes.SELECT})
     return res.status(200).json(allrequest);
    } catch (error) {
     return res.status(400).json({msg: error})

@@ -6,7 +6,7 @@ const manufactureRouter = express.Router();
 
 manufactureRouter.get('/manufactures/all', authorizationUser, getManufactures);
 manufactureRouter.get('/manufactures/items',authorizationUser, getProductitemByManufacture);
-manufactureRouter.get('/manufactures/requests', authorizationUser, getAllRequestByManufacture);
+manufactureRouter.get('/manufactures/requests', authorizationUser,checkCssx, getAllRequestByManufacture);
 manufactureRouter.post('/productitem/send',authorizationUser, checkCssx, sendListProductItem );
 // tất cả các lô đã xuất cho đại lý phân phối
 manufactureRouter.get('/manufacture/lot', authorizationUser, checkCssx, allLotsHaveSent);
