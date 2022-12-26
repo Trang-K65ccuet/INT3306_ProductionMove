@@ -150,3 +150,16 @@ export const lotDetail = async (req, res) => {
       return res.status(400).json({msg: error});
     }
 }
+// tất cả các sản phẩm không thể sửa trả về cssx
+export const getAllCantFixItem = async (req, res) => {
+    try {
+        const all = await ProductItem.findAll({where: {
+            status: 8, 
+            manufactureid: req.Id
+        }})
+        return res.status(200).json(all);
+    } catch (error) {
+        return res.status(400).json({msg: error});
+    }
+    
+}

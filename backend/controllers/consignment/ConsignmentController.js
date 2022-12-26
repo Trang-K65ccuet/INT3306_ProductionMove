@@ -248,3 +248,10 @@ export const sendItemBack = async (req, res) => {
            return res.status(400).json({msg: error});  
     }
 }
+
+// triệu hồi sản phẩm
+export const retrieveItem = async (req, res) => {
+    const {productcode} = req.body;
+    const sql = "SELECT * FROM transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode WHERE"
+    +" productline = :pro_ln AND status = 2 OR status = 6" 
+}
