@@ -1,7 +1,9 @@
 import Layout from "../Layout";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "../../button/Button";
+import "./products.css"
+import { Link } from "react-router-dom";
 
 
 const InsuranceDLPP = () => {
@@ -35,16 +37,12 @@ const InsuranceDLPP = () => {
     <Layout>
           <div>
             <h1 className="title">Bảo hành</h1>
-            <Link to="/dlpp/insurance/new" className="button is-primary mb-2">
-              Tạo mới
-            </Link>
-            <Link to="/dlpp/insurance/send" className="button is-primary mb-2">
-              Chuyển tới trung tâm bảo hành
-            </Link>
-            <Link to="/dlpp/insurance/finished" className="button is-primary mb-2">
-              Đã bảo hành
-            </Link>
-            <h3>Lịch sử bảo hành</h3>
+            <div className="button-widget">
+              <Link to="/dlpp/insurance/new"><Button type="new" /></Link>
+              <Link to = "/dlpp/insurance/send"><Button type="send" /></Link>
+              <Link to="/dlpp/insurance/finished"><Button type="finished" /></Link>
+          </div>
+            <h3>Danh sách sản phẩm lỗi</h3>
             <table className="table is-striped is-fullwidth">
               <thead>
                 <tr>
