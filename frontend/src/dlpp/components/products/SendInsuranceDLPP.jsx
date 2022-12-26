@@ -64,6 +64,8 @@ const SendInsuranceDLPP = () => {
                   />
                 </div>
               </div>
+
+              
               <div className="field">
                 <label className="label">Ngày bảo hành</label>
                 <div className="control">

@@ -39,6 +39,8 @@ const InsuranceList = () => {
                   <th>Mã bảo hành</th>
                   <th>Mã sản phẩm</th>
                   <th>Ngày bảo hành</th>
+                  <th>Đại lý phân phối</th>
+                  <th>Trạng thái</th>
                 </tr>
               </thead>
                 <tbody>
