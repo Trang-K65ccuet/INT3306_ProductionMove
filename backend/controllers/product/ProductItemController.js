@@ -13,7 +13,7 @@ export const getProductItem = async (req, res) => {
    
 };
 
-// cơ sở sản xuất thống kê số sản phẩm đã tạo
+// lấy các sản phẩm theo dòng sản phẩm
 
 
 
