@@ -26,5 +26,5 @@ manufactureRouter.get('/manufacture/lot', authorizationUser, checkCssx, allLotsH
 manufactureRouter.post('/manufacture/lotdetail', authorizationUser, checkCssx, lotDetail);
 
 // tất cả các sản phẩm lỗi không thể sửa
-manufactureRouter.post('/manufacture/allcantfix',authorizationUser, checkCssx, getAllCantFixItem);
+manufactureRouter.get('/manufacture/allcantfix',authorizationUser, checkCssx, getAllCantFixItem);
 export default manufactureRouter;

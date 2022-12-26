@@ -60,7 +60,6 @@ const InsuranceList = () => {
                   <th>STT</th>
                   <th>Mã sản phẩm</th>
                   <th>Dòng sản phẩm</th>
-                  <th>Đại lý phân phối</th>
                   <th>Trạng thái</th>
                   <th>Hành động</th>
                 </tr>
@@ -71,7 +70,6 @@ const InsuranceList = () => {
                     <td>{index + 1}</td>
                     <td>{item.productcode}</td>
                     <td>{item.productline}</td>
-                    <td>{item.name}</td>
                     <td>{returnStatus(item.status)}</td>
                     <td>
                         <button className="button is-small is-info">

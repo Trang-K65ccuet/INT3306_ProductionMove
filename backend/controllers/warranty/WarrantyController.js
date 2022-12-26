@@ -54,7 +54,7 @@ export const sendfixedItem = async (req, res) => {
     }
 }
 // các sản phẩm đã sửa xong
-export const allFixed = async (req, res) => {
+export const allFixed = async (req, res) => {   
     
     
 }
@@ -83,9 +83,9 @@ export const setCannotFIxItem = async (req, res) => {
 // tất cả các sản phẩm không thể bảo hành
 export const allCantFixItemsByWarrantyAgent = async (req, res) => {
     try {
-        const sql = "SELECT warranties.productcode, productitems.productline FROM warranties LEFT JOIN productitems ON productitems.productcode = warranties.productcode"
-        + " AND status = 7 AND warrantyAgentId = :wr_id";
-        const all = database.query(sql, {replacements: {
+        const sql = "SELECT warranties.productcode, productitems.productline, productitems.manufactureid, users.name FROM warranties LEFT JOIN productitems ON productitems.productcode = warranties.productcode"
+        + " LEFT JOIN users ON users.id = productitems.manufactureid AND productitems.status = 7 AND warrantyAgentId = :wr_id";
+        const all = await database.query(sql, {replacements: {
             wr_id: req.Id
 
         }, type: QueryTypes.SELECT})
