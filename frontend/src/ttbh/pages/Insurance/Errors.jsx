@@ -28,7 +28,7 @@ const ErrorsTTBH = () => {
                   <th>STT</th>
                   <th>Mã sản phẩm</th>
                   <th>Sản phẩm</th>
-                  <th>Đại lý phân phối</th>
+                  <th>Cơ sở sản xuất</th>
                   <th>Hành động</th>
                 </tr>
               </thead>
