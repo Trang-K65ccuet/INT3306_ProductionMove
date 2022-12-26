@@ -42,6 +42,42 @@ const Button = ({ type }) => {
             ),
           };
         break;
+        case "sell":
+            data = {
+              title: "TẠO MỚI",
+              link: "Tạo đơn bán hàng mới",
+              icon: (
+                <LibraryAddIcon
+                     className="icon"
+                    style={{color: "crimson", backgroundColor: "#ff000033"}}
+                />
+              ),
+            };
+          break;
+          case "request":
+            data = {
+              title: "GỬI YÊU CẦU",
+              link: "Gửi yêu cầu nhận hàng",
+              icon: (
+                <SendIcon
+                    className="icon"
+                    style={{ color: "blue", backgroundColor: "#ddeeff" }}
+                />
+                 ),
+            };
+          break;
+          case "import":
+            data = {
+              title: "NHẬP HÀNG",
+              link: "Chấp nhận các lô được xuất",
+              icon: (
+                <LibraryAddIcon
+                     className="icon"
+                    style={{color: "crimson", backgroundColor: "#ff000033"}}
+                />
+                 ),
+            };
+          break;
 
     default:
       break;

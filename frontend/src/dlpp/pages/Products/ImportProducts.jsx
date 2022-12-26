@@ -2,6 +2,8 @@ import Layout from "../Layout";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "../../button/Button";
+import "./products.css"
 
 
 const ImportProductsDLPP = () => {
@@ -18,12 +20,11 @@ const ImportProductsDLPP = () => {
     <Layout>
           <div>
             <h1 className="title">Nhập hàng</h1>
-            <Link to="/dlpp/import/add" className="button is-primary mb-2">
-              Gửi yêu cầu
-            </Link>
-            <Link to="/dlpp/import/import" className="button is-primary mb-2">
-              Nhập hàng
-            </Link>
+            <div className="button-widget">
+              <Link to="/dlpp/import/add"><Button type="request" /></Link>
+              <Link to="/dlpp/import/import"><Button type="import" /></Link>
+            </div>
+            <br />
             <h3>Lịch sử nhập hàng</h3>
             <table className="table is-striped is-fullwidth">
               <thead>

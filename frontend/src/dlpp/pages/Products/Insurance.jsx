@@ -42,6 +42,7 @@ const InsuranceDLPP = () => {
               <Link to = "/dlpp/insurance/send"><Button type="send" /></Link>
               <Link to="/dlpp/insurance/finished"><Button type="finished" /></Link>
           </div>
+          <br />
             <h3>Danh sách sản phẩm lỗi</h3>
             <table className="table is-striped is-fullwidth">
               <thead>
