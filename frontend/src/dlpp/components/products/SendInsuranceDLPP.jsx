@@ -65,7 +65,7 @@ const SendInsuranceDLPP = () => {
                 </div>
               </div>
 
-              
+
               <div className="field">
                 <label className="label">Ngày bảo hành</label>
                 <div className="control">
@@ -78,7 +78,7 @@ const SendInsuranceDLPP = () => {
                   />
                 </div>
               </div>
-
+              <p className="has-text-centered">{msg} </p>
               <div className="field">
                 <div className="control">
                   <button type="submit" className="button is-success">
