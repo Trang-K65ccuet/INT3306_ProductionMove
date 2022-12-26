@@ -51,16 +51,12 @@ const InsuranceList = () => {
                     <td>{item.productline}</td>
                     <td>{item.name}</td>
                     <td>{returnStatus(item.status)}</td>
-                    <button 
-                      onClick={axios.post("http://localhost:5000/warranty/sendfixeditem",
-                        {
-                          productcode:item.productcode,
-                        },
-                        { withCredentials: true })}
-                      className="button is-small is-info"
-                    >
-                      Gửi về đại lý
-                  </button>
+                        <button className="button is-small is-info">
+                          Gửi về đại lý
+                      </button>
+                        <button className="button is-small is-danger">
+                          Xác nhận lỗi
+                        </button>
                   </tr>
                   ))}
                 </tbody>
