@@ -84,7 +84,7 @@ export const setCannotFIxItem = async (req, res) => {
 export const allCantFixItemsByWarrantyAgent = async (req, res) => {
     try {
         const sql = "SELECT warranties.productcode, productitems.productline, productitems.manufactureid, users.name FROM warranties LEFT JOIN productitems ON productitems.productcode = warranties.productcode"
-        + " LEFT JOIN users ON users.id = productitems.manufactureid AND productitems.status = 7 AND warrantyAgentId = :wr_id";
+        + " LEFT JOIN users ON users.id = productitems.manufactureid WHERE productitems.status = 7 AND warrantyAgentId = :wr_id";
         const all = await database.query(sql, {replacements: {
             wr_id: req.Id
 
