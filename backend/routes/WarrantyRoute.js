@@ -1,4 +1,4 @@
-import { allItemWarranty, sendfixedItem, setCannotFIxItem } from "../controllers/warranty/WarrantyController.js";
+import { allItemWarranty, sendfixedItem, setCannotFIxItem, sendCannotFixItem} from "../controllers/warranty/WarrantyController.js";
 import { authorizationUser, checkWarranty } from "../middleware/AuthUser.js";
 import express from 'express';
 
@@ -9,6 +9,12 @@ warrantyRouter.get('/warranty/allitem',authorizationUser, checkWarranty, allItem
 
 //gửi trả sản phẩm bảo hành xong về cho đại lý phân phối
 warrantyRouter.post('/warranty/sendfixeditem', authorizationUser, checkWarranty, sendfixedItem);
+
+//chuyển trạng thái sản phẩm thành lỗi không thể bảo hành
+warrantyRouter.post('/warranty/cannotfix',authorizationUser,checkWarranty,setCannotFIxItem);
+
+// gửi sản phẩm không thể sửa về cssx
+warrantyRouter.post('/warranty/sendbackmanufacture',authorizationUser, checkWarranty, sendCannotFixItem);
 
 
 export default warrantyRouter;
