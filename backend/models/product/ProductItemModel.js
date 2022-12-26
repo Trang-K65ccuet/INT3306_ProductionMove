@@ -40,6 +40,10 @@ export const ProductItem = database.define('productitems',{
             model: User,
             key: 'id'
         }
+    },
+    dateOfManufacture: {
+        type: DataTypes.DATE,
+        allowNull: false
     }
 
 }, {

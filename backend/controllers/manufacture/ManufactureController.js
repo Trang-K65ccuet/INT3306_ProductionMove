@@ -18,6 +18,38 @@ try {
     return res.status(400).json({msg: error})
 }
 };
+// tạo các sản phẩm mới
+export const addProductItemList = async(req, res) => {
+    try {
+        const records = req.body.length;
+        var j = 0;
+        for (j; j< records; j++) {
+        const {productline,quantity,image, price} = req.body.at(j);
+        let d = await ProductItem.findAndCountAll({
+            where: {
+                productline : productline
+            }
+        });
+        let i =0 ;
+        for(i; i< quantity; i++ ) {
+            const a = d.count + i;
+          await ProductItem.create({
+            productcode: productline + a,
+            productline: productline,
+            name: 'Máy tính ' + productline,
+            image: image,
+            price: price,
+            status: '0',
+            manufactureId: req.Id,
+          })
+        }
+    }
+        return res.status(200).json({msg: "Tạo thành công: " +records});
+    } catch (error) {
+        return res.status(400).json({msg: error.message});
+    }
+}
+
 // lấy ra tất cả các sản phẩm do user(cssx) sản xuất
 export const getProductitemByManufacture = async (req, res) => {
     try {

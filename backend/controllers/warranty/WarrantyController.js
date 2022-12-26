@@ -1,3 +1,4 @@
+import { QueryTypes } from "sequelize";
 import { database } from "../../config/Database.js";
 import { ProductItem } from "../../models/product/ProductItemModel.js";
 import Warranty from "../../models/warranty/WarrantyModel.js";
@@ -60,4 +61,24 @@ export const setCannotFIxItem = async (req, res) => {
     }
 
 }
-
+// chuyển sản phẩm về nhà máy sản xuất
+export const sendCannotFixItem = async (req, res) => {
+    const {productcode} = req.body;
+    try {
+        const sql = "SELECT * FROM warranties LEFT JOIN productitems ON warranties.productcode = productitems.productcode WHERE status = 7 AND "
+        +"warranties.productcode = :pr_code AND warranties.warrantyAgentId = :w_i";
+        const it = await database.query(sql, {replacements: {
+            pr_code: productcode, w_i: req.Id
+        }, type: QueryTypes.SELECT})
+        if (it.length == 0) return res.status(400).json({msg: "Không tồn tại sản phẩm có code này trong ds phải chuyển về cssx"});
+        else {
+            await ProductItem.update({status: 8}, {where: {
+                productcode: productcode,
+                status: 7
+            }})
+        }
+        return res.status(200).json({msg: "Đã chuyển sản phẩm về cơ sở sản xuất thành công"});
+    } catch (error) {
+        return res.status(400).json({msg: error})
+    }
+}
