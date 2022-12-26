@@ -12,6 +12,7 @@ const AddProductInCSSX = () => {
     quantity: "",
     image: "",
     price: "",
+    dateOfManufacture: ""
   });
   const [arrays, setArray] = useState([]);
 
@@ -19,6 +20,7 @@ const AddProductInCSSX = () => {
   const [quantity, setQuantity] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
+  const [dateOfManufacture, setDateOfManufacture] = useState(''); 
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
@@ -30,12 +32,14 @@ const AddProductInCSSX = () => {
         quantity: quantity,
         image: image,
         price: price,
+        dateOfManufacture: dateOfManufacture
       },
     ]);
     setProductLineName(productline[0].productline);
     setQuantity("");
     setImage("");
     setPrice("");
+    setDateOfManufacture(""); 
   };
 
   const deleteData = (index) => {
@@ -130,6 +134,20 @@ const AddProductInCSSX = () => {
                     value={price}
                     required="required"
                     onChange={(e) => setPrice(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label">Ngày sản xuất</label>
+                <div className="control">
+                  <input
+                    type="date"
+                    className="input"
+                    placeholder="YYYY-MM-DD"
+                    value={dateOfManufacture}
+                    required="required"
+                    onChange={(e) => setDateOfManufacture(e.target.value)}
                   />
                 </div>
               </div>
