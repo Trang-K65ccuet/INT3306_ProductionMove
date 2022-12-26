@@ -14,6 +14,28 @@ const InsuranceList = () => {
     setItem(response.data);
   };
 
+  const sendItemToDLPP = async (productcode) => {
+      await axios.post(
+        "http://localhost:5000/warranty/sendfixeditem",
+        {
+          productcode:productcode,
+        },
+        { withCredentials: true }
+      );
+    getItem(); 
+  }
+
+  const setItemError = async (productcode) => {
+      await axios.post(
+        "http://localhost:5000/warranty/cannotfix",
+        {
+          productcode:productcode,
+        },
+        { withCredentials: true }
+      );
+    getItem(); 
+  }
+
   function returnStatus(status) {
     switch(status) {
       case 0: return "Mới sản xuất";
@@ -51,12 +73,14 @@ const InsuranceList = () => {
                     <td>{item.productline}</td>
                     <td>{item.name}</td>
                     <td>{returnStatus(item.status)}</td>
+                    <td>
                         <button className="button is-small is-info">
-                          Gửi về đại lý
-                      </button>
-                        <button className="button is-small is-danger">
-                          Xác nhận lỗi
+                            Gửi về đại lý
                         </button>
+                          <button className="button is-small is-danger">
+                            Xác nhận lỗi
+                          </button>
+                    </td>
                   </tr>
                   ))}
                 </tbody>
