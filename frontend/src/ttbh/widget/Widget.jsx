@@ -31,7 +31,7 @@ const Widget = ({ type }) => {
         data = {
           title: "SẢN PHẨM",
           value: countItem ,
-          link: "Sản phẩm được yêu cầu bảo hành",
+          link: "Sản phẩm đang trong kho bảo hành",
           icon: (
             <ProductionQuantityLimitsIcon
               className="icon"

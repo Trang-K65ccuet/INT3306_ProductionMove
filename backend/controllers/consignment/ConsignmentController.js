@@ -146,10 +146,11 @@ export const getFaultItemFromCus = async (req, res) => {
     const {productcode} = req.body;
     const find = await ProductItem.findAndCountAll({
         where: {
-            productcode: productcode
+            productcode: productcode,
+            status: 2
         }
     })
-    if (find.count == 0) return res.status(400).json({msg: "Không có sản phẩm này trong kho"})
+    if (find.count == 0) return res.status(400).json({msg: "Không có sản phẩm này ở khách hàng"})
     try {
         await ProductItem.update({
             status: 3
@@ -246,4 +247,11 @@ export const sendItemBack = async (req, res) => {
     } catch (error) {
            return res.status(400).json({msg: error});  
     }
+}
+
+// triệu hồi sản phẩm
+export const retrieveItem = async (req, res) => {
+    const {productcode} = req.body;
+    const sql = "SELECT * FROM transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode WHERE"
+    +" productline = :pro_ln AND status = 2 OR status = 6" 
 }
