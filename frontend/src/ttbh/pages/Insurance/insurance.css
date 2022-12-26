@@ -1,0 +1,23 @@
+.form{
+    margin: 10px;
+    background-color:beige;
+    border: rgb(186, 186, 102) solid 1px;
+    border-radius: 20px;
+}
+
+.field {
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#text{
+    position: relative;
+    top:10px;
+    font-weight: bold;
+}
+ 
+.history {
+    margin-top:20px;
+}

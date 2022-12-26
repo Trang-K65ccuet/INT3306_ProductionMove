@@ -2,6 +2,7 @@ import Layout from "../Layout";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./insurance.css"
 
 const SuccessfulTTBH = () => {
   const [productcode, setProduct] = useState("");
@@ -29,10 +30,10 @@ const SuccessfulTTBH = () => {
     <Layout>
         <div>
           <h1 className="title">Đã bảo hành</h1>
-          <form onSubmit={getSendError}>
+          <form onSubmit={getSendError} className = "form">
               <p className="has-text-centered"></p>
+              <label className="field" id="text">Gửi sản phẩm bảo hành xong về đại lý:</label>
               <div className="field">
-                <label className="label">Gửi sản phẩm bảo hành xong về đại lý</label>
                 <div className="control">
                   <input
                     value = {productcode} 
@@ -43,15 +44,15 @@ const SuccessfulTTBH = () => {
                   />
                 </div>
               </div>
-
               <div className="field">
-                <div className="control">
+                <div className="send">
                   <button type="submit" className="button is-success">
-                    Gửi về đại lý phân phối
+                    Gửi
                   </button>
                 </div>
               </div>
             </form>
+            <p className="history">Các sản phẩm đã bảo hành thành công</p>
             <table className="table is-striped is-fullwidth">
               <thead>
                 <tr>
