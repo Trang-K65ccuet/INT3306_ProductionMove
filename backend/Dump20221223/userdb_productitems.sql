@@ -30,8 +30,6 @@ CREATE TABLE `productitems` (
   `price` double NOT NULL,
   `status` int NOT NULL,
   `manufactureId` int NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`productcode`),
   KEY `productline` (`productline`),
   KEY `manufactureId` (`manufactureId`),
@@ -46,7 +44,7 @@ CREATE TABLE `productitems` (
 
 LOCK TABLES `productitems` WRITE;
 /*!40000 ALTER TABLE `productitems` DISABLE KEYS */;
-INSERT INTO `productitems` VALUES ('DELL0','DELL','máy tính dell','image/dell.png',332000,1,4,'2022-11-11 00:00:00','2022-12-15 16:40:57'),('DELL1','DELL','Máy tính DELL','image/dell.png',223456,0,4,'2022-12-15 17:33:28','2022-12-15 17:33:28'),('DELL2','DELL','Máy tính DELL','image/dell.png',223456,0,4,'2022-12-15 17:33:28','2022-12-15 17:33:28'),('DELL3','DELL','Máy tính DELL','image/dell.png',223456,0,4,'2022-12-15 17:33:28','2022-12-15 17:33:28'),('DELL4','DELL','Máy tính DELL','image/dell.png',223456,0,4,'2022-12-15 17:33:28','2022-12-15 17:33:28'),('DELL5','DELL','Máy tính DELL','image/dell.png',223456,0,4,'2022-12-15 17:33:28','2022-12-15 17:33:28'),('DELL6','DELL','Máy tính DELL','image/dell.png',223456,0,4,'2022-12-15 17:35:01','2022-12-15 17:35:01'),('DELL7','DELL','Máy tính DELL','image/dell.png',223456,0,4,'2022-12-15 17:35:01','2022-12-15 17:35:01'),('HP0','HP','Máy tính HP','image/hp.png',223444,1,4,'2022-12-15 17:35:01','2022-12-15 17:45:04'),('HP1','HP','Máy tính HP','image/hp.png',223444,1,4,'2022-12-15 17:35:01','2022-12-15 17:45:04'),('HP2','HP','Máy tính HP','image/hp.png',223444,1,4,'2022-12-15 17:35:01','2022-12-15 17:45:04');
+INSERT INTO `productitems` VALUES ('DELL0','DELL','máy tính dell','image/dell.png',332000,2,4),('DELL1','DELL','Máy tính DELL','image/dell.png',223456,0,4),('DELL2','DELL','Máy tính DELL','image/dell.png',223456,0,4),('DELL3','DELL','Máy tính DELL','image/dell.png',223456,0,4),('DELL4','DELL','Máy tính DELL','image/dell.png',223456,0,4),('DELL5','DELL','Máy tính DELL','image/dell.png',223456,0,4),('DELL6','DELL','Máy tính DELL','image/dell.png',223456,0,4),('DELL7','DELL','Máy tính DELL','image/dell.png',223456,0,4),('HP0','HP','Máy tính HP','image/hp.png',223444,2,4),('HP1','HP','Máy tính HP','image/hp.png',223444,2,4),('HP2','HP','Máy tính HP','image/hp.png',223444,1,4);
 /*!40000 ALTER TABLE `productitems` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-17  9:52:03
+-- Dump completed on 2022-12-23 13:35:40

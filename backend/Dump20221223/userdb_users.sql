@@ -16,27 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `productlines`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `productlines`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `productlines` (
-  `productline` varchar(255) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`productline`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `position` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `status` tinyint NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `productlines`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `productlines` WRITE;
-/*!40000 ALTER TABLE `productlines` DISABLE KEYS */;
-INSERT INTO `productlines` VALUES ('DELL','Máy tính Dell'),('HP','Máy tính HP');
-/*!40000 ALTER TABLE `productlines` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Mah','manhacd','admin','$argon2id$v=19$m=65536,t=3,p=4$ABWWNBbVutCfkk+k1hXt4A$QkmAPka6Y+1zVvLYy6zt4nIdKNC4dN3oQdH4fpIMQf4',2),(3,'M','sf','cssx','a',0),(4,'M','manh123','cssx','$argon2id$v=19$m=65536,t=3,p=4$ABWWNBbVutCfkk+k1hXt4A$QkmAPka6Y+1zVvLYy6zt4nIdKNC4dN3oQdH4fpIMQf4',0),(5,'M','man','dlpp','$argon2id$v=19$m=65536,t=3,p=4$LiDf7T0kwmrK/0z3ZAuf3g$4hAlJdvbkERRkV7FeRuKIwr7IuuHeuL/J55JaPszS/Q',1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-17  9:52:03
+-- Dump completed on 2022-12-23 13:35:39

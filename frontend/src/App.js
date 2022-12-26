@@ -29,8 +29,9 @@ import InsuranceDLPP from "./dlpp/pages/Products/Insurance";
 import AddProductInDLPP from "./dlpp/components/products/AddProductInDLPP";
 import ImportProductInDLPP from "./dlpp/components/products/ImportProductInDLPP";
 import ExportProductInDLPP from "./dlpp/components/products/ExportProductInDLPP";
-import InsuranceInDLPP from "./dlpp/components/products/InsuranceInDLPP";
 import FinishedInDLPP from "./dlpp/components/products/FinishedInDLPP";
+import NewInsuranceInDLPP from "./dlpp/components/products/NewInsuranceInDLPP";
+import SendInsuranceDLPP from "./dlpp/components/products/SendInsuranceDLPP";
 
 
 import DashboardTTBH from "./ttbh/pages/Dashboard";
@@ -38,7 +39,6 @@ import StatisticTTBH from "./ttbh/pages/Statistic";
 import ProductsTTBH from "./ttbh/pages/Insurance/Products";
 import SuccessfulTTBH from "./ttbh/pages/Insurance/Successful";
 import ErrorsTTBH from "./ttbh/pages/Insurance/Errors";
-import ImportInTTBH from "./ttbh/components/insurance/ImportInTTBH";
 import StatusInTTBH from "./ttbh/components/insurance/StatusINTTBH";
 
 
@@ -81,8 +81,9 @@ function App() {
           <Route path="/dlpp/import/add" element={<AddProductInDLPP />} />
           <Route path="/dlpp/import/import" element={<ImportProductInDLPP />} />
           <Route path="/dlpp/export/new" element={<ExportProductInDLPP />} />
-          <Route path="/dlpp/insurance/new" element={<InsuranceInDLPP />} />
           <Route path="/dlpp/insurance/finished" element={<FinishedInDLPP />} />
+          <Route path="/dlpp/insurance/new" element={<NewInsuranceInDLPP />} />
+          <Route path="/dlpp/insurance/send" element={<SendInsuranceDLPP />} />
 
           //TTBH
           <Route path="/ttbh/dashboard" element={<DashboardTTBH />} />
@@ -90,7 +91,6 @@ function App() {
           <Route path="/ttbh/products" element={<ProductsTTBH />} />
           <Route path="/ttbh/successful" element={<SuccessfulTTBH />} />
           <Route path="/ttbh/errors" element={<ErrorsTTBH />} />
-          <Route path="/ttbh/products/import" element={<ImportInTTBH />} />
           <Route path="/ttbh/products/status" element={<StatusInTTBH />} />
           
         </Routes>

@@ -16,33 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `consignmentdetails`
+-- Table structure for table `productlines`
 --
 
-DROP TABLE IF EXISTS `consignmentdetails`;
+DROP TABLE IF EXISTS `productlines`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `consignmentdetails` (
-  `productcode` varchar(255) NOT NULL,
-  `lot` int NOT NULL,
-  `exportday` datetime NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`productcode`),
-  KEY `lot` (`lot`),
-  CONSTRAINT `consignmentdetails_ibfk_1` FOREIGN KEY (`productcode`) REFERENCES `productitems` (`productcode`),
-  CONSTRAINT `consignmentdetails_ibfk_2` FOREIGN KEY (`lot`) REFERENCES `consignments` (`lot`)
+CREATE TABLE `productlines` (
+  `productline` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`productline`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `consignmentdetails`
+-- Dumping data for table `productlines`
 --
 
-LOCK TABLES `consignmentdetails` WRITE;
-/*!40000 ALTER TABLE `consignmentdetails` DISABLE KEYS */;
-INSERT INTO `consignmentdetails` VALUES ('DELL0',1,'2022-12-12 00:00:00','2022-12-15 16:40:57','2022-12-15 16:40:57'),('HP0',2,'2022-12-16 00:00:00','2022-12-15 17:45:04','2022-12-15 17:45:04'),('HP1',2,'2022-12-16 00:00:00','2022-12-15 17:45:04','2022-12-15 17:45:04'),('HP2',2,'2022-12-16 00:00:00','2022-12-15 17:45:04','2022-12-15 17:45:04');
-/*!40000 ALTER TABLE `consignmentdetails` ENABLE KEYS */;
+LOCK TABLES `productlines` WRITE;
+/*!40000 ALTER TABLE `productlines` DISABLE KEYS */;
+INSERT INTO `productlines` VALUES ('AT','Máy tính'),('DELL','Máy tính Dell'),('HP','Máy tính HP');
+/*!40000 ALTER TABLE `productlines` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-17  9:52:03
+-- Dump completed on 2022-12-23 13:35:38

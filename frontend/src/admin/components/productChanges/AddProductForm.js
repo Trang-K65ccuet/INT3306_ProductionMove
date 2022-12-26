@@ -19,7 +19,7 @@ const AddProductForm = () => {
         productline: productline,
         description: description,
       }, {withCredentials: true});
-      navigate("admin/products");
+      navigate("/admin/products");
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
@@ -43,6 +43,8 @@ const AddProductForm = () => {
                     className="input"
                     placeholder="Tên dòng sản phẩm"
                     required='required'
+                    value={productline}
+                    onChange={(e) => setProductLine(e.target.value)}
                   />
                 </div>
               </div>
@@ -54,6 +56,8 @@ const AddProductForm = () => {
                     className="input"
                     placeholder="Mô tả"
                     required='required'
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
               </div>

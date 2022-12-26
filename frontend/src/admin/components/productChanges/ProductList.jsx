@@ -14,8 +14,8 @@ const ProductList = () => {
     setProductLines(response.data); 
   }
 
-  const deleteProductLine = async (productLineId) => {
-    await axios.delete(`http://localhost:5000/productline/delete/${productLineId}`, {withCredentials: true})
+  const deleteProductLine = async () => {
+    await axios.delete(`http://localhost:5000/productline/delete`, {withCredentials: true})
     getProductLines(); 
   }
   
@@ -24,7 +24,7 @@ const ProductList = () => {
       <h1 className="title">Dòng sản phẩm</h1>
       <h2 className="subtitle">Danh mục dòng sản phẩm</h2>
       <Link to="/admin/products/add" className="button is-primary mb-2">
-        Add New
+        Thêm mới
       </Link>
       <table className="table is-striped is-fullwidth">
         <thead>
@@ -32,30 +32,31 @@ const ProductList = () => {
             <th>STT</th>
             <th>Tên dòng sản phẩm</th>
             <th>Mô tả</th>
+            <th>Tùy chọn</th>
           </tr>
         </thead>
         <tbody>
-          {productLines.map((productLine, index) => {
-            <tr key={productLine.id}>
+          {productLines.map((productLine, index) => (
+            <tr key={productLine.productline}>
             <td>{index + 1}</td>
             <td>{productLine.productline}</td>
             <td>{productLine.description}</td>
             <td>
               <Link
-                to={`/products/edit/${productLine.id}`}
+                to={`/products/edit/${productLine.productline}`}
                 className="button is-small is-info"
               >
                 Edit
               </Link>
               <button
-                onClick={() => deleteProductLine(productLine.id)}
+                onClick={() => deleteProductLine()}
                 className="button is-small is-danger"
               >
                 Delete
               </button>
             </td>
           </tr>
-          })}
+          ))}
         </tbody>
       </table>
     </div>

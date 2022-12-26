@@ -42,6 +42,8 @@ export const ProductItem = database.define('productitems',{
         }
     }
 
-});
+}, {
+    timestamps: false
+  });
     
     

@@ -28,7 +28,13 @@ const Transaction = database.define('transaction', {
     dateOfTransaction: {
         type: DataTypes.DATE,
         allowNull: false
+    },
+    expiredDay: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 
+}, {
+    timestamps: false
 });
 export default Transaction;

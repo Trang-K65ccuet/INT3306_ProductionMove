@@ -16,34 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `warranties`
+-- Table structure for table `transactions`
 --
 
-DROP TABLE IF EXISTS `warranties`;
+DROP TABLE IF EXISTS `transactions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `warranties` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `transactions` (
+  `transactionId` int NOT NULL AUTO_INCREMENT,
   `productcode` varchar(255) NOT NULL,
-  `warrantyAgentId` int NOT NULL,
-  `dateOfGuarantee` datetime NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
-  PRIMARY KEY (`id`),
+  `customerId` int DEFAULT NULL,
+  `dateOfTransaction` datetime NOT NULL,
+  PRIMARY KEY (`transactionId`),
   KEY `productcode` (`productcode`),
-  KEY `warrantyAgentId` (`warrantyAgentId`),
-  CONSTRAINT `warranties_ibfk_1` FOREIGN KEY (`productcode`) REFERENCES `transactions` (`productcode`),
-  CONSTRAINT `warranties_ibfk_2` FOREIGN KEY (`warrantyAgentId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `customerId` (`customerId`),
+  CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`productcode`) REFERENCES `consignmentdetails` (`productcode`),
+  CONSTRAINT `transactions_ibfk_2` FOREIGN KEY (`customerId`) REFERENCES `customerdetails` (`customerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `warranties`
+-- Dumping data for table `transactions`
 --
 
-LOCK TABLES `warranties` WRITE;
-/*!40000 ALTER TABLE `warranties` DISABLE KEYS */;
-/*!40000 ALTER TABLE `warranties` ENABLE KEYS */;
+LOCK TABLES `transactions` WRITE;
+/*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+INSERT INTO `transactions` VALUES (1,'DELL0',36,'2022-11-12 00:00:00'),(2,'HP0',36,'2022-11-12 00:00:00'),(8,'HP1',36,'2022-11-12 00:00:00');
+/*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-17  9:52:02
+-- Dump completed on 2022-12-23 13:35:38

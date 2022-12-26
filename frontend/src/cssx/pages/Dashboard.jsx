@@ -9,7 +9,6 @@ const DashboardCSSX = () => {
   return (
     <Layout>
       <div className="widgets">
-            <Widget type="products" />
             <Widget type="import" />
             <Widget type="export" />
             <Widget type="error" />
