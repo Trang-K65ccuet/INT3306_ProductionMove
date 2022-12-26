@@ -1,8 +1,6 @@
 import Layout from "../../pages/Layout";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 
 const FinishedInDLPP = () => {
@@ -57,14 +55,7 @@ const FinishedInDLPP = () => {
                   <td>{product.lot}</td>
                   <td>{returnStatus(product.status)}</td>
                   <td>
-                  <button 
-                    onClick={axios.post("http://localhost:5000/producitem/sendbackitem",
-                      {
-                        productcode:product.productcode,
-                      },
-                      { withCredentials: true })}
-                    className="button is-small is-info"
-                  >
+                  <button className="button is-small is-info">
                       Trả cho khách hàng
                   </button>
                   </td>

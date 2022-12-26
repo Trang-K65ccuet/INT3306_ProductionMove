@@ -9,9 +9,6 @@ const ProductsTTBH = () => {
     <Layout>
       <div>
         <h1 className="title">Bảo hành</h1>
-        <Link to="/ttbh/products/status" className="button is-primary mb-2">
-          Cập nhật trạng thái
-        </Link>
       </div>
       <InsuranceList/>
     </Layout>

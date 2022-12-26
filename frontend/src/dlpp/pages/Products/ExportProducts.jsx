@@ -2,6 +2,8 @@ import Layout from "../Layout";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "../../button/Button";
+import "./products.css"
 
 const ExportProductsDLPP = () => {
   const [item, setItem] = useState([]);
@@ -34,9 +36,10 @@ const ExportProductsDLPP = () => {
     <Layout>
           <div>
             <h1 className="title">Bán hàng</h1>
-            <Link to="/dlpp/export/new" className="button is-primary mb-2">
-              Tạo mới
-            </Link>
+            <div className="button-widget">
+              <Link to="/dlpp/export/new"><Button type="sell" /></Link>
+            </div>
+            <br></br>
             <h3>Lịch sử bán hàng</h3>
             <table className="table is-striped is-fullwidth">
               <thead>

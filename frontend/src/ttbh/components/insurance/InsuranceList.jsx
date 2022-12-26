@@ -14,6 +14,28 @@ const InsuranceList = () => {
     setItem(response.data);
   };
 
+  const sendItemToDLPP = async (productcode) => {
+      await axios.post(
+        "http://localhost:5000/warranty/sendfixeditem",
+        {
+          productcode:productcode,
+        },
+        { withCredentials: true }
+      );
+    getItem(); 
+  }
+
+  const setItemError = async (productcode) => {
+      await axios.post(
+        "http://localhost:5000/warranty/cannotfix",
+        {
+          productcode:productcode,
+        },
+        { withCredentials: true }
+      );
+    getItem(); 
+  }
+
   function returnStatus(status) {
     switch(status) {
       case 0: return "Mới sản xuất";
@@ -36,18 +58,29 @@ const InsuranceList = () => {
               <thead>
                 <tr>
                   <th>STT</th>
-                  <th>Mã bảo hành</th>
                   <th>Mã sản phẩm</th>
-                  <th>Ngày bảo hành</th>
+                  <th>Dòng sản phẩm</th>
+                  <th>Đại lý phân phối</th>
+                  <th>Trạng thái</th>
+                  <th>Hành động</th>
                 </tr>
               </thead>
                 <tbody>
                   {item.map((item, index) => (
                     <tr key={item.id}>
                     <td>{index + 1}</td>
-                    <td>{item.id}</td>
                     <td>{item.productcode}</td>
-                    <td>{item.dateOfGuarantee}</td>
+                    <td>{item.productline}</td>
+                    <td>{item.name}</td>
+                    <td>{returnStatus(item.status)}</td>
+                    <td>
+                        <button className="button is-small is-info">
+                            Gửi về đại lý
+                        </button>
+                          <button className="button is-small is-danger">
+                            Xác nhận lỗi
+                          </button>
+                    </td>
                   </tr>
                   ))}
                 </tbody>

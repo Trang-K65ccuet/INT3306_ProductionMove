@@ -18,6 +18,38 @@ try {
     return res.status(400).json({msg: error})
 }
 };
+// tạo các sản phẩm mới
+export const addProductItemList = async(req, res) => {
+    try {
+        const records = req.body.length;
+        var j = 0;
+        for (j; j< records; j++) {
+        const {productline,quantity,image, price} = req.body.at(j);
+        let d = await ProductItem.findAndCountAll({
+            where: {
+                productline : productline
+            }
+        });
+        let i =0 ;
+        for(i; i< quantity; i++ ) {
+            const a = d.count + i;
+          await ProductItem.create({
+            productcode: productline + a,
+            productline: productline,
+            name: 'Máy tính ' + productline,
+            image: image,
+            price: price,
+            status: '0',
+            manufactureId: req.Id,
+          })
+        }
+    }
+        return res.status(200).json({msg: "Tạo thành công: " +records});
+    } catch (error) {
+        return res.status(400).json({msg: error.message});
+    }
+}
+
 // lấy ra tất cả các sản phẩm do user(cssx) sản xuất
 export const getProductitemByManufacture = async (req, res) => {
     try {
@@ -36,11 +68,10 @@ export const getProductitemByManufacture = async (req, res) => {
 // lấy ra tất cả các yêu cầu nhập hàng
 export const getAllRequestByManufacture = async (req, res) => {
    try {
-    const allrequest = await ConsignmentRequest.findAll({
-        where: {
-            manufactureid : req.Id
-        }
-    })
+    const sql = "SELECT productline, quantity,consignmentid, users.name, consignmentrequests.status FROM consignmentrequests LEFT JOIN users ON users.id = consignmentrequests.consignmentid WHERE consignmentrequests.manufactureid = :manu_id";
+    const allrequest = await database.query(sql, {replacements: {
+        manu_id: req.Id
+    }, type: QueryTypes.SELECT})
     return res.status(200).json(allrequest);
    } catch (error) {
     return res.status(400).json({msg: error})
@@ -118,4 +149,17 @@ export const lotDetail = async (req, res) => {
     } catch (error) {
       return res.status(400).json({msg: error});
     }
+}
+// tất cả các sản phẩm không thể sửa trả về cssx
+export const getAllCantFixItem = async (req, res) => {
+    try {
+        const all = await ProductItem.findAll({where: {
+            status: 8, 
+            manufactureid: req.Id
+        }})
+        return res.status(200).json(all);
+    } catch (error) {
+        return res.status(400).json({msg: error});
+    }
+    
 }
