@@ -26,7 +26,7 @@ export const productStatistic = async (req, res) => {
 
 }
 // lấy các sản phẩm theo dòng sản phẩm
-const getProductItemByLine = async (req, res) => {
+export const getProductItemByLine = async (req, res) => {
     const {productline} = req.body;
     try {
         const sql2 = "SELECT * FROM productitems WHERE productline = :prd";
