@@ -44,7 +44,7 @@ const Widget = ({ type }) => {
     setError(response.data);
   };
 
-  const errorCount = error.total;
+  //const errorCount = error.total;
 
   let data;
   switch (type) {
@@ -93,12 +93,12 @@ const Widget = ({ type }) => {
         case "error":
           data = {
             title: "LỖI",
-            value:
-             <p>
+            value:0,
+             /*<p>
               {errorCount.map((error) => (
                 <p>{error.total}</p>
                ))}
-            </p> , 
+            </p> , */
             link: "Sản phẩm bị lỗi",
             diff:100,
             icon: (

@@ -7,3 +7,14 @@
 .charts {
     padding: 5px 20px;
 }
+
+.border {
+    padding: 70px;
+}
+
+.text {
+    font-size: 25px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-align: center;
+}

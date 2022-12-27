@@ -34,7 +34,6 @@ const Featured = () => {
         </div>
         <p className="title">Doanh số bán hàng</p>
         <p className="amount">251</p>
-        <p className="desc">Doanh số trước đây</p>
         <div className="summary">
         <div className="item">
             <div className="itemTitle">Trạng thái</div>
