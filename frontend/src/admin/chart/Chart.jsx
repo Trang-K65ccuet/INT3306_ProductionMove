@@ -14,6 +14,7 @@ import {
 import "./chart.scss";
 
 const Chart = ({ aspect, title }) => {
+  const data = [{"total":28,"productline":"DELL"},{"total":23,"productline":"HP"}];
   const [productline, setProductline] = useState([]);
   const getProductline = async () => {
     const response = await axios.get("http://localhost:5000/productitem/statistic",{withCredentials: true});
@@ -28,7 +29,7 @@ const Chart = ({ aspect, title }) => {
           width={10}
           height={100}
           margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
-          data={getProductline()}
+          data={data}
         >
           <CartesianGrid
             strokeDasharray="1 2"

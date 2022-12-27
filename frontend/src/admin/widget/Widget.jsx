@@ -12,11 +12,13 @@ const Widget = ({ type }) => {
   const [productline, setProductline] = useState([]);
   const [user, setUser] = useState([]);
   const [product, setProduct] = useState([]);
+  const [error, setError] = useState([]);
 
   useEffect(() => {
     getProductline();
     getUser();
     getProduct();
+    getError();
   }, []);
 
   const productlineCount = productline.length;  
@@ -31,10 +33,17 @@ const Widget = ({ type }) => {
     setUser(response.data);
   };
 
-  //const productCount = product.productItem.length;
+  const productCount = 0;
   const getProduct= async () => {
-    const response = await axios.get("http://localhost:5000/productitem/all",{withCredentials: true});
+    const response = await axios.get("http://localhost:5000/productitem/statistic",{withCredentials: true});
     setProduct(response.data);
+  };
+
+  const errorCount = 0;
+  //console.log(`${error[0][0].totalquantity}`)
+  const getError= async () => {
+    const response = await axios.get("http://localhost:5000/productitem/by",{withCredentials: true});
+    setError(response.data);
   };
 
   let data;
@@ -71,7 +80,7 @@ const Widget = ({ type }) => {
         case "product":
           data = {
             title: "SẢN PHẨM",
-            value: 0,
+            value: productCount,
             link: "Sản phẩm được sản xuất",
             icon: (
               <ProductionQuantityLimitsIcon
@@ -97,8 +106,8 @@ const Widget = ({ type }) => {
         case "error":
           data = {
             title: "LỖI",
-            value: amount,
-            link: "Sản phẩm không thể bảo hành",
+            value: productCount ,
+            link: "Sản phẩm bị lỗi",
             icon: (
               <WarningAmberIcon
                 className="icon"

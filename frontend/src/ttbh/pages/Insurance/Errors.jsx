@@ -5,11 +5,6 @@ import axios from "axios";
 const ErrorsTTBH = () => {
   const [item, setItem] = useState([]);
 
-  function getName(a) {
-    if(a==null) return "Cơ sở sản xuất Hà Nội";
-    else return a;
-  }
-
   useEffect(() => {
     getItem();
   }, []);
@@ -18,6 +13,19 @@ const ErrorsTTBH = () => {
     const response = await axios.get("http://localhost:5000/warranty/itemneedsendback", {withCredentials: true});
     setItem(response.data);
   };
+
+  const setItemError = async (productCode) => {
+    await axios.post(
+      `http://localhost:5000/warranty/sendbackmanufacture`,
+      {
+        productcode:productCode,
+      },
+      { withCredentials: true }
+    );
+  getItem(); 
+}
+
+
   return (
     <Layout>
         <div>
@@ -38,11 +46,11 @@ const ErrorsTTBH = () => {
                     <td>{index + 1}</td>
                     <td>{item.productcode}</td>
                     <td>{item.productline}</td>
-                    <td>{getName(item.name)}</td>
+                    <td>{item.name}</td>
                     <td>
-                        <button className="button is-small is-danger">
-                            Gửi về cơ sở sản xuất
-                        </button>
+                      <button onClick={() => setItemError(item.productcode)} className="button is-small is-danger">
+                        Gửi về cơ sở sản xuất
+                      </button>
                     </td>
                   </tr>
                   ))}
