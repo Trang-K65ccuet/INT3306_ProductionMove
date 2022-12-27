@@ -249,9 +249,27 @@ export const sendItemBack = async (req, res) => {
     }
 }
 
-// triệu hồi sản phẩm
+// sản phẩm cần triệu hồi
 export const retrieveItem = async (req, res) => {
-    const {productcode} = req.body;
-    const sql = "SELECT * FROM transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode WHERE"
-    +" productline = :pro_ln AND status = 2 OR status = 6" 
+    const {productline} = req.body;
+    try {
+        const sql = "UPDATE transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode" +
+        " LEFT JOIN customerdetails ON customerdetails.id = transactions.customerId SET productitems.status = 9 WHERE"
+        +" productline = :pro_ln AND status = 2 OR status = 6";
+        await database.query(sql, {replacements: {
+            pro_ln: productline
+        }, type: QueryTypes.UPDATE})
+        return res.status(200).json({msg: "đã triệu hồi sản phẩm thành công"});
+    } catch (error) {
+        return res.status(400).json({msg: error});
+    }
+   
+}
+// tất cả các sản phẩm triệu hồi
+export const GetRetrieveItem = async (req,res) => {
+    try {
+        const sql = "SELECT * FROM productitems LEFT JOIN "
+    } catch (error) {
+        
+    }
 }
