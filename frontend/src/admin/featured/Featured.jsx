@@ -32,7 +32,7 @@ const Featured = () => {
             )}
           </ChangingProgressProvider>
         </div>
-        <p className="title">Doanh số tháng này</p>
+        <p className="title">Doanh số bán hàng</p>
         <p className="amount">251</p>
         <p className="desc">Doanh số trước đây</p>
         <div className="summary">
@@ -43,13 +43,13 @@ const Featured = () => {
             </div>
           </div>
           <div className="item">
-            <div className="itemTitle">Tháng trước</div>
+            <div className="itemTitle">Thu nhập</div>
             <div className="itemResult positive">
               <div className="resultAmount">223</div>
             </div>
           </div>
           <div className="item">
-            <div className="itemTitle">Năm trước</div>
+            <div className="itemTitle">Lỗi</div>
             <div className="itemResult negative">
               <div className="resultAmount">2282</div>
             </div>
