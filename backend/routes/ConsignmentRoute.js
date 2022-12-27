@@ -1,9 +1,11 @@
 import express from "express";
 import { authorizationUser, checkConsignment } from "../middleware/AuthUser.js";
-import {getProductLotByDistributor, getProductItemByDistributor, sendProductToCustomer, getFaultItemFromCus, getItemNeedWarrantyByConsignment
+import {getAllDistributor,getProductLotByDistributor, getProductItemByDistributor, sendProductToCustomer, getFaultItemFromCus, getItemNeedWarrantyByConsignment
 , sendFaultItemToWarrantyAgent, allFixedItem, sendItemBack, allItemSelled} from '../controllers/consignment/ConsignmentController.js';
 
 const consignmentRouter = express.Router();
+// tất cả các đại lý
+consignmentRouter.get('/distributor', authorizationUser, getAllDistributor);
 // lấy ra tất cả lô hàng của người dùng
 consignmentRouter.get('/lots',authorizationUser,checkConsignment,getProductLotByDistributor);
 

@@ -19,7 +19,7 @@ const ExportProductsCSSX = () => {
           <div>
             <h1 className="title">Xuất hàng</h1>
             <Link to="/cssx/export/exportnew" className="button is-primary mb-2">
-              Yêu cầu xuất hàng
+              Xuất hàng
             </Link>
             <h3>Lịch sử xuất hàng</h3>
             <table className="table is-striped is-fullwidth">
