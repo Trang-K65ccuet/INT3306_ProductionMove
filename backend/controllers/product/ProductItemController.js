@@ -17,27 +17,36 @@ export const getProductItem = async (req, res) => {
 // thống kê số sản phẩm đã tạo theo từng dòng sản phẩm
 export const productStatistic = async (req, res) => {
     try {
-        const sql1 = "SELECT COUNT(*) as total, productline FROM productitems GROUP BY productline";
+        const sql1 = "SELECT COUNT(*) as totalquantity FROM productitems";
+        const sql2 = "SELECT COUNT(*) as total, productline FROM productitems GROUP BY productline";
         const x1 = await database.query(sql1,{type: QueryTypes.SELECT});
-        return res.status(200).json(x1);
+        const x2 = await database.query(sql2,{type: QueryTypes.SELECT});
+        return res.status(200).json([x1, x2]);
     } catch (error) {
         return res.status(400).json({msg: error});
     }
 
 }
-// lấy các sản phẩm theo dòng sản phẩm
-export const getProductItemByLine = async (req, res) => {
-    const {productline} = req.body;
+
+// thống kê số sản phẩm đã bán
+export const spdaban = async (req, res) => {
     try {
-        const sql2 = "SELECT * FROM productitems WHERE productline = :prd";
-        const x1 = await database.query(sql1,{replacements: {
-            prd: productline
-        }, type: QueryTypes.SELECT});
-        return res.status(200).json(x1);
+        const sql1 = "SELECT COUNT(*) as totalquantity FROM transactions";
+        const sql2 = "SELECT COUNT(*) as total, productline FROM transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode GROUP BY productline";
+        const x1 = await database.query(sql1,{type: QueryTypes.SELECT});
+        const x2 = await database.query(sql2,{type: QueryTypes.SELECT});
+        return res.status(200).json([x1, x2]);
     } catch (error) {
         return res.status(400).json({msg: error});
     }
+}
+// thống kê sản phẩm bị lỗi
+export const AllFaultItem = async(req, res) => {
+    try {
+        const sql1 = "SELECT COUNT(*), productitems.productline FROM transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode GROUP BY productline";
+        const total = await database.query(sql1, {type: SELECT});
+    } catch (error) {
+        
     }
-
-
+}
 
