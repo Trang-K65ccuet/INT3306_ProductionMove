@@ -24,7 +24,7 @@ export const addProductItemList = async(req, res) => {
         const records = req.body.length;
         var j = 0;
         for (j; j< records; j++) {
-        const {productline,quantity,image, price} = req.body.at(j);
+        const {productline,quantity,image, price, dateOfManufacture} = req.body.at(j);
         let d = await ProductItem.findAndCountAll({
             where: {
                 productline : productline
@@ -41,6 +41,7 @@ export const addProductItemList = async(req, res) => {
             price: price,
             status: '0',
             manufactureId: req.Id,
+            dateOfManufacture: dateOfManufacture,
           })
         }
     }
