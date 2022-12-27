@@ -11,10 +11,14 @@ import axios from "axios";
 const Widget = ({ type }) => {
   const [productline, setProductline] = useState([]);
   const [user, setUser] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [error, setError] = useState([]);
 
   useEffect(() => {
     getProductline();
     getUser();
+    getProduct();
+    getError();
   }, []);
 
   const productlineCount = productline.length;  
@@ -27,6 +31,19 @@ const Widget = ({ type }) => {
   const getUser= async () => {
     const response = await axios.get("http://localhost:5000/users",{withCredentials: true});
     setUser(response.data);
+  };
+
+  const productCount = 0;
+  const getProduct= async () => {
+    const response = await axios.get("http://localhost:5000/productitem/statistic",{withCredentials: true});
+    setProduct(response.data);
+  };
+
+  const errorCount = 0;
+  //console.log(`${error[0][0].totalquantity}`)
+  const getError= async () => {
+    const response = await axios.get("http://localhost:5000/productitem/by",{withCredentials: true});
+    setError(response.data);
   };
 
   let data;
@@ -49,9 +66,9 @@ const Widget = ({ type }) => {
       break;
       case "products":
         data = {
-          title: "SẢN PHẨM",
+          title: "MẶT HÀNG",
           value: productlineCount,
-          link: "Số mặt hàng quản lý",
+          link: "Mặt hàng quản lý",
           icon: (
             <ProductionQuantityLimitsIcon
               className="icon"
@@ -60,6 +77,19 @@ const Widget = ({ type }) => {
           ),
         };
         break;
+        case "product":
+          data = {
+            title: "SẢN PHẨM",
+            value: productCount,
+            link: "Sản phẩm được sản xuất",
+            icon: (
+              <ProductionQuantityLimitsIcon
+                className="icon"
+                style={{ color: "purple", backgroundColor: "#80008033" }}
+              />
+            ),
+          };
+          break;
         case "sold":
           data = {
             title: "ĐÃ BÁN",
@@ -76,8 +106,8 @@ const Widget = ({ type }) => {
         case "error":
           data = {
             title: "LỖI",
-            value: amount,
-            link: "Số sản phẩm bảo hành",
+            value: productCount ,
+            link: "Sản phẩm bị lỗi",
             icon: (
               <WarningAmberIcon
                 className="icon"

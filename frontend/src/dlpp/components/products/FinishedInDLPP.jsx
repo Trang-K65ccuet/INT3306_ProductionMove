@@ -13,6 +13,17 @@ const FinishedInDLPP = () => {
     setFinished(response.data);
   };
 
+  const returnCus = async (productCode) => {
+    await axios.post(
+      `http://localhost:5000/producitem/sendbackitem`,
+      {
+        productcode:productCode,
+      },
+      { withCredentials: true }
+    );
+  getFinished(); 
+}
+
   function returnStatus(status) {
     switch(status) {
       case 0: return "Mới sản xuất";
@@ -55,10 +66,10 @@ const FinishedInDLPP = () => {
                   <td>{product.lot}</td>
                   <td>{returnStatus(product.status)}</td>
                   <td>
-                  <button className="button is-small is-info">
-                      Trả cho khách hàng
-                  </button>
-                  </td>
+                      <button onClick={() => returnCus(product.productcode)} className="button is-small is-info">
+                        Trả cho khách hàng
+                      </button>
+                    </td>
                 </tr>
                 ))}
               </tbody>

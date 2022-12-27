@@ -8,6 +8,8 @@ warrantyRouter.get('/warranty/allagent', authorizationUser, allWarrantyAgents);
 // tất cả các sản phẩm đã từng hoặc đang được trung tâm bảo hành
 warrantyRouter.get('/warranty/allitem',authorizationUser, checkWarranty, allItemWarranty);
 
+// tất cả các sản phẩm bảo hành xong chờ trả
+
 //gửi trả sản phẩm bảo hành xong về cho đại lý phân phối
 warrantyRouter.post('/warranty/sendfixeditem', authorizationUser, checkWarranty, sendfixedItem);
 

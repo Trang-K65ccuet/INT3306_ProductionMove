@@ -41,7 +41,7 @@ export const addProductItemList = async(req, res) => {
             price: price,
             status: '0',
             manufactureId: req.Id,
-            dateOfManufacture: dateOfManufacture,
+            dateOfManufacture: dateOfManufacture
           })
         }
     }

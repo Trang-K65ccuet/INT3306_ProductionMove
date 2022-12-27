@@ -16,12 +16,12 @@ const Dashboard = () => {
       <div className="widgets">
             <Widget type="users" />
             <Widget type="products" />
-            <Widget type="sold" />
+            <Widget type="product" />
             <Widget type="error" />
         </div>
         <div className="charts">
           <Featured />
-          <Chart title="Trong năm nay" aspect={2 / 1} />
+          <Chart title="Số lượng từng mặt hàng" aspect={2 / 1} />
         </div>
     </Layout>
   );
