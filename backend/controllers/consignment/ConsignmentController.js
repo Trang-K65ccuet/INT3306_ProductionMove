@@ -10,6 +10,16 @@ import { response } from "express";
 import ConsignmentRequest from "../../models/consignment/ConsignmentRequestModel.js";
 import User from "../../models/user/UserModel.js";
 
+// lấy ra các đại lý phân phối
+export const getAllDistributor = async (req, res) => {
+    try {
+        const sql = "SELECT users.id, users.name FROM users WHERE users.position = 'dlpp' ";
+        const all = await database.query(sql, {type: QueryTypes.SELECT});
+        return res.status(200).json(all); 
+    } catch (error) {
+        return res.status(400).json({msg: error});
+    }
+}
 // dưới đây là những chức năng mà đại lý phân phối có quyên thực hiện
 export const getProductLotByDistributor = async (req, res) => {
     const distributorId = req.Id;

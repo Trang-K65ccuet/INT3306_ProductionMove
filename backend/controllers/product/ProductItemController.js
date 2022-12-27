@@ -46,9 +46,9 @@ export const AllFaultItem = async(req, res) => {
     try {
         const sql1 = "SELECT COUNT(*) as total, productitems.productline FROM productitems WHERE status >2 AND status < 10";
         const sql2 = "SELECT COUNT(*) as detailproductline, productitems.productline FROM productitems WHERE productitems.status >2 AND productitems.status < 10 GROUP BY productline";
-        const total = await database.query(sql1, {type: QueryTypes.SELECT});
+        const totals = await database.query(sql1, {type: QueryTypes.SELECT});
         const detail = await database.query(sql2, {type: QueryTypes.SELECT});
-        return res.status(200).json({total, detail});
+        return res.status(200).json({totals, detail});
     } catch (error) {
         return res.status(400).json({msg: error});
     }
