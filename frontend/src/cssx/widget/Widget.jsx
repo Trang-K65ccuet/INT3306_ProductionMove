@@ -31,6 +31,16 @@ const Widget = ({ type }) => {
   };
   const exportCount = exportCSSX.length;
 
+  const [error, setError] = useState([]);
+  useEffect(() => {
+    getError();
+  }, []);
+  const errorCount = error.length;
+  const getError = async () => {
+    const response = await axios.get("http://localhost:5000/manufacture/allcantfix", {withCredentials: true});
+    setError(response.data);
+  };
+
   let data;
   // temp
   const amount = 500;
@@ -66,7 +76,7 @@ const Widget = ({ type }) => {
         case "error":
           data = {
             title: "LỖI",
-            value: amount,
+            value: errorCount,
             link: "Sản phẩm không thể bảo hành",
             icon: (
               <WarningAmberIcon

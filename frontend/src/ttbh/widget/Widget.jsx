@@ -10,15 +10,23 @@ import axios from "axios";
 
 const Widget = ({ type }) => {
   const [item, setItem] = useState([]);
-
   useEffect(() => {
     getItem();
   }, []);
-
   const countItem = item.length;
   const getItem = async () => {
     const response = await axios.get("http://localhost:5000/warranty/allitem", {withCredentials: true});
     setItem(response.data);
+  };
+
+  const [error, setError] = useState([]);
+  useEffect(() => {
+    getError();
+  }, []);
+  const countError = error.length;
+  const getError = async () => {
+    const response = await axios.get("http://localhost:5000/warranty/itemneedsendback", {withCredentials: true});
+    setError(response.data);
   };
 
   let data;
@@ -56,8 +64,8 @@ const Widget = ({ type }) => {
         case "error":
           data = {
             title: "LỖI",
-            value: amount ,
-            link: "Sản phẩm không thể bảo hành",
+            value: countError ,
+            link: "Sản phẩm không thể bảo hành trong kho",
             icon: (
               <WarningAmberIcon
                 className="icon"
