@@ -6,42 +6,68 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const PieChart = () => {
-  const [product, setProduct] = useState([[{totalquantity: 0, month: 0, year: 0}], [{total: 0, productline: ''}]]);
-  const getProduct= async () => {
-    const response = await axios.get("http://localhost:5000/productitem/statistic",{withCredentials: true});
-    setProduct(response.data);
-    console.log(response.data);
-  };
-  console.log(product[1]);
-  useEffect(() => {
-    getProduct();
-  }, []);
-
-  const ChartData = product[1];
-    //const ChartData = [{"total":58,"productline":"DELL"},{"total":53,"productline":"HP"}];
-
-    const [chartData, setChart] = useState({
-      labels: ChartData.map((data) => data.productline),
-      datasets: [
-        {
-          label: "Số lượng: ",
-          data: ChartData.map((data) => data.total),
-          backgroundColor: [
-            "rgba(75,192,192,1)",
-            "#f3ba2f",
-            "#ecf0f1",
-            "#50AF95",
-            "#2a71d0",
-            "#fcf3f1",
+  const [datat, setDatat] = useState({
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  });
+  useEffect(()=> {
+    const fetchData = async () =>  {
+      const resp = await axios.get('http://localhost:5000/productitem/statistic', {withCredentials: true});
+        const label = [];
+        const data = [];
+        for(var i of resp.data[1]) {
+            label.push(i.productline);
+            data.push(i.total)
+        }
+        setDatat(
+          {
+            labels:label,
+            datasets: [{
+                data:data,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                ]
+            },
           ],
-          borderWidth: 2,
-        },
-      ],
-    });
+          
+        }
+        )
 
+      };
+  fetchData();
+  }, [])
+  console.log(datat);
+  
   return (
     <div class = "piechart">
-        <Pie data={chartData} />
+        <Pie data={datat} />
     </div>
   );
 

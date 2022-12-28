@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../../button/Button";
 import "./products.css"
+import ReactPaginate from "react-paginate";
 
 const ExportProductsDLPP = () => {
   const [item, setItem] = useState([]);
@@ -32,6 +33,17 @@ const ExportProductsDLPP = () => {
     }
   }
 
+  let itemsPerPage = 5; 
+  const [itemOffset, setItemOffset] = useState(0);
+    const endOffset = itemOffset + itemsPerPage;
+    const currentItems = item.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(item.length / itemsPerPage);
+  
+    // Invoke when user click to request another page.
+    const handlePageClick = (event) => {
+      const newOffset = (event.selected * itemsPerPage) % item.length;
+      setItemOffset(newOffset);
+    };
   return (
     <Layout>
           <div>
@@ -55,7 +67,7 @@ const ExportProductsDLPP = () => {
                 </tr>
               </thead>
               <tbody>
-                {item.map((item, index) => (
+                {currentItems.map((item, index) => (
                   <tr key={item.productcode}>
                   <td>{index + 1}</td>
                   <td>{item.productcode}</td>
@@ -69,6 +81,21 @@ const ExportProductsDLPP = () => {
                 ))}
               </tbody>
             </table>
+            <ReactPaginate
+                breakLabel="..."
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel={"< Prev"}
+                nextLabel={"Next >"}
+                renderOnZeroPageCount={null}
+                containerClassName={"pagination-list"}
+                pageLinkClassName={"pagination-link"}
+                previousLinkClassName={"pagination-previous"}
+                nextLinkClassName={"pagination-next"}
+                activeLinkClassName={"pagination-link is-current"}
+                disabledLinkClassName={"pagination-link is-disabled"}
+              />
          </div>
     </Layout>
   );

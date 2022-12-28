@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ReactPaginate from "react-paginate";
 
 const InsuranceList = () => {
   const [item, setItem] = useState([]);
@@ -36,6 +37,17 @@ const InsuranceList = () => {
     getItem(); 
   }
 
+  let itemsPerPage = 5; 
+  const [itemOffset, setItemOffset] = useState(0);
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = item.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(item.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % item.length;
+    setItemOffset(newOffset);
+  };
   function returnStatus(status) {
     switch(status) {
       case 0: return "Mới sản xuất";
@@ -65,7 +77,7 @@ const InsuranceList = () => {
                 </tr>
               </thead>
                 <tbody>
-                  {item.map((item, index) => (
+                  {currentItems.map((item, index) => (
                     <tr key={item.id}>
                     <td>{index + 1}</td>
                     <td>{item.productcode}</td>
@@ -83,6 +95,21 @@ const InsuranceList = () => {
                   ))}
                 </tbody>
             </table>
+            <ReactPaginate
+                breakLabel="..."
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel={"< Prev"}
+                nextLabel={"Next >"}
+                renderOnZeroPageCount={null}
+                containerClassName={"pagination-list"}
+                pageLinkClassName={"pagination-link"}
+                previousLinkClassName={"pagination-previous"}
+                nextLinkClassName={"pagination-next"}
+                activeLinkClassName={"pagination-link is-current"}
+                disabledLinkClassName={"pagination-link is-disabled"}
+              />
         </div>
   );
 };

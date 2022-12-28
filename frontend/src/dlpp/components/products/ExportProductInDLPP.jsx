@@ -12,10 +12,21 @@ const ExportProductInDLPP = () => {
   }, []);
 
   const getProductline = async () => {
-    const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
-    setProductline(response.data);  
+    const responses = await axios.get("http://localhost:5000/lot/get/item", {
+      withCredentials: true,
+    });
+    const responeFiltered = responses.data.filter(
+      (response) => response.status == 1
+    );
+    // setProductline(responeFiltered);
+    
+    setProductline([...new Set(responeFiltered.map((response) => response.productline))])
+    setChooseProductline(productline[0]);
   };
-  
+
+  // useEffect(() => {
+  //   getSendCustomer();
+  // }, []);
   const [chooseProductline, setChooseProductline] = useState("");
   const [quantity, setQuantity] = useState("");
   const [customername, setName] = useState("");
@@ -31,17 +42,17 @@ const ExportProductInDLPP = () => {
       await axios.post(
         "http://localhost:5000/consignment/send",
         {
-          productline:chooseProductline, 
-          quantity:quantity, 
+          productline: chooseProductline,
+          quantity: quantity,
           customername: customername,
-          customerphone: customerphone, 
-          customeraddress: customeraddress, 
-          date:date,
-          timeExpired:timeExpired,
+          customerphone: customerphone,
+          customeraddress: customeraddress,
+          date: date,
+          timeExpired: timeExpired,
         },
         { withCredentials: true }
       );
-      navigate('/dlpp/export');
+      navigate("/dlpp/export");
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
@@ -50,24 +61,29 @@ const ExportProductInDLPP = () => {
   };
   return (
     <Layout>
-      <div>
       <h1 className="title">Bán hàng</h1>
       <div className="card is-shadowless">
         <div className="card-content">
           <div className="content">
             <form onSubmit={getSendCustomer}>
-              <p className="has-text-centered"></p>
               <div className="field">
                 <label className="label">Sản phẩm</label>
                 <div className="control">
-                <select 
-                  value = {chooseProductline} 
-                  onChange={(e) => setChooseProductline(e.target.value)}
-                  className="input">
-                  {productline.map((product) => (
-                      <option>{product.productline}</option>
-                  ))}
-                </select>
+                  <div className="select is-fullwidth">
+                    <select
+                      value={chooseProductline}
+                      onChange={(e) => {
+                        setChooseProductline(e.target.value); 
+                      }}
+                      className="input"
+                    >
+                      {productline.map((product, index) => (
+                        <option key={index}>
+                          {product}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
               </div>
               <div className="field">
@@ -87,7 +103,7 @@ const ExportProductInDLPP = () => {
                 <div className="control">
                   <input
                     type="text"
-                    value = {customername}
+                    value={customername}
                     onChange={(e) => setName(e.target.value)}
                     className="input"
                     placeholder="Họ tên khách hàng"
@@ -123,7 +139,7 @@ const ExportProductInDLPP = () => {
                 <div className="control">
                   <input
                     type="date"
-                    value = {date}
+                    value={date}
                     onChange={(e) => setDate(e.target.value)}
                     className="input"
                     placeholder="Ngày bán"
@@ -135,7 +151,7 @@ const ExportProductInDLPP = () => {
                 <div className="control">
                   <input
                     type="number"
-                    value = {timeExpired}
+                    value={timeExpired}
                     onChange={(e) => setTimeExpired(e.target.value)}
                     className="input"
                     placeholder="Số ngày bảo hành"
@@ -154,9 +170,7 @@ const ExportProductInDLPP = () => {
           </div>
         </div>
       </div>
-    </div>
     </Layout>
-    
   );
 };
 
