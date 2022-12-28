@@ -49,7 +49,7 @@ export const getProductItemByDistributor = async (req, res) => {
         var allItem = [];
         for(i; i< getallLot.length; i++) {
             let Lot = getallLot.at(i).lot;
-            let sql = "SELECT productitems.productcode, productline, name, image, price, status, manufactureid, productitems.status,users.name as distributorname lot FROM `productitems` LEFT JOIN `consignmentdetails` ON `productitems`.`productcode` = `consignmentdetails`.`productcode` LEFT JOIN users ON users.id = consignments.distributorid WHERE lot = ?";
+            let sql = "SELECT productitems.productcode, productline, productitems.name, image, price, productitems.manufactureid, productitems.status,users.name as distributorname, consignmentdetails.lot FROM `productitems` LEFT JOIN `consignmentdetails` ON `productitems`.`productcode` = `consignmentdetails`.`productcode` LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot LEFT JOIN users ON users.id = consignments.distributorid WHERE consignmentdetails.lot = ?";
             
             const getItemByLot = await database.query(sql, {
                 replacements: [Lot],

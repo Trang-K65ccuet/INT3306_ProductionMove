@@ -28,12 +28,14 @@ export const addProductLine = async (req,res) => {
 // cập nhật danh mục sản phẩm
 export const updateProductLine = async (req, res) => {
     const {productline, newproductline, description} = req.body;
+    
     try {
+        if (productline != newproductline) {
         await ProductLine.create({
             productline: newproductline,
             description: description
         });
-        
+    
         await ProductItem.update({
             productline: newproductline
         }, {
@@ -47,6 +49,11 @@ export const updateProductLine = async (req, res) => {
                 productline: productline
             }
         });
+    } else {
+        await ProductLine.update({description: description}, {where: {
+            productline: productline
+        }});
+    }
         return res.status(200).json({msg: "Cập nhật danh mục sản phẩm thành công"});
     } catch (error) {
         return res.status(400).json({msg: error});

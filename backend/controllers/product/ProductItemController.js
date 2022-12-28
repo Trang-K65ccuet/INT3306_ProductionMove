@@ -28,6 +28,15 @@ export const productStatistic = async (req, res) => {
     }
 
 }
+export const ssa = async (req, res) => {
+   try {
+    const sql2 = "SELECT COUNT(*) as total, productline FROM productitems GROUP BY productline";
+    const x2 = await database.query(sql2,{type: QueryTypes.SELECT});
+    return res.status(200).json(x2);
+   } catch (error) {
+    
+   }
+}
 
 // thống kê số sản phẩm đã bán
 export const spdaban = async (req, res) => {

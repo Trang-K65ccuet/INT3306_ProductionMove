@@ -1,4 +1,4 @@
-import { getProductItem, productStatistic, spdaban, AllFaultItem, productStatisticManufacture, spdabanManufacture} from "../../controllers/product/ProductItemController.js";
+import { getProductItem, productStatistic, spdaban, AllFaultItem, productStatisticManufacture, spdabanManufacture, ssa} from "../../controllers/product/ProductItemController.js";
 import { authorizationUser,checkAdmin,checkCssx } from "../../middleware/AuthUser.js";
 import express from 'express';
 const itemRoute = express.Router();
@@ -7,6 +7,7 @@ itemRoute.get('/productitem/all', authorizationUser,checkAdmin,getProductItem);
 // thống kê của admin
 // thống kê các sản phẩm đã sản xuất(tổng cộng và theo dòng sp) theo năm
 itemRoute.get('/productitem/statistic', authorizationUser,checkAdmin,productStatistic);
+itemRoute.get('/thunghiem', authorizationUser, checkAdmin, ssa);
 //thống kê các sản phẩm đã bán ( số lượng - theo tổng và theo dòng)
 itemRoute.get('/productitem/byproductline', authorizationUser,checkAdmin,spdaban);
 // thống kê các sản phẩm bị lỗi
