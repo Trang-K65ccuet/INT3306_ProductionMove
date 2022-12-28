@@ -16,6 +16,7 @@ const ExportProductsDLPP = () => {
     setItem(response.data);  
   };
 
+  //Status 
   function returnStatus(status) {
     switch(status) {
       case 0: return "Mới sản xuất";

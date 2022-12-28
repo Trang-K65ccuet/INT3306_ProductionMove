@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 
-
 const ExpiredTime = () => {
+  //map expired time
   const [expired, setExpired] = useState([]);
   useEffect(() => {
     getExpired();
@@ -14,6 +14,7 @@ const ExpiredTime = () => {
     setExpired(response.data);
   };
 
+  //get CSSX name
   const returnCSSX = async (productCode) => {
     await axios.post(
       `http://localhost:5000/producitem/sendbackovertime`,

@@ -11,6 +11,8 @@ const FixAll = () => {
     const [chooseProductline, setChooseProductline] = useState("");
     const navigate = useNavigate();
     const [productline, setProductline] = useState([]);
+
+    //get productline name to select
     useEffect(() => {
       getProductline();
     }, []);
@@ -19,6 +21,7 @@ const FixAll = () => {
         setProductline(response.data);  
       };
 
+      //All 
       const [all, setAll] = useState([]);
       useEffect(() => {
         getAll();
@@ -28,6 +31,7 @@ const FixAll = () => {
           setAll(response.data);  
         };
 
+    //Send
     const sendAll = async (e) => {
       e.preventDefault();
       try {
