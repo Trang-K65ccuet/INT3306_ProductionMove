@@ -2,8 +2,8 @@ import React from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import {useState } from "react";
-
-function PieChart() {
+import "./pie.scss"
+const PieChart = () => {
     const ChartData = [{"total":58,"productline":"DELL"},{"total":53,"productline":"HP"}];
 
     const [chartData, setChart] = useState({
@@ -18,13 +18,19 @@ function PieChart() {
             "#ecf0f1",
             "#50AF95",
             "#2a71d0",
+            "#fcf3f1",
           ],
           borderWidth: 2,
         },
       ],
     });
 
-  return <Pie data={chartData} />;
-}
+  return (
+    <div class = "piechart">
+        <Pie data={chartData} />
+    </div>
+  );
+
+};
 
 export default PieChart;

@@ -18,7 +18,7 @@ const Dashboard = () => {
             <Widget type="error" />
         </div>
         <div className="charts">
-          <Featured />
+          <Featured class ="featured" />
           <div class="pie" style={{ width: 500 }}>
             <div class = "border">
               <PieChart/>

@@ -12,7 +12,7 @@ const Widget = ({ type }) => {
   const [productline, setProductline] = useState([]);
   const [user, setUser] = useState([]);
   const [product, setProduct] = useState([]);
-  const [error, setError] = useState([]);
+  const [errorItem, setError] = useState([[{total: 0, productline: ''}], [{detailproductline: 0, productline: ''}]]);
 
   useEffect(() => {
     getProductline();
@@ -20,7 +20,11 @@ const Widget = ({ type }) => {
     getProduct();
     getError();
   }, []);
-
+  var errorC = errorItem.length;
+  const getError= async () => {
+    const response = await axios.get("http://localhost:5000/productitem/fault",{withCredentials: true});
+    setError(response.data);
+  };
   const productlineCount = productline.length;  
   const getProductline = async () => {
     const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
@@ -37,15 +41,12 @@ const Widget = ({ type }) => {
   const getProduct= async () => {
     const response = await axios.get("http://localhost:5000/productitem/all",{withCredentials: true});
     setProduct(response.data);
+    console.log(response.data);
   };
 
-  const getError= async () => {
-    const response = await axios.get("http://localhost:5000/productitem/fault",{withCredentials: true});
-    setError(response.data);
-  };
-
-  //const errorCount = error.total;
-
+  
+  var x1 = 0;
+  //setTimeout(()=> {console.log(errorCount.find().total)},5);
   let data;
   switch (type) {
     case "users":
@@ -93,12 +94,7 @@ const Widget = ({ type }) => {
         case "error":
           data = {
             title: "LỖI",
-            value:0,
-             /*<p>
-              {errorCount.map((error) => (
-                <p>{error.total}</p>
-               ))}
-            </p> , */
+            value: errorC > 0 ? errorItem[0][0].total : 0,
             link: "Sản phẩm bị lỗi",
             diff:100,
             icon: (
@@ -131,4 +127,4 @@ const Widget = ({ type }) => {
 
 };
 
-export default Widget;
+export default Widget

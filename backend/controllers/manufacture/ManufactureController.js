@@ -54,17 +54,17 @@ export const addProductItemList = async(req, res) => {
 // lấy ra tất cả các sản phẩm do user(cssx) sản xuất
 export const getProductitemByManufacture = async (req, res) => {
     try {
-        const productItemByCssx = await ProductItem.findAll({
-            where: {
-                manufactureid: req.Id
-            }
-        })
+        const sql = "SELECT productitems.productcode, productitems.name, productitems.productline, productitems.price, productitems.image, productitems.status"
+        + ", productitems.manufactureId, users.name as manufacturename FROM productitems LEFT JOIN users ON users.id = productitems.manufactureId";
+        const productItemByCssx = await database.query(sql, {type: QueryTypes.SELECT});
         return res.status(200).json(productItemByCssx);
+
+        }catch (error) {
+            return res.status(500).json({msg : error.message});
+        }
         
-    } catch (error) {
-        return res.status(500).json({msg : error.message});
-    }
-};
+    };
+
 
 // lấy ra tất cả các yêu cầu nhập hàng
 export const getAllRequestByManufacture = async (req, res) => {

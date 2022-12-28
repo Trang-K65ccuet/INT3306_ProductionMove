@@ -15,11 +15,7 @@ const ExportProductInDLPP = () => {
     const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
     setProductline(response.data);  
   };
-
-
-  useEffect(() => {
-    getSendCustomer();
-  }, []);
+  
   const [chooseProductline, setChooseProductline] = useState("");
   const [quantity, setQuantity] = useState("");
   const [customername, setName] = useState("");
