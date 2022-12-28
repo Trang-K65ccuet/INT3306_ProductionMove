@@ -17,7 +17,7 @@ const PieChart = () => {
     getProduct();
   }, []);
 
-  const ChartData = product.at(1);
+  const ChartData = product[1];
     //const ChartData = [{"total":58,"productline":"DELL"},{"total":53,"productline":"HP"}];
 
     const [chartData, setChart] = useState({
