@@ -14,7 +14,7 @@ const AddProductInCSSX = () => {
     quantity: "",
     image: "",
     price: "",
-    dateOfManufacture: ""
+    dateOfManufacture: "",
   });
   const [arrays, setArray] = useState([]);
 
@@ -22,10 +22,10 @@ const AddProductInCSSX = () => {
   const [quantity, setQuantity] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
-  const [dateOfManufacture, setDateOfManufacture] = useState(''); 
+  const [dateOfManufacture, setDateOfManufacture] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
-  const imageRef = useRef(); 
+  const imageRef = useRef();
 
   const addData = () => {
     setArray([
@@ -35,7 +35,7 @@ const AddProductInCSSX = () => {
         quantity: quantity,
         image: imageRef.current.src,
         price: price,
-        dateOfManufacture: dateOfManufacture
+        dateOfManufacture: dateOfManufacture,
       },
     ]);
     setProductLineName(productline[0].productline);
@@ -43,7 +43,7 @@ const AddProductInCSSX = () => {
     // setImage("");
     document.getElementById("uploadedimage").setAttribute("src", "");
     setPrice("");
-    setDateOfManufacture(""); 
+    setDateOfManufacture("");
   };
 
   const deleteData = (index) => {
@@ -85,73 +85,74 @@ const AddProductInCSSX = () => {
 
         <div className="card is-shadowless">
           <div className="card-content">
-            <div className="content">
-              <div className="field">
-                <label className="label">Dòng sản phẩm</label>
-                <div className="control select is-fullwidth">
-                  <select
-                    value={producLineName}
-                    onChange={(e) => setProductLineName(e.target.value)}
-                  >
-                    {productline.map((product, index) => (
-                      <option key={index}>{product.productline}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div className="field">
-                <label className="label">Số lượng</label>
-                <div className="control">
-                  <input
-                    type="number"
-                    className="input"
-                    placeholder="Số lượng"
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                    required="required"
-                  />
-                </div>
-              </div>
-
-              <div className="field">
-                <label className="label">Ảnh minh họa</label>
-                <CloudinaryUploadWidget />
-                <img id="uploadedimage" src="" ref={imageRef}></img>
-              </div>
-
-              <div className="field">
-                <label className="label">Giá</label>
-                <div className="control">
-                  <input
-                    type="number"
-                    className="input"
-                    placeholder="Giá"
-                    value={price}
-                    required="required"
-                    onChange={(e) => setPrice(e.target.value)}
-                  />
-                </div>
-              </div>
-
-              <div className="field">
-                <label className="label">Ngày sản xuất</label>
-                <div className="control">
-                  <input
-                    type="date"
-                    className="input"
-                    placeholder="YYYY-MM-DD"
-                    value={dateOfManufacture}
-                    required="required"
-                    onChange={(e) => setDateOfManufacture(e.target.value)}
-                  />
-                </div>
+            <div className="field">
+              <label className="label">Dòng sản phẩm</label>
+              <div className="control select is-fullwidth">
+                <select
+                  value={producLineName}
+                  onChange={(e) => setProductLineName(e.target.value)}
+                >
+                  {productline.map((product, index) => (
+                    <option key={index}>{product.productline}</option>
+                  ))}
+                </select>
               </div>
             </div>
-            <div className="addDataProductItemButton">
-              <button className="button is-success" onClick={addData}>
-                Thêm dữ liệu
-              </button>
+
+            <div className="field">
+              <label className="label">Số lượng</label>
+              <div className="control">
+                <input
+                  type="number"
+                  className="input"
+                  placeholder="Số lượng"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  required="required"
+                />
+              </div>
+            </div>
+
+            <div className="field">
+              <label className="label">Ảnh minh họa</label>
+              <CloudinaryUploadWidget />
+              <img id="uploadedimage" src="" ref={imageRef}></img>
+            </div>
+
+            <div className="field">
+              <label className="label">Giá</label>
+              <div className="control">
+                <input
+                  type="number"
+                  className="input"
+                  placeholder="Giá"
+                  value={price}
+                  required="required"
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="field">
+              <label className="label">Ngày sản xuất</label>
+              <div className="control">
+                <input
+                  type="date"
+                  className="input"
+                  placeholder="YYYY-MM-DD"
+                  value={dateOfManufacture}
+                  required="required"
+                  onChange={(e) => setDateOfManufacture(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="field addDataProductItemButton">
+              <div className="control">
+                <button className="button is-success" onClick={addData}>
+                  Thêm dữ liệu
+                </button>
+              </div>
             </div>
 
             <table className="table is-striped is-fullwidth">
