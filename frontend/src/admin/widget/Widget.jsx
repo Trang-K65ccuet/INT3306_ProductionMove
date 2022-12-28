@@ -12,7 +12,8 @@ const Widget = ({ type }) => {
   const [productline, setProductline] = useState([]);
   const [user, setUser] = useState([]);
   const [product, setProduct] = useState([]);
-  const [error, setError] = useState([]);
+  const [errorItem, setError] = useState([[{total: 0, productline: ''}], [{detailproductline: 0, productline: ''}]]);
+ 
 
   useEffect(() => {
     getProductline();
@@ -20,7 +21,11 @@ const Widget = ({ type }) => {
     getProduct();
     getError();
   }, []);
-
+  var errorC = errorItem.length;
+  const getError= async () => {
+    const response = await axios.get("http://localhost:5000/productitem/fault",{withCredentials: true});
+    setError(response.data);
+  };
   const productlineCount = productline.length;  
   const getProductline = async () => {
     const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
@@ -33,29 +38,23 @@ const Widget = ({ type }) => {
     setUser(response.data);
   };
 
-  const productCount = 0;
+  const productCount = product.length;
   const getProduct= async () => {
-    const response = await axios.get("http://localhost:5000/productitem/statistic",{withCredentials: true});
+    const response = await axios.get("http://localhost:5000/productitem/all",{withCredentials: true});
     setProduct(response.data);
   };
 
-  const errorCount = 0;
-  //console.log(`${error[0][0].totalquantity}`)
-  const getError= async () => {
-    const response = await axios.get("http://localhost:5000/productitem/by",{withCredentials: true});
-    setError(response.data);
-  };
-
+  
+  var x1 = 0;
+  //setTimeout(()=> {console.log(errorCount.find().total)},5);
   let data;
-  const amount = 500;
-  const diff = 30;
-
   switch (type) {
     case "users":
       data = {
         title: "NGƯỜI DÙNG",
         value:userCount,
         link: "Tài khoản được kích hoạt",
+        diff:100,
         icon: (
           <PersonOutlineOutlinedIcon
             className="icon"
@@ -69,6 +68,7 @@ const Widget = ({ type }) => {
           title: "MẶT HÀNG",
           value: productlineCount,
           link: "Mặt hàng quản lý",
+          diff:100,
           icon: (
             <ProductionQuantityLimitsIcon
               className="icon"
@@ -82,19 +82,7 @@ const Widget = ({ type }) => {
             title: "SẢN PHẨM",
             value: productCount,
             link: "Sản phẩm được sản xuất",
-            icon: (
-              <ProductionQuantityLimitsIcon
-                className="icon"
-                style={{ color: "purple", backgroundColor: "#80008033" }}
-              />
-            ),
-          };
-          break;
-        case "sold":
-          data = {
-            title: "ĐÃ BÁN",
-            value:amount,
-            link: "Tổng sản phẩm đã bán",
+            diff:100,
             icon: (
               <SellIcon
                 className="icon"
@@ -102,12 +90,13 @@ const Widget = ({ type }) => {
               />
             ),
           };
-        break;
+          break;
         case "error":
           data = {
             title: "LỖI",
-            value: productCount ,
+            value: errorC > 0 ? errorItem[0][0].total : 0,
             link: "Sản phẩm bị lỗi",
+            diff:100,
             icon: (
               <WarningAmberIcon
                 className="icon"
@@ -129,7 +118,7 @@ const Widget = ({ type }) => {
         <div className="right">
           <div className="percentage positive">
             <KeyboardArrowUpIcon />
-            {diff}%
+            {data.diff}%
           </div>
           {data.icon}
         </div>
@@ -138,4 +127,4 @@ const Widget = ({ type }) => {
 
 };
 
-export default Widget;
+export default Widget

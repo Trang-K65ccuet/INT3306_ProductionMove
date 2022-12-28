@@ -1,3 +1,7 @@
+#nav{
+    background-color: rgb(119, 200, 222);
+}
+
 #logout{
     background-color: rgb(41, 175, 212);
     color:aliceblue;
@@ -7,3 +11,10 @@
     background-color: rgb(15, 75, 92);
 }
 
+.logo-text{
+    font-size: 30px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    color: rgb(20, 5, 73);
+    margin-left: 10px;
+}

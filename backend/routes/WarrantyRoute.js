@@ -1,4 +1,4 @@
-import { allItemWarranty, sendfixedItem, setCannotFIxItem, sendCannotFixItem, allWarrantyAgents, allCantFixItemsByWarrantyAgent} from "../controllers/warranty/WarrantyController.js";
+import { allItemWarranty, sendfixedItem, setCannotFIxItem, sendCannotFixItem, allWarrantyAgents, allCantFixItemsByWarrantyAgent, allFixedWarranty} from "../controllers/warranty/WarrantyController.js";
 import { authorizationUser, checkWarranty } from "../middleware/AuthUser.js";
 import express from 'express';
 
@@ -9,7 +9,7 @@ warrantyRouter.get('/warranty/allagent', authorizationUser, allWarrantyAgents);
 warrantyRouter.get('/warranty/allitem',authorizationUser, checkWarranty, allItemWarranty);
 
 // tất cả các sản phẩm bảo hành xong chờ trả
-
+warrantyRouter.get('/warranty/itemwaitsendback', authorizationUser, checkWarranty,allFixedWarranty);
 //gửi trả sản phẩm bảo hành xong về cho đại lý phân phối
 warrantyRouter.post('/warranty/sendfixeditem', authorizationUser, checkWarranty, sendfixedItem);
 

@@ -1,16 +1,14 @@
 import Layout from "./Layout";
-import Welcome from "../components/Welcome";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProfile} from "../../all/features/authSlice";
 import Widget from "../widget/Widget";
 import Featured from "../featured/Featured";
 import Chart from "../chart/Chart";
 import "./pages.css"
-
+import PieChart from "../pie/PieChart";
 
 
 const Dashboard = () => {
+ 
   return (
     <Layout>
       <div className="widgets">
@@ -20,8 +18,14 @@ const Dashboard = () => {
             <Widget type="error" />
         </div>
         <div className="charts">
-          <Featured />
-          <Chart title="Số lượng từng mặt hàng" aspect={2 / 1} />
+          <Featured class ="featured" />
+          <div class="pie" style={{ width: 500 }}>
+            <div class = "border">
+              <PieChart/>
+              <br />
+              <p class = "text">Tỷ lệ các sản phẩm</p>
+            </div>
+          </div>
         </div>
     </Layout>
   );

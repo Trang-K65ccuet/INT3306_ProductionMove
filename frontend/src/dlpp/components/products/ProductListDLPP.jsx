@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ReactPaginate from "react-paginate";
 
 const ProductListDLPP = () => {
   const [productDLPP, setProductDLPP] = useState([]);
@@ -30,7 +31,17 @@ const ProductListDLPP = () => {
       case 11: return "Trả lại cơ sở sản xuất"
     }
   }
-
+  let itemsPerPage = 5; 
+  const [itemOffset, setItemOffset] = useState(0);
+    const endOffset = itemOffset + itemsPerPage;
+    const currentItems = productDLPP.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(productDLPP.length / itemsPerPage);
+  
+    // Invoke when user click to request another page.
+    const handlePageClick = (event) => {
+      const newOffset = (event.selected * itemsPerPage) % productDLPP.length;
+      setItemOffset(newOffset);
+    };
   return (
     <div>
       <h1 className="title">Sản phẩm</h1>
@@ -48,7 +59,7 @@ const ProductListDLPP = () => {
           </tr>
         </thead>
         <tbody>
-          {productDLPP.map((product, index) => (
+          {currentItems.map((product, index) => (
             <tr key={product.productcode}>
             <td>{index + 1}</td>
             <td>{product.productcode}</td>
@@ -61,6 +72,22 @@ const ProductListDLPP = () => {
           ))}
         </tbody>
       </table>
+      <ReactPaginate
+        breakLabel="..."
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel={"< Prev"}
+        nextLabel={"Next >"}
+        renderOnZeroPageCount={null}
+        containerClassName={"pagination-list"}
+        pageLinkClassName={"pagination-link"}
+        previousLinkClassName={"pagination-previous"}
+        nextLinkClassName={"pagination-next"}
+        activeLinkClassName={"pagination-link is-current"}
+        disabledLinkClassName={"pagination-link is-disabled"}
+      />
+
     </div>
   );
 };

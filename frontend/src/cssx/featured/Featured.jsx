@@ -8,13 +8,13 @@ import ChangingProgressProvider from "./ChangingProgressProvider";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+
 const Featured = () => {
   const [errorItem, setError] = useState([[{total: 0, productline: ''}], [{detailproductline: 0, productline: ''}]]);
   const [sell, setSell] = useState([[{totalquantity: 0, totalmoney: 0}], [{total: 0, productline: ''}]]);
 
   useEffect(() => {
     getSell();
-    getError();
   }, []);
   const getError= async () => {
     const response = await axios.get("http://localhost:5000/productitem/fault",{withCredentials: true});
@@ -23,12 +23,11 @@ const Featured = () => {
   const errorCount = errorItem[0][0].total;
   
   const getSell= async () => {
-    const response = await axios.get("http://localhost:5000/productitem/byproductline",{withCredentials: true});
+    const response = await axios.get("http://localhost:5000/productitem/selledmanufacture",{withCredentials: true});
     setSell(response.data);
   };
   const sellCount = sell[0][0].totalquantity;
   const sellPrice = sell[0][0].totalmoney;
-
 
   return (
     <div className="featured">

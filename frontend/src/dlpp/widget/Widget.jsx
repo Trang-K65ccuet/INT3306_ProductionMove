@@ -60,7 +60,7 @@ const Widget = ({ type }) => {
         data = {
           title: "SẢN PHẨM",
           value:productCount,
-          link: "Sản phẩm trong kho",
+          link: "Sản phẩm đã nhập",
           icon: (
             <ProductionQuantityLimitsIcon
               className="icon"

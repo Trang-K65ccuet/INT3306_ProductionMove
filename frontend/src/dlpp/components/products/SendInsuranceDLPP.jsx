@@ -8,9 +8,28 @@ import { useNavigate } from "react-router-dom";
 const SendInsuranceDLPP = () => {
     const [productcode, setProduct] = useState("");
     const [warrantyAgentId, setWarrantyAgentId] = useState("");
+    const [warrantyName, setWarrantyName] = useState("");
     const [dateOfGuarantee, setDateOfGuarantee] = useState("");
+    const [warrantylist, setWarrantyList] = useState([]);
     const [msg, setMsg] = useState("");
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+      getWarrantyLists();
+    }, []);
+
+    const getWarrantyLists = async () => {
+      const response = await axios.get("http://localhost:5000/warranty/allagent", {
+        withCredentials: true,
+      });
+      setWarrantyList(response.data);
+      setWarrantyName(
+        response.data[0].name + " - Mã trung tâm: " + response.data[0].id
+      );
+      setWarrantyAgentId(response.data[0].id);
+    };
+  
     const getSendError = async (e) => {
       e.preventDefault();
       try {
@@ -53,17 +72,24 @@ const SendInsuranceDLPP = () => {
                 </div>
               </div>
               <div className="field">
-                <label className="label">Trung tâm bảo hành</label>
-                <div className="control">
-                  <input
-                    value = {warrantyAgentId} 
-                    onChange={(e) => setWarrantyAgentId(e.target.value)}
-                    type="text"
-                    className="input"
-                    placeholder="Trung tâm bảo hành"
-                  />
+                  <label className="label">Trung tâm bảo hành</label>
+                  <div className="control select is-fullwidth">
+                    <select className="input"
+                      value={warrantyName}
+                      onChange={(e) => {
+                        let arr = e.target.value.split(" ");
+                        setWarrantyName(e.target.value);
+                        setWarrantyAgentId(arr[arr.length - 1]);
+                      }}
+                    >
+                      {warrantylist.map((warranty, index) => (
+                        <option key={index}>
+                          {warranty.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-              </div>
 
 
               <div className="field">

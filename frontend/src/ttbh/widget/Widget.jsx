@@ -29,10 +29,20 @@ const Widget = ({ type }) => {
     setError(response.data);
   };
 
+  const [success, setSuccess] = useState([]);
+  useEffect(() => {
+    getSuccess();
+  }, []);
+  const successCount = success.length;
+  const getSuccess = async () => {
+    const response = await axios.get("http://localhost:5000/warranty/itemwaitsendback", {withCredentials: true});
+    setSuccess(response.data);
+  };
+
   let data;
   // temp
   const amount = 500;
-  const diff = 30;
+  const diff = 100;
 
   switch (type) {
       case "products":
@@ -51,7 +61,7 @@ const Widget = ({ type }) => {
         case "insurance":
           data = {
             title: "ĐÃ BẢO HÀNH",
-            value: amount ,
+            value: successCount ,
             link: "Sản phẩm đã bảo hành thành công",
             icon: (
               <SellIcon

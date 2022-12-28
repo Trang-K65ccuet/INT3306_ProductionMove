@@ -10,7 +10,18 @@ import { response } from "express";
 import ConsignmentRequest from "../../models/consignment/ConsignmentRequestModel.js";
 import User from "../../models/user/UserModel.js";
 
+// lấy ra các đại lý phân phối
+export const getAllDistributor = async (req, res) => {
+    try {
+        const sql = "SELECT users.id, users.name FROM users WHERE users.position = 'dlpp' ";
+        const all = await database.query(sql, {type: QueryTypes.SELECT});
+        return res.status(200).json(all); 
+    } catch (error) {
+        return res.status(400).json({msg: error});
+    }
+}
 // dưới đây là những chức năng mà đại lý phân phối có quyên thực hiện
+// lấy tất cả các lô hàng
 export const getProductLotByDistributor = async (req, res) => {
     const distributorId = req.Id;
     try {
@@ -25,6 +36,7 @@ export const getProductLotByDistributor = async (req, res) => {
     }
     
 }
+// lấy ra các sản phẩm theo đại lý phân phối
 export const getProductItemByDistributor = async (req, res) => {
     const distributorid = req.Id;
     try {
@@ -37,7 +49,7 @@ export const getProductItemByDistributor = async (req, res) => {
         var allItem = [];
         for(i; i< getallLot.length; i++) {
             let Lot = getallLot.at(i).lot;
-            let sql = "SELECT productitems.productcode, productline, name, image, price, status, manufactureid, status, lot FROM `productitems` LEFT JOIN `consignmentdetails` ON `productitems`.`productcode` = `consignmentdetails`.`productcode` WHERE lot = ?";
+            let sql = "SELECT productitems.productcode, productline, productitems.name, image, price, productitems.manufactureid, productitems.status,users.name as distributorname, consignmentdetails.lot FROM `productitems` LEFT JOIN `consignmentdetails` ON `productitems`.`productcode` = `consignmentdetails`.`productcode` LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot LEFT JOIN users ON users.id = consignments.distributorid WHERE consignmentdetails.lot = ?";
             
             const getItemByLot = await database.query(sql, {
                 replacements: [Lot],
@@ -249,9 +261,70 @@ export const sendItemBack = async (req, res) => {
     }
 }
 
-// triệu hồi sản phẩm
+//triệu hồi sản phẩm
 export const retrieveItem = async (req, res) => {
+    const {productline} = req.body;
+    try {
+        const sql = "UPDATE transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode" +
+        " LEFT JOIN customerdetails ON customerdetails.id = transactions.customerId SET productitems.status = 9 WHERE"
+        +" productline = :pro_ln AND status = 2 OR status = 6";
+        await database.query(sql, {replacements: {
+            pro_ln: productline
+        }, type: QueryTypes.UPDATE})
+        return res.status(200).json({msg: "đã triệu hồi sản phẩm thành công"});
+    } catch (error) {
+        return res.status(400).json({msg: error});
+    }
+   
+}
+// tất cả các sản phẩm cần triệu hồi
+export const GetRetrieveItem = async (req,res) => {
+    try {
+        const sql = "SELECT productitems.productcode, productitems.productline, transactions.customerId, userdetails.phonenumber FROM productitems LEFT JOIN transactions ON transactions.productcode = productitems.productcode"
+        + " LEFT JOIN consignmentdetails ON consignmentdetails.productcode = productitems.productcode LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot" +
+         " LEFT JOIN userdetails ON userdetails.id = transactions.customerId  WHERE consignments.distributorid = :dis_id AND productitems.status = 9";
+        const retrieve = await database.query(sql, {replacements: {
+            dis_id : req.Id
+        }, type: QueryTypes.SELECT});
+        return res.status(200).json(retrieve);
+    } catch (error) {
+        return res.status(400).json({msg: error});
+}
+}
+// chuyển trạng thái sản phẩm về hết thời gian bảo hành
+export const warrantyOverTime = async(req, res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+} 
+// các sản phẩm cần chuyển về do lâu không bán được
+export const allItemNeedSend = async (req, res) => {
+    try {
+        const sql = "SELECT CURDATE() as currentdate, productitems.productcode, productitems.productline, productitems.manufactureId FROM productitems LEFT JOIN consignmentdetails ON productitems.productcode = consignmentdetails.productcode" 
+        + " LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot WHERE productitems.status = 1 AND consignments.distributorid = :dis_id AND DATEDIFF(CURDATE(), consignmentdetails.exportday) < 180";
+        const retrieve = await database.query(sql, {replacements: {
+            dis_id: req.Id
+        }, type: QueryTypes.SELECT});
+        return res.status(200).json(retrieve);
+    } catch (error) {
+        return res.status(400).json({msg: error});
+
+    }
+}
+// chuyển sản phẩm về do lâu không bán được
+export const chuyenspManufacture = async(req, res) => {
     const {productcode} = req.body;
-    const sql = "SELECT * FROM transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode WHERE"
-    +" productline = :pro_ln AND status = 2 OR status = 6" 
+    try {
+        const sql = "UPDATE productitems LEFT JOIN consignmentdetails ON productitems.productcode = consignmentdetails.productcode" 
+        + " LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot SET productitems.status = 11 WHERE consignments.distributorid = :dis_id AND productitems.productcode = :pr_code";
+        await database.query(sql, {replacements: {
+           dis_id : req.Id,
+           pr_code: productcode
+        }, type: QueryTypes.UPDATE});
+        return res.status(200).json({msg: "Chuyển sản phẩm thành công"})
+    } catch (error) {
+        return res.status(400).json({msg: error});
+    }
 }
