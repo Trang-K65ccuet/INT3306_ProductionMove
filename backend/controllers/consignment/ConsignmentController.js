@@ -21,6 +21,7 @@ export const getAllDistributor = async (req, res) => {
     }
 }
 // dưới đây là những chức năng mà đại lý phân phối có quyên thực hiện
+// lấy tất cả các lô hàng
 export const getProductLotByDistributor = async (req, res) => {
     const distributorId = req.Id;
     try {
@@ -35,6 +36,7 @@ export const getProductLotByDistributor = async (req, res) => {
     }
     
 }
+// lấy ra các sản phẩm theo đại lý phân phối
 export const getProductItemByDistributor = async (req, res) => {
     const distributorid = req.Id;
     try {
@@ -47,7 +49,7 @@ export const getProductItemByDistributor = async (req, res) => {
         var allItem = [];
         for(i; i< getallLot.length; i++) {
             let Lot = getallLot.at(i).lot;
-            let sql = "SELECT productitems.productcode, productline, name, image, price, status, manufactureid, status, lot FROM `productitems` LEFT JOIN `consignmentdetails` ON `productitems`.`productcode` = `consignmentdetails`.`productcode` WHERE lot = ?";
+            let sql = "SELECT productitems.productcode, productline, name, image, price, status, manufactureid, productitems.status,users.name as distributorname lot FROM `productitems` LEFT JOIN `consignmentdetails` ON `productitems`.`productcode` = `consignmentdetails`.`productcode` LEFT JOIN users ON users.id = consignments.distributorid WHERE lot = ?";
             
             const getItemByLot = await database.query(sql, {
                 replacements: [Lot],
