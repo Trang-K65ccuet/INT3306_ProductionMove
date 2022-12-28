@@ -50,7 +50,7 @@ export const updateProductLine = async (req, res) => {
             }
         });
     } else {
-        await ProductItem.update({description: description}, {where: {
+        await ProductLine.update({description: description}, {where: {
             productline: productline
         }});
     }
