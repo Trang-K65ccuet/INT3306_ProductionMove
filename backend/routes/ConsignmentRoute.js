@@ -1,7 +1,9 @@
 import express from "express";
 import { authorizationUser, checkConsignment } from "../middleware/AuthUser.js";
-import {getAllDistributor,getProductLotByDistributor, getProductItemByDistributor, sendProductToCustomer, getFaultItemFromCus, getItemNeedWarrantyByConsignment
-, sendFaultItemToWarrantyAgent, allFixedItem, sendItemBack, allItemSelled} from '../controllers/consignment/ConsignmentController.js';
+import {getAllDistributor,getProductLotByDistributor, getProductItemByDistributor, sendProductToCustomer, 
+    getFaultItemFromCus, getItemNeedWarrantyByConsignment
+, sendFaultItemToWarrantyAgent, allFixedItem, sendItemBack, allItemSelled, retrieveItem,
+ GetRetrieveItem, allItemNeedSend, chuyenspManufacture} from '../controllers/consignment/ConsignmentController.js';
 
 const consignmentRouter = express.Router();
 // tất cả các đại lý
@@ -31,4 +33,15 @@ consignmentRouter.get('/productitem/allfixeditem', authorizationUser,checkConsig
 
 // gửi sản phẩm bảo hành xong về cho khách hàng
 consignmentRouter.post('/producitem/sendbackitem', authorizationUser, checkConsignment,sendItemBack);
+
+// yêu cầu triệu hồi sản phẩm
+consignmentRouter.post('/productitem/retrieveitem',authorizationUser, checkConsignment, retrieveItem);
+
+//tất cả các sản phẩm cần triệu hồi
+consignmentRouter.get('/productitem/allretrieveitem',authorizationUser, checkConsignment, GetRetrieveItem);
+
+// các sản phẩm cần trả về cssx do lâu ko bán đc
+consignmentRouter.get('/productitem/cantsell', authorizationUser,checkConsignment,allItemNeedSend);
+// chuyển sản phẩm về cssx
+consignmentRouter.post('/producitem/sendbackovertime', authorizationUser, checkConsignment, chuyenspManufacture);
 export default consignmentRouter;

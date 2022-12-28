@@ -22,7 +22,7 @@ export const productStatistic = async (req, res) => {
         const sql2 = "SELECT COUNT(*) as total, productline FROM productitems GROUP BY productline";
         const x1 = await database.query(sql1,{type: QueryTypes.SELECT});
         const x2 = await database.query(sql2,{type: QueryTypes.SELECT});
-        return res.status(200).json({x1, x2});
+        return res.status(200).json([x1, x2]);
     } catch (error) {
         return res.status(400).json({msg: error});
     }
@@ -36,7 +36,7 @@ export const spdaban = async (req, res) => {
         const sql2 = "SELECT COUNT(*) as total, productline, SUM(productitems.price) FROM transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode GROUP BY productline";
         const x1 = await database.query(sql1,{type: QueryTypes.SELECT});
         const x2 = await database.query(sql2,{type: QueryTypes.SELECT});
-        return res.status(200).json({x1, x2});
+        return res.status(200).json([x1, x2]);
     } catch (error) {
         return res.status(400).json({msg: error});
     }
@@ -48,7 +48,7 @@ export const AllFaultItem = async(req, res) => {
         const sql2 = "SELECT COUNT(*) as detailproductline, productitems.productline FROM productitems WHERE productitems.status >2 AND productitems.status < 10 GROUP BY productline";
         const totals = await database.query(sql1, {type: QueryTypes.SELECT});
         const detail = await database.query(sql2, {type: QueryTypes.SELECT});
-        return res.status(200).json({totals, detail});
+        return res.status(200).json([totals, detail]);
     } catch (error) {
         return res.status(400).json({msg: error});
     }
@@ -65,7 +65,7 @@ export const productStatisticManufacture = async (req, res) => {
         const x2 = await database.query(sql2,{replacements: {
             manu_id: req.Id
         },type: QueryTypes.SELECT});
-        return res.status(200).json({x1, x2});
+        return res.status(200).json([x1, x2]);
     } catch (error) {
         return res.status(400).json({msg: error});
     }
@@ -82,7 +82,7 @@ export const spdabanManufacture = async (req, res) => {
         const x2 = await database.query(sql2,{replacements: {
             manu_id: req.Id
         },type: QueryTypes.SELECT});
-        return res.status(200).json({x1, x2});
+        return res.status(200).json([x1, x2]);
     } catch (error) {
         return res.status(400).json({msg: error});
     }
@@ -96,3 +96,4 @@ export const itemNeedWarrantyManufacture = async (req, res) => {
     }
 }
 // sản phẩm lỗi trả về nhà sản xuất
+

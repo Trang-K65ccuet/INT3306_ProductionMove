@@ -30,7 +30,7 @@ export const getUserById = async (req, res) => {
 export const updateUser = async (req, res) => {
     const {name,position, password} = req.body;
     try {
-        const response = User.findOne({
+        const response = Users.findOne({
             attributes: ['id', 'name', 'username','position']
         })
     } catch (error) {

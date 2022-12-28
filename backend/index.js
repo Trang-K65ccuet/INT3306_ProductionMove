@@ -11,7 +11,6 @@ import manufactureRouter from "./routes/ManufactureRoute.js";
 import warrantyRouter from "./routes/WarrantyRoute.js";
 import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
-import itemRouter from './routes/productRoute/ProductItemRoute.js';
 
 dotenv.config();
 const app = express();

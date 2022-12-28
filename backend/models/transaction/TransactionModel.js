@@ -30,7 +30,7 @@ const Transaction = database.define('transaction', {
         allowNull: false
     },
     expiredDay: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DATE,
         allowNull: false
     }
 
