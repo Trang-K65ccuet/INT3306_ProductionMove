@@ -107,11 +107,20 @@ export const spdabanManufacture = async (req, res) => {
     }
 }
 // sản phẩm đã từng hoặc đang bảo hành
-export const itemNeedWarrantyManufacture = async (req, res) => {
+export const NumberitemNeedWarrantyManufacture = async (req, res) => {
     try {
-        
+        const sql1 = "SELECT COUNT(*) as total FROM productitems WHERE productitems.status > 2 AND productitems.status < 7 AND manufactureid = :manu_id";
+        const sql2 = "SELECT COUNT(*) as total, productline FROM productitems WHERE productitems.status > 2 AND productitems.status < 7 AND manufactureid = :manu_id";
+        const x1 = await  database.query(sql1,{replacements: {
+            manu_id: req.Id
+        },type: QueryTypes.SELECT});
+        const x2 = await database.query(sql2,{replacements: {
+            manu_id: req.Id
+        },type: QueryTypes.SELECT});
+        return res.status(200).json([x1, x2]);
     } catch (error) {
-        
+        return res.status(400).json({msg: error});
+
     }
 }
 // sản phẩm lỗi trả về nhà sản xuất

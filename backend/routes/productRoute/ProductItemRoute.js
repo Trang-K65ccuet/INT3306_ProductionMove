@@ -1,4 +1,4 @@
-import { getProductItem, productStatistic, spdaban, AllFaultItem, productStatisticManufacture, spdabanManufacture, ssa} from "../../controllers/product/ProductItemController.js";
+import { getProductItem, productStatistic, spdaban, AllFaultItem, productStatisticManufacture, spdabanManufacture, ssa, NumberitemNeedWarrantyManufacture} from "../../controllers/product/ProductItemController.js";
 import { authorizationUser,checkAdmin,checkCssx } from "../../middleware/AuthUser.js";
 import express from 'express';
 const itemRoute = express.Router();
@@ -20,6 +20,6 @@ itemRoute.get('/productitem/statisticmanufacture', authorizationUser, checkCssx,
 //thống kê sản phẩm đã bán
 itemRoute.get('/productitem/selledmanufacture', authorizationUser, checkCssx, spdabanManufacture);
 
-// thống kê số sản phẩm bị lỗi, theo tổng cộng và chi tiết
-
+// thống kê số sản phẩm cần bảo hành, theo tổng cộng và chi tiết
+itemRoute.get('/productitem/totalfaultitem', authorizationUser, checkCssx, NumberitemNeedWarrantyManufacture);
 export default itemRoute;
