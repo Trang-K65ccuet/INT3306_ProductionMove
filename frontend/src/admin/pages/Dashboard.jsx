@@ -25,9 +25,7 @@ const Dashboard = () => {
               <br />
               <p class = "text">Tỷ lệ các sản phẩm</p>
             </div>
-
           </div>
-          
         </div>
     </Layout>
   );

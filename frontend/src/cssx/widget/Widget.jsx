@@ -75,7 +75,7 @@ const Widget = ({ type }) => {
         break;
         case "error":
           data = {
-            title: "LỖI",
+            title: "HỎNG",
             value: errorCount,
             link: "Sản phẩm không thể bảo hành",
             icon: (
