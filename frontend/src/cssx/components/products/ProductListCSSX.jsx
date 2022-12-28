@@ -2,12 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
-<<<<<<< HEAD
 import Modal from "../modal/Modal";
 import "../modal/Modal.css";
 import { FaRegTimesCircle, FaUserCircle } from "react-icons/fa";
-=======
->>>>>>> main
 
 const ProductListCSSX = () => {
   const [productCSSX, setProductCSSX] = useState([]);
@@ -26,7 +23,6 @@ const ProductListCSSX = () => {
     setProductCSSX(response.data);
   };
 
-<<<<<<< HEAD
   let itemsPerPage = 5;
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
@@ -38,19 +34,6 @@ const ProductListCSSX = () => {
     const newOffset = (event.selected * itemsPerPage) % productCSSX.length;
     setItemOffset(newOffset);
   };
-=======
-  let itemsPerPage = 5; 
-  const [itemOffset, setItemOffset] = useState(0);
-    const endOffset = itemOffset + itemsPerPage;
-    const currentItems = productCSSX.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(productCSSX.length / itemsPerPage);
-  
-    // Invoke when user click to request another page.
-    const handlePageClick = (event) => {
-      const newOffset = (event.selected * itemsPerPage) % productCSSX.length;
-      setItemOffset(newOffset);
-    };
->>>>>>> main
 
   function returnStatus(status) {
     switch (status) {

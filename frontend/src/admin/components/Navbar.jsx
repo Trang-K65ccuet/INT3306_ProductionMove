@@ -23,7 +23,7 @@ const Navbar = () => {
         <div className="navbar-brand">
         <NavLink to="/admin/dashboard" className="navbar-item">
             <img src={logo} width="70" alt="logo" />
-            <p class="logo-text">Production Move</p>
+            <p className="logo-text">Production Move</p>
           </NavLink>
           <a
             href="!#"

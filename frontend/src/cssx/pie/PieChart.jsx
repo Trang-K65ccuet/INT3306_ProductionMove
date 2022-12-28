@@ -66,7 +66,7 @@ const PieChart = () => {
   console.log(datat);
   
   return (
-    <div class = "piechart">
+    <div className = "piechart">
         <Pie data={datat} />
     </div>
   );
