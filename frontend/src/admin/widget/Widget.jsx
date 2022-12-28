@@ -13,6 +13,7 @@ const Widget = ({ type }) => {
   const [user, setUser] = useState([]);
   const [product, setProduct] = useState([]);
   const [errorItem, setError] = useState([[{total: 0, productline: ''}], [{detailproductline: 0, productline: ''}]]);
+ 
 
   useEffect(() => {
     getProductline();
@@ -41,7 +42,6 @@ const Widget = ({ type }) => {
   const getProduct= async () => {
     const response = await axios.get("http://localhost:5000/productitem/all",{withCredentials: true});
     setProduct(response.data);
-    console.log(response.data);
   };
 
   

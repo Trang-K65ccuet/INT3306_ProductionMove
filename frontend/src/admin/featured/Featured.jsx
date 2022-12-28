@@ -5,8 +5,31 @@ import "./featured.scss";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ChangingProgressProvider from "./ChangingProgressProvider";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Featured = () => {
+  const [errorItem, setError] = useState([[{total: 0, productline: ''}], [{detailproductline: 0, productline: ''}]]);
+  const [sell, setSell] = useState([[{totalquantity: 0, totalmoney: 0}], [{total: 0, productline: ''}]]);
+
+  useEffect(() => {
+    getSell();
+    getError();
+  }, []);
+  const getError= async () => {
+    const response = await axios.get("http://localhost:5000/productitem/fault",{withCredentials: true});
+    setError(response.data);
+  };
+  const errorCount = errorItem[0][0].total;
+  
+  const getSell= async () => {
+    const response = await axios.get("http://localhost:5000/productitem/byproductline",{withCredentials: true});
+    setSell(response.data);
+  };
+  const sellCount = sell[0][0].totalquantity;
+  const sellPrice = sell[0][0].totalmoney;
+
+
   return (
     <div className="featured">
       <div className="top">
@@ -33,7 +56,7 @@ const Featured = () => {
           </ChangingProgressProvider>
         </div>
         <p className="title">Doanh số bán hàng</p>
-        <p className="amount">251</p>
+        <p className="amount">{sellCount}</p>
         <div className="summary">
         <div className="item">
             <div className="itemTitle">Trạng thái</div>
@@ -44,13 +67,13 @@ const Featured = () => {
           <div className="item">
             <div className="itemTitle">Thu nhập</div>
             <div className="itemResult positive">
-              <div className="resultAmount">223</div>
+              <div className="resultAmount">{sellPrice} đồng</div>
             </div>
           </div>
           <div className="item">
             <div className="itemTitle">Lỗi</div>
             <div className="itemResult negative">
-              <div className="resultAmount">2282</div>
+              <div className="resultAmount">{errorCount} sản phẩm</div>
             </div>
           </div>
         </div>

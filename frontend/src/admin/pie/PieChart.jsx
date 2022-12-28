@@ -1,10 +1,24 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
-import {useState } from "react";
 import "./pie.scss"
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 const PieChart = () => {
-    const ChartData = [{"total":58,"productline":"DELL"},{"total":53,"productline":"HP"}];
+  const [product, setProduct] = useState([[{totalquantity: 0, month: 0, year: 0}], [{total: 0, productline: ''}]]);
+  const getProduct= async () => {
+    const response = await axios.get("http://localhost:5000/productitem/statistic",{withCredentials: true});
+    setProduct(response.data);
+    console.log(response.data);
+  };
+  console.log(product[1]);
+  useEffect(() => {
+    getProduct();
+  }, []);
+
+  const ChartData = product.at(1);
+    //const ChartData = [{"total":58,"productline":"DELL"},{"total":53,"productline":"HP"}];
 
     const [chartData, setChart] = useState({
       labels: ChartData.map((data) => data.productline),
