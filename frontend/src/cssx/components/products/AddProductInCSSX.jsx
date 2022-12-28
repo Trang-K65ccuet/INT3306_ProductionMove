@@ -5,6 +5,8 @@ import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 
 import "../components.css";
+import CloudinaryUploadWidget from "../dragImage/cloudDiaryWidget";
+import { useRef } from "react";
 const AddProductInCSSX = () => {
   const [productline, setProductline] = useState([]);
   const [productItemInput, setProductItemInput] = useState({
@@ -23,6 +25,7 @@ const AddProductInCSSX = () => {
   const [dateOfManufacture, setDateOfManufacture] = useState(''); 
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
+  const imageRef = useRef(); 
 
   const addData = () => {
     setArray([
@@ -30,14 +33,15 @@ const AddProductInCSSX = () => {
       {
         productline: producLineName,
         quantity: quantity,
-        image: image,
+        image: imageRef.current.src,
         price: price,
         dateOfManufacture: dateOfManufacture
       },
     ]);
     setProductLineName(productline[0].productline);
     setQuantity("");
-    setImage("");
+    // setImage("");
+    document.getElementById("uploadedimage").setAttribute("src", "");
     setPrice("");
     setDateOfManufacture(""); 
   };
@@ -112,16 +116,8 @@ const AddProductInCSSX = () => {
 
               <div className="field">
                 <label className="label">Ảnh minh họa</label>
-                <div className="control">
-                  <input
-                    type="text"
-                    className="input"
-                    placeholder="Ảnh minh họa"
-                    value={image}
-                    required="required"
-                    onChange={(e) => setImage(e.target.value)}
-                  />
-                </div>
+                <CloudinaryUploadWidget />
+                <img id="uploadedimage" src="" ref={imageRef}></img>
               </div>
 
               <div className="field">

@@ -18,17 +18,17 @@ const ProductListCSSX = () => {
     setProductCSSX(response.data);
   };
 
-  let itemsPerPage = 5; 
+  let itemsPerPage = 5;
   const [itemOffset, setItemOffset] = useState(0);
-    const endOffset = itemOffset + itemsPerPage;
-    const currentItems = productCSSX.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(productCSSX.length / itemsPerPage);
-  
-    // Invoke when user click to request another page.
-    const handlePageClick = (event) => {
-      const newOffset = (event.selected * itemsPerPage) % productCSSX.length;
-      setItemOffset(newOffset);
-    };
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = productCSSX.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(productCSSX.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % productCSSX.length;
+    setItemOffset(newOffset);
+  };
 
   function returnStatus(status) {
     switch (status) {
@@ -71,6 +71,7 @@ const ProductListCSSX = () => {
             <th>Dòng sản phẩm</th>
             <th>Giá</th>
             <th>Trạng thái</th>
+            <th>Tùy chọn</th>
           </tr>
         </thead>
         <tbody>
@@ -82,6 +83,14 @@ const ProductListCSSX = () => {
               <td>{product.name}</td>
               <td>{product.price}</td>
               <td>{returnStatus(product.status)}</td>
+              <td>
+                <button
+                  // onClick={() => deleteProductLine()}
+                  className="button is-small is-info"
+                >
+                  Xem chi tiết
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

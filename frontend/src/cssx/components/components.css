@@ -7,4 +7,13 @@
     background-color: rgb(15, 75, 92);
 }
 
+.imageWrapper {
+    margin-top: 20px;
+}
+
+#uploadedimage {
+    width: 40%;
+    margin-top: 20px;
+}
+
 

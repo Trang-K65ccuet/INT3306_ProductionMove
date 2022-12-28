@@ -62,7 +62,7 @@ const ExportProductsDLPP = () => {
                   <td>{item.productline}</td>
                   <td>{item.name}</td>
                   <td>{item.price}</td>
-                  <td>{item.dateOfTransaction}</td>
+                  <td>{item.dateOfTransaction.split("T")[0]}</td>
                   <td>{item.expiredDay}</td>
                   <td>{returnStatus(item.status)}</td>
                 </tr>

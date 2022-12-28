@@ -43,7 +43,7 @@ const ProductList = () => {
             <td>{productLine.description}</td>
             <td>
               <Link
-                to={`/products/edit/${productLine.productline}`}
+                to={`/admin/products/edit/${productLine.productline}`}
                 className="button is-small is-info"
               >
                 Edit
