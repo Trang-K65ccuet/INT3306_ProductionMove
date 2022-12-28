@@ -4,69 +4,50 @@ import axios from "axios";
 import ReactPaginate from "react-paginate";
 
 
-const FinishedInDLPP = () => {
-  const [finished, setFinished] = useState([]);
+const ExpiredTime = () => {
+  const [expired, setExpired] = useState([]);
   useEffect(() => {
-    getFinished();
+    getExpired();
   }, []);
-  const getFinished = async () => {
-    const response = await axios.get("http://localhost:5000/productitem/allfixeditem", {withCredentials: true});
-    setFinished(response.data);
+  const getExpired = async () => {
+    const response = await axios.get("http://localhost:5000/productitem/cantsell", {withCredentials: true});
+    setExpired(response.data);
   };
 
-  const returnCus = async (productCode) => {
+  const returnCSSX = async (productCode) => {
     await axios.post(
-      `http://localhost:5000/producitem/sendbackitem`,
+      `http://localhost:5000/producitem/sendbackovertime`,
       {
         productcode:productCode,
       },
       { withCredentials: true }
     );
-  getFinished(); 
+  getExpired(); 
 }
-
-  function returnStatus(status) {
-    switch(status) {
-      case 0: return "Mới sản xuất";
-      case 1: return "Đã nhập vào đại lý";
-      case 2: return "Đã bán";
-      case 3: return "Lỗi";
-      case 4: return "Đang bảo hành";
-      case 5: return "Đã bảo hành";
-      case 6: return "Đã bảo hành và trả cho khách hàng";
-      case 7: return "Cần trả về nhà máy";
-      case 8: return "Đã chuyển về cơ sở sản xuất";
-      case 9: return "Lỗi, cần triệu hồi";
-      case 10: return "Hết thời gian bảo hành"
-      case 11: return "Trả lại cơ sở sản xuất"
-    }
-  }
 
   let itemsPerPage = 5; 
   const [itemOffset, setItemOffset] = useState(0);
     const endOffset = itemOffset + itemsPerPage;
-    const currentItems = finished.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(finished.length / itemsPerPage);
+    const currentItems = expired.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(expired.length / itemsPerPage);
   
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
-      const newOffset = (event.selected * itemsPerPage) % finished.length;
+      const newOffset = (event.selected * itemsPerPage) % expired.length;
       setItemOffset(newOffset);
     };
 
   return (
     <Layout>
           <div>
-            <h1 className="title">Đã bảo hành xong</h1>
-            <h2>Danh sách các sản phẩm đã được bảo hành và chuyển về cho đại lý</h2>
+            <h1 className="title">Hết hạn</h1>
+            <h2>Các sản phẩm hết hạn do không bán</h2>
             <table className="table is-striped is-fullwidth">
               <thead>
                 <tr>
                   <th>STT</th>
                   <th>Mã sản phẩm</th>
                   <th>Sản phẩm</th>
-                  <th>Lô</th>
-                  <th>Trạng thái</th>
                   <th>Hành động</th>
                 </tr>
               </thead>
@@ -76,11 +57,9 @@ const FinishedInDLPP = () => {
                   <td>{index + 1}</td>
                   <td>{product.productcode}</td>
                   <td>{product.productline}</td>
-                  <td>{product.lot}</td>
-                  <td>{returnStatus(product.status)}</td>
                   <td>
-                      <button onClick={() => returnCus(product.productcode)} className="button is-small is-info">
-                        Trả cho khách hàng
+                      <button onClick={() => returnCSSX(product.productcode)} className="button is-small is-danger">
+                        Trả về cơ sở sản xuất
                       </button>
                     </td>
                 </tr>
@@ -107,4 +86,4 @@ const FinishedInDLPP = () => {
   );
 };
 
-export default FinishedInDLPP;
+export default ExpiredTime;

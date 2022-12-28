@@ -266,7 +266,7 @@ export const retrieveItem = async (req, res) => {
     const {productline} = req.body;
     try {
         const sql = "UPDATE transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode" +
-        " LEFT JOIN customerdetails ON customerdetails.id = transactions.customerId SET productitems.status = 9 WHERE"
+        " LEFT JOIN customerdetails ON customerdetails.customerId = transactions.customerId SET productitems.status = 9 WHERE"
         +" productline = :pro_ln AND status = 2 OR status = 6";
         await database.query(sql, {replacements: {
             pro_ln: productline

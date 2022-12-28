@@ -83,8 +83,19 @@ export const productStatisticManufacture = async (req, res) => {
 // thống kê số sản phẩm đã chuyển cho đại lý pp
 export const allitemSendToDistributor = async (req, res) => {
     try {
-        const sql1 = "SELECT COUNT(*) as totalquantity FROM productitems WHERE status > 0";
-        const sql2 = "SELECT COUNT(*) as total, productline FROM productitems WHERE status > 0 GROUP BY productline";
+        const sql1 = "SELECT COUNT(*) as totalquantity, YEAR(productitems.dateOfManufacture) as year, MONTH(productitems.dateOfManufacture) as month FROM productitems WHERE status > 0 AND productitems.manufactureid = :manu_id GROUP by month, year";
+        const sql2 = "SELECT COUNT(*) as total, productline FROM productitems WHERE status > 0 AND productitems.manufactureid = :manu_id GROUP BY productline";
+        const sql3 = "SELECT COUNT(*) as totalquantity FROM productitems WHERE status > 0 AND productitems.manufactureid = :manu_id";
+        const x1 = await database.query(sql1,{replacements: {
+            manu_id: req.Id
+        },type: QueryTypes.SELECT});
+        const x2 = await database.query(sql2,{replacements: {
+            manu_id: req.Id
+        },type: QueryTypes.SELECT});
+        const x3 = await database.query(sql3,{replacements: {
+            manu_id: req.Id
+        },type: QueryTypes.SELECT});
+        return res.status(200).json([x1,x2,x3]);
     } catch (error) {
         res.status(400).json({msg: error})
     }
@@ -107,11 +118,20 @@ export const spdabanManufacture = async (req, res) => {
     }
 }
 // sản phẩm đã từng hoặc đang bảo hành
-export const itemNeedWarrantyManufacture = async (req, res) => {
+export const NumberitemNeedWarrantyManufacture = async (req, res) => {
     try {
-        
+        const sql1 = "SELECT COUNT(*) as total, YEAR(productitems.dateOfManufacture) as year FROM productitems WHERE productitems.status > 2 AND productitems.status < 7 AND manufactureid = :manu_id GROUP BY year";
+        const sql2 = "SELECT COUNT(*) as total, productline, YEAR(productitems.dateOfManufacture) as year FROM productitems WHERE productitems.status > 2 AND productitems.status < 7 AND manufactureid = :manu_id GROUP BY year, productline";
+        const x1 = await  database.query(sql1,{replacements: {
+            manu_id: req.Id
+        },type: QueryTypes.SELECT});
+        const x2 = await database.query(sql2,{replacements: {
+            manu_id: req.Id
+        },type: QueryTypes.SELECT});
+        return res.status(200).json([x1, x2]);
     } catch (error) {
-        
+        return res.status(400).json({msg: error});
+
     }
 }
 // sản phẩm lỗi trả về nhà sản xuất
