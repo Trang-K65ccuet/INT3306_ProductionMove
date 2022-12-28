@@ -28,8 +28,6 @@ const Featured = () => {
   };
   const sellCount = sell[0][0].totalquantity;
   const sellPrice = sell[0][0].totalmoney;
-  
-
 
   return (
     <div className="featured">
