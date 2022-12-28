@@ -5,7 +5,7 @@ import './components.css'
 
 const Sidebar = () => {
   return (
-    <div>
+    <div class ="side-bar">
       <aside className="menu pl-2 has-shadow">
         <p className="menu-label">Chung</p>
         <ul className="menu-list">

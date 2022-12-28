@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../../button/Button";
 import "./products.css"
+import ReactPaginate from "react-paginate";
 
 
 const ImportProductsDLPP = () => {
@@ -15,6 +16,18 @@ const ImportProductsDLPP = () => {
     const response = await axios.get("http://localhost:5000/lots",{withCredentials: true});
     setLot(response.data);  
   };
+
+  let itemsPerPage = 5; 
+  const [itemOffset, setItemOffset] = useState(0);
+    const endOffset = itemOffset + itemsPerPage;
+    const currentItems = lot.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(lot.length / itemsPerPage);
+  
+    // Invoke when user click to request another page.
+    const handlePageClick = (event) => {
+      const newOffset = (event.selected * itemsPerPage) % lot.length;
+      setItemOffset(newOffset);
+    };
 
   return (
     <Layout>
@@ -36,7 +49,7 @@ const ImportProductsDLPP = () => {
                 </tr>
               </thead>
               <tbody>
-                {lot.map((lot, index) => (
+                {currentItems.map((lot, index) => (
                   <tr key={lot.lot}>
                   <td>{index + 1}</td>
                   <td>{lot.lot}</td>
@@ -46,6 +59,21 @@ const ImportProductsDLPP = () => {
                 ))}
               </tbody>
             </table>
+            <ReactPaginate
+                breakLabel="..."
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel={"< Prev"}
+                nextLabel={"Next >"}
+                renderOnZeroPageCount={null}
+                containerClassName={"pagination-list"}
+                pageLinkClassName={"pagination-link"}
+                previousLinkClassName={"pagination-previous"}
+                nextLinkClassName={"pagination-next"}
+                activeLinkClassName={"pagination-link is-current"}
+                disabledLinkClassName={"pagination-link is-disabled"}
+              />
          </div>
     </Layout>
   );

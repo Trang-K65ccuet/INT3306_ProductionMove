@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import ReactPaginate from "react-paginate";
 
 const ProductList = () => {
   const [productLines, setProductLines] = useState([]);
@@ -19,6 +20,19 @@ const ProductList = () => {
     getProductLines(); 
   }
   
+
+  let itemsPerPage = 5; 
+  const [itemOffset, setItemOffset] = useState(0);
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = productLines.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(productLines.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % productLines.length;
+    setItemOffset(newOffset);
+  };
+
   return (
     <div>
       <h1 className="title">Dòng sản phẩm</h1>
@@ -36,7 +50,7 @@ const ProductList = () => {
           </tr>
         </thead>
         <tbody>
-          {productLines.map((productLine, index) => (
+          {currentItems.map((productLine, index) => (
             <tr key={productLine.productline}>
             <td>{index + 1}</td>
             <td>{productLine.productline}</td>
@@ -59,6 +73,21 @@ const ProductList = () => {
           ))}
         </tbody>
       </table>
+      <ReactPaginate
+              breakLabel="..."
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={5}
+              pageCount={pageCount}
+              previousLabel={"< Prev"}
+              nextLabel={"Next >"}
+              renderOnZeroPageCount={null}
+              containerClassName={"pagination-list"}
+              pageLinkClassName={"pagination-link"}
+              previousLinkClassName={"pagination-previous"}
+              nextLinkClassName={"pagination-next"}
+              activeLinkClassName={"pagination-link is-current"}
+              disabledLinkClassName={"pagination-link is-disabled"}
+        />
     </div>
   );
 };

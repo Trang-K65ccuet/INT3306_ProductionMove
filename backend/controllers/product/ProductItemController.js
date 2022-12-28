@@ -28,6 +28,15 @@ export const productStatistic = async (req, res) => {
     }
 
 }
+export const ssa = async (req, res) => {
+   try {
+    const sql2 = "SELECT COUNT(*) as total, productline FROM productitems GROUP BY productline";
+    const x2 = await database.query(sql2,{type: QueryTypes.SELECT});
+    return res.status(200).json(x2);
+   } catch (error) {
+    
+   }
+}
 
 // thống kê số sản phẩm đã bán
 export const spdaban = async (req, res) => {
@@ -71,6 +80,16 @@ export const productStatisticManufacture = async (req, res) => {
     }
 
 }
+// thống kê số sản phẩm đã chuyển cho đại lý pp
+export const allitemSendToDistributor = async (req, res) => {
+    try {
+        const sql1 = "SELECT COUNT(*) as totalquantity FROM productitems WHERE status > 0";
+        const sql2 = "SELECT COUNT(*) as total, productline FROM productitems WHERE status > 0 GROUP BY productline";
+    } catch (error) {
+        res.status(400).json({msg: error})
+    }
+}
+// sp đã bán
 export const spdabanManufacture = async (req, res) => {
     try {
         const sql1 = "SELECT COUNT(*) as totalquantity, SUM(productitems.price) as totalmoney FROM transactions LEFT JOIN productitems ON productitems.productcode = transactions.productcode"
@@ -96,4 +115,3 @@ export const itemNeedWarrantyManufacture = async (req, res) => {
     }
 }
 // sản phẩm lỗi trả về nhà sản xuất
-

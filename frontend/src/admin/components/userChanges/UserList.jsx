@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ReactPaginate from "react-paginate";
 
 const Userlist = () => {
   const [users, setUsers] = useState([]);
@@ -26,6 +27,17 @@ const Userlist = () => {
     if(pos == "dlpp") return "Đại lý phân phối";
     if(pos == "ttbh") return "Trung tâm bảo hành"
   }
+  let itemsPerPage = 5; 
+  const [itemOffset, setItemOffset] = useState(0);
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = users.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(users.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % users.length;
+    setItemOffset(newOffset);
+  };
 
   return (
     <div>
@@ -45,7 +57,7 @@ const Userlist = () => {
           </tr>
         </thead>
         <tbody>
-        {users.map((user, index) => (
+        {currentItems.map((user, index) => (
             <tr key={user.id}>
               <td>{index + 1}</td>
               <td>{user.name}</td>
@@ -69,6 +81,21 @@ const Userlist = () => {
           ))}
         </tbody>
       </table>
+        <ReactPaginate
+              breakLabel="..."
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={5}
+              pageCount={pageCount}
+              previousLabel={"< Prev"}
+              nextLabel={"Next >"}
+              renderOnZeroPageCount={null}
+              containerClassName={"pagination-list"}
+              pageLinkClassName={"pagination-link"}
+              previousLinkClassName={"pagination-previous"}
+              nextLinkClassName={"pagination-next"}
+              activeLinkClassName={"pagination-link is-current"}
+              disabledLinkClassName={"pagination-link is-disabled"}
+        />
     </div>
   );
 };

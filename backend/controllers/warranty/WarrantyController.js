@@ -54,8 +54,16 @@ export const sendfixedItem = async (req, res) => {
     }
 }
 // các sản phẩm đã sửa xong
-export const allFixed = async (req, res) => {   
-    
+export const allFixedWarranty = async (req, res) => {   
+    try {
+        const sql = "SELECT * FROM warranties LEFT JOIN productitems ON warranties.productcode = productitems.productcode WHERE productitems.status = 5 AND warranties.warrantyAgentId = :wr_id";
+        const all = await database.query(sql, {replacements: {
+            wr_id: req.Id
+        }, type: QueryTypes.SELECT});
+        return res.status(200).json(all);
+    } catch (error) {
+        return res.status(400).json({msg: error});
+    }
     
 }
 // sản phẩm không thể sửa, cần trả lại nhà máy
