@@ -20,4 +20,6 @@ itemRoute.get('/productitem/statisticmanufacture', authorizationUser, checkCssx,
 //thống kê sản phẩm đã bán
 itemRoute.get('/productitem/selledmanufacture', authorizationUser, checkCssx, spdabanManufacture);
 
+// thống kê số sản phẩm bị lỗi, theo tổng cộng và chi tiết
+
 export default itemRoute;

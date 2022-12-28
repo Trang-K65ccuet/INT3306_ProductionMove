@@ -80,6 +80,16 @@ export const productStatisticManufacture = async (req, res) => {
     }
 
 }
+// thống kê số sản phẩm đã chuyển cho đại lý pp
+export const allitemSendToDistributor = async (req, res) => {
+    try {
+        const sql1 = "SELECT COUNT(*) as totalquantity FROM productitems WHERE status > 0";
+        const sql2 = "SELECT COUNT(*) as total, productline FROM productitems WHERE status > 0 GROUP BY productline";
+    } catch (error) {
+        res.status(400).json({msg: error})
+    }
+}
+// sp đã bán
 export const spdabanManufacture = async (req, res) => {
     try {
         const sql1 = "SELECT COUNT(*) as totalquantity, SUM(productitems.price) as totalmoney FROM transactions LEFT JOIN productitems ON productitems.productcode = transactions.productcode"
