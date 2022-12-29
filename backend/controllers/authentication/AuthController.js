@@ -4,10 +4,16 @@
  import bcrypt from 'bcrypt';
  import jwt from "jsonwebtoken";
  import dotenv from "dotenv";
+import { body, validationResult } from 'express-validator';
+
 
 dotenv.config();
 // đăng nhập tài khoản sử dụng
 export const Login = async (req, res)=> {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const existUser = await User.findOne({
     where : {
             username: req.body.username

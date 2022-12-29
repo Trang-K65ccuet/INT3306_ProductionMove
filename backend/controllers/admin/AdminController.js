@@ -2,7 +2,7 @@ import { where } from "sequelize";
 import User from "../../models/user/UserModel.js";
 import bcrypt from 'bcrypt';
 import argon2 from 'argon2';
-
+import { validationResult } from "express-validator";
 export const getUsers = async (req, res) => {
     try {
         const resp = await User.findAll({
@@ -30,11 +30,11 @@ export const getUserById = async (req, res) => {
 export const updateUser = async (req, res) => {
     const {name,position, password} = req.body;
     try {
-        const response = Users.findOne({
+        const response = User.findOne({
             attributes: ['id', 'name', 'username','position']
         })
     } catch (error) {
-          res.status(500).json({msg: error.message});
+          res.status(400).json({msg: error.message});
     
     }
     try {
@@ -47,12 +47,16 @@ export const updateUser = async (req, res) => {
         }})
         return res.status(200).json({msg: "Update người dùng thành công!"})
     } catch (error) {
-        return res.status(200).json({msg: error})
+        return res.status(400).json({msg: error})
     }
 
     
 }
 export const postUser = async(req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const {name,username,position,password, confpassword, status} = req.body;
     const existed = await User.findAndCountAll({
        
