@@ -55,8 +55,13 @@ export const updateUser = async (req, res) => {
 }
 export const postUser = async(req, res) => {
     const errors = validationResult(req);
+    let errorsInfo = ""; 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+        let i = 0; 
+        for (i ; i < errors.array().length; i++) {
+            errorsInfo = errorsInfo + errors.array().at(i).msg + "\n"; 
+        }
+      return res.status(400).json({ msg: errorsInfo });
     }
     const {name,username,position,password, confpassword, status} = req.body;
     const existed = await User.findAndCountAll({
