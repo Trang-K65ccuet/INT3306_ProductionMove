@@ -5,7 +5,7 @@ import LineChart from "../linechart/LineChart";
 import PieChartInStatistic from "../../cssx/pie/PieChartInStatistic";
 import axios from "axios";
 
-const StatisticCSSX = () => {
+const StatisticDLPP = () => {
 
 //Line chart 
 const [sell, setSell] = useState({
@@ -116,4 +116,4 @@ fetchData();
     );
 };
 
-export default StatisticCSSX;
+export default StatisticDLPP;
