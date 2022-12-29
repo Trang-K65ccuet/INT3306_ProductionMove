@@ -37,7 +37,7 @@ const PieChart = () => {
       const resp = await axios.get('http://localhost:5000/productitem/statistic', {withCredentials: true});
         const label = [];
         const data = [];
-        for(var i of resp.data[1]) {
+        for(var i of resp.data[2]) {
             label.push(i.productline);
             data.push(i.total)
         }

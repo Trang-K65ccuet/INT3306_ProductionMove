@@ -22,7 +22,7 @@ const LineChart = (aspect) => {
   });
   useEffect(()=> {
     const fetchData = async () =>  {
-      const resp = await axios.get('http://localhost:5000/productitem/statisticmanufacture', {withCredentials: true});
+      const resp = await axios.get('http://localhost:5000/productitem/statisticmanufacture/2022', {withCredentials: true});
       const label = [];
         const data = [];
         for(var i of resp.data[0]) {
@@ -51,7 +51,7 @@ const LineChart = (aspect) => {
     <ResponsiveContainer aspect={aspect}>
         <div className = "linechart">
             <Line data={datat} />
-            <p className = "line-text">Đã nhập</p>
+            <p className = "text">Đã nhập</p>
         </div>
     </ResponsiveContainer>
   );

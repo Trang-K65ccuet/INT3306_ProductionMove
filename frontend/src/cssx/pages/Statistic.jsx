@@ -16,10 +16,10 @@ const StatisticCSSX = () => {
                     <h1 class = "choose-text">Chọn năm</h1>
                     <div className="main">
                       <input 
+                        type="number"
                         className="input"
-                        type="number" 
-                        placeholder="Chọn năm"
-                      />
+                        
+                       />
                     </div>
                   <div className="main">
                     <div className="control">
@@ -32,8 +32,9 @@ const StatisticCSSX = () => {
                 </div>
               <div className="pie" style={{ width: 450 }}>
                 <div className = "border">
-                  <p className = "pie-text">Tỷ lệ sản phẩm đã bán</p>
                   <PieStatistic/>
+                  <br />
+                  <p className = "text">Tỷ lệ sản phẩm đã bán</p>
                 </div>
             </div>
           </div>

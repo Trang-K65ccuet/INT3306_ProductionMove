@@ -34,7 +34,7 @@ const PieChart = () => {
   });
   useEffect(()=> {
     const fetchData = async () =>  {
-      const resp = await axios.get('http://localhost:5000/productitem/statisticmanufacture', {withCredentials: true});
+      const resp = await axios.get('http://localhost:5000/productitem/statisticmanufacture/2022', {withCredentials: true});
         const label = [];
         const data = [];
         for(var i of resp.data[1]) {
