@@ -5,6 +5,9 @@ import { ProductItem } from "../../models/product/ProductItemModel.js";
 import User from "../../models/user/UserModel.js";
 import { database } from "../../config/Database.js";
 import { QueryTypes } from "sequelize";
+import {body, validationResult} from 'express-validator';
+import { check } from 'express-validator';
+
 // lấy ra tất cả các cssx
 export const getManufactures = async (req, res) => {
 try {
@@ -20,6 +23,10 @@ try {
 };
 // tạo các sản phẩm mới
 export const addProductItemList = async(req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     try {
         const records = req.body.length;
         var j = 0;
