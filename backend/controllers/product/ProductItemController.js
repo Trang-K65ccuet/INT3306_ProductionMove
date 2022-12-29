@@ -25,7 +25,7 @@ export const productStatistic = async (req, res) => {
         const x0 = await database.query(sql0, {type: QueryTypes.SELECT});
         const x1 = await database.query(sql1,{type: QueryTypes.SELECT});
         const x2 = await database.query(sql2,{type: QueryTypes.SELECT});
-        return res.status(200).json([x0, x1, x2]);
+        return res.status(200).json([x1, x2, x0]);
     } catch (error) {
         return res.status(400).json({msg: error});
     }
@@ -52,7 +52,7 @@ export const spdaban = async (req, res) => {
         const x0 = await database.query(sql0,{type: QueryTypes.SELECT});
         const x1 = await database.query(sql1,{replacements: {yr: year}});
         const x2 = await database.query(sql2,{type: QueryTypes.SELECT});
-        return res.status(200).json([x0, x1, x2]);
+        return res.status(200).json([x1, x2, x0]);
     } catch (error) {
         return res.status(400).json({msg: error});
     }
@@ -66,7 +66,7 @@ export const AllFaultItem = async(req, res) => {
         const x0 = await database.query(sql0, {type: QueryTypes.SELECT});
         const totals = await database.query(sql1, {type: QueryTypes.SELECT});
         const detail = await database.query(sql2, {type: QueryTypes.SELECT});
-        return res.status(200).json([x0, totals, detail]);
+        return res.status(200).json([ totals, detail, x0]);
     } catch (error) {
         return res.status(400).json({msg: error});
     }
