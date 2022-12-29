@@ -53,7 +53,7 @@ function App() {
           <Route path="/admin/users/edit/:id" element={<EditUser />} />
           <Route path="/admin/products" element={<Products />} />
           <Route path="/admin/products/add" element={<AddProduct />} />
-          <Route path="/admin/products/edit/:id" element={<EditProduct />} />
+          <Route path="/admin/products/edit/:productline" element={<EditProduct />} />
 
           //CSSX
           <Route path="/cssx/dashboard" element={<DashboardCSSX />} />

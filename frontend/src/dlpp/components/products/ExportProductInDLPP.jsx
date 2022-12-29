@@ -16,12 +16,14 @@ const ExportProductInDLPP = () => {
       withCredentials: true,
     });
     const responeFiltered = responses.data.filter(
-      (response) => response.status == 1
+      (response) => response.status === 1
     );
     // setProductline(responeFiltered);
-    
-    setProductline([...new Set(responeFiltered.map((response) => response.productline))])
-    setChooseProductline(productline[0]);
+    let productlineList = [
+      ...new Set(responeFiltered.map((response) => response.productline)),
+    ];
+    setProductline(productlineList);
+    setChooseProductline(productlineList[0]);
   };
 
   // useEffect(() => {
@@ -36,7 +38,7 @@ const ExportProductInDLPP = () => {
   const [date, setDate] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
-  const getSendCustomer = async (e) => {
+  const sendCustomer = async (e) => {
     e.preventDefault();
     try {
       await axios.post(
@@ -65,7 +67,7 @@ const ExportProductInDLPP = () => {
       <div className="card is-shadowless">
         <div className="card-content">
           <div className="content">
-            <form onSubmit={getSendCustomer}>
+            <form onSubmit={sendCustomer}>
               <div className="field">
                 <label className="label">Sản phẩm</label>
                 <div className="control">
@@ -73,14 +75,12 @@ const ExportProductInDLPP = () => {
                     <select
                       value={chooseProductline}
                       onChange={(e) => {
-                        setChooseProductline(e.target.value); 
+                        setChooseProductline(e.target.value);
                       }}
                       className="input"
                     >
                       {productline.map((product, index) => (
-                        <option key={index}>
-                          {product}
-                        </option>
+                        <option key={index}>{product}</option>
                       ))}
                     </select>
                   </div>
@@ -95,6 +95,7 @@ const ExportProductInDLPP = () => {
                     onChange={(e) => setQuantity(e.target.value)}
                     className="input"
                     placeholder="Số lượng"
+                    required="required"
                   />
                 </div>
               </div>
@@ -107,6 +108,8 @@ const ExportProductInDLPP = () => {
                     onChange={(e) => setName(e.target.value)}
                     className="input"
                     placeholder="Họ tên khách hàng"
+                    required="required"
+
                   />
                 </div>
               </div>
@@ -119,6 +122,8 @@ const ExportProductInDLPP = () => {
                     onChange={(e) => setPhone(e.target.value)}
                     className="input"
                     placeholder="Số điện thoại"
+                    required="required"
+
                   />
                 </div>
               </div>
@@ -131,6 +136,7 @@ const ExportProductInDLPP = () => {
                     onChange={(e) => setAddress(e.target.value)}
                     className="input"
                     placeholder="Địa chỉ"
+                    required="required"
                   />
                 </div>
               </div>
@@ -143,6 +149,8 @@ const ExportProductInDLPP = () => {
                     onChange={(e) => setDate(e.target.value)}
                     className="input"
                     placeholder="Ngày bán"
+                    required="required"
+
                   />
                 </div>
               </div>
@@ -155,6 +163,8 @@ const ExportProductInDLPP = () => {
                     onChange={(e) => setTimeExpired(e.target.value)}
                     className="input"
                     placeholder="Số ngày bảo hành"
+                    required="required"
+
                   />
                 </div>
               </div>

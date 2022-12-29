@@ -16,6 +16,7 @@ const ExportProductInCSSX = () => {
 
   const [distributorlist, setDistributorList] = useState([]);
   const navigate = useNavigate();
+  const [choice, setChoice] = useState();
 
   useEffect(() => {
     getDistributorLists();
@@ -38,10 +39,11 @@ const ExportProductInCSSX = () => {
       "http://localhost:5000/manufactures/items/",
       { withCredentials: true }
     );
-    setProductCSSX([
+    let arrFilter = [
       ...new Set(responses.data.map((response) => response.productline)),
-    ]);
-    setProductline(productCSSX[0]);
+    ];
+    setProductCSSX(arrFilter);
+    setProductline(arrFilter[0]);
   };
 
   const exportData = async (e) => {
@@ -75,7 +77,6 @@ const ExportProductInCSSX = () => {
           <div className="card-content">
             <div className="content">
               <form onSubmit={exportData}>
-                <p className="has-text-centered"></p>
                 <div className="field">
                   <label className="label">Tên dòng sản phẩm</label>
                   <div className="control select is-fullwidth">
@@ -136,13 +137,14 @@ const ExportProductInCSSX = () => {
                 </div>
                 <p className="has-text-centered">{msg}</p>
                 <div className="field">
-                  <div className="control">
-                    <button type="submit" className="button is-success">
-                      Xuất
-                    </button>
-                  </div>
+                <div className="control">
+                  <button type = "submit" className="button is-success">
+                    Xuất
+                  </button>
                 </div>
+              </div>
               </form>
+              
             </div>
           </div>
         </div>

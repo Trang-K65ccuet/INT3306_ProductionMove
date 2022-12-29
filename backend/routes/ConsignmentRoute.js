@@ -3,7 +3,7 @@ import { authorizationUser, checkConsignment } from "../middleware/AuthUser.js";
 import {getAllDistributor,getProductLotByDistributor, getProductItemByDistributor, sendProductToCustomer, 
     getFaultItemFromCus, getItemNeedWarrantyByConsignment
 , sendFaultItemToWarrantyAgent, allFixedItem, sendItemBack, allItemSelled, retrieveItem,
- GetRetrieveItem, allItemNeedSend, chuyenspManufacture} from '../controllers/consignment/ConsignmentController.js';
+ GetRetrieveItem, allItemNeedSend, chuyenspManufacture, allItemInCustomer} from '../controllers/consignment/ConsignmentController.js';
 
 const consignmentRouter = express.Router();
 // tất cả các đại lý
@@ -19,6 +19,9 @@ consignmentRouter.post('/consignment/send', authorizationUser,checkConsignment, 
 
 //tất cả các sản phẩm đã bán của đại lý phân phối
 consignmentRouter.get('/consignment/sell',authorizationUser,checkConsignment,allItemSelled);
+
+// tất cả các sản phẩm đang ở khách hàng, nếu muốn nhập về thì lấy từ đây
+consignmentRouter.get('/consignment/productatcustomer', authorizationUser, checkConsignment, allItemInCustomer);
 // đại lý phân phối nhập lại các sản phẩm đã bán bị lỗi
 consignmentRouter.post('/productitem/importfaultproduct', authorizationUser, checkConsignment,getFaultItemFromCus);
 

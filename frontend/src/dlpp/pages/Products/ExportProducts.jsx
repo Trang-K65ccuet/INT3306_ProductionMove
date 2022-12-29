@@ -16,7 +16,6 @@ const ExportProductsDLPP = () => {
     setItem(response.data);  
   };
 
-  //Status 
   function returnStatus(status) {
     switch(status) {
       case 0: return "Mới sản xuất";
@@ -76,7 +75,7 @@ const ExportProductsDLPP = () => {
                   <td>{item.productline}</td>
                   <td>{item.name}</td>
                   <td>{item.price}</td>
-                  <td>{item.dateOfTransaction}</td>
+                  <td>{item.dateOfTransaction.split("T")[0]}</td>
                   <td>{item.expiredDay}</td>
                   <td>{returnStatus(item.status)}</td>
                 </tr>

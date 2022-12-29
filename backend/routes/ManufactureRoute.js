@@ -2,6 +2,7 @@ import express from "express";
 import { getAllRequestByManufacture, getManufactures , getProductitemByManufacture, sendListProductItem, allLotsHaveSent,
      lotDetail, addProductItemList, getAllCantFixItem} from "../controllers/manufacture/ManufactureController.js";
 import { authorizationUser, checkCssx } from "../middleware/AuthUser.js";
+import { checkAddItem } from "../middleware/Validation.js";
 // route cho cơ sở sản xuất
 const manufactureRouter = express.Router();
 
@@ -9,7 +10,7 @@ const manufactureRouter = express.Router();
 manufactureRouter.get('/manufactures/all', authorizationUser, getManufactures);
 
 //tạo danh sách các sản phẩm mới
-manufactureRouter.post('/productitem/add',authorizationUser,checkCssx,addProductItemList);
+manufactureRouter.post('/productitem/add',checkAddItem,authorizationUser,checkCssx,addProductItemList);
 // các sản phẩm do user đã tạo
 manufactureRouter.get('/manufactures/items',authorizationUser, getProductitemByManufacture);
 

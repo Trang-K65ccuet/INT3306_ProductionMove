@@ -7,3 +7,30 @@
 .charts {
     padding: 5px 20px;
 }
+
+.text {
+    font-size:20px;
+}
+
+.text-pie,.line-text {
+    font-size: 19px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+.main{
+    padding: 10px;
+}
+
+.choose-text{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.line-chart{
+    position: relative;
+    top:50px;
+}
+
+

@@ -20,9 +20,9 @@ const Sidebar = () => {
           <li>
             <NavLink to={"/dlpp/products"}><FcDocument /> Sản phẩm</NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to={"/dlpp/import"}><FcImport /> Nhập hàng</NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink to={"/dlpp/export"}><FcExport /> Bán hàng</NavLink>
           </li>

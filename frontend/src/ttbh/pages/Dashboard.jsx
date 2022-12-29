@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import Widget from "../widget/Widget";
 import Chart from "../chart/Chart";
 import "./pages.css"
+import BarChart from "../barchart/BarChart";
 
 
 const DashboardTTBH = () => {
@@ -14,7 +15,9 @@ const DashboardTTBH = () => {
             <Widget type="error" />
         </div>
         <div className="charts">
-          <Chart title="Trong năm nay" aspect={3 / 1} />
+          <div className ="bar" style={{ width: 1000 }}>
+              <BarChart/>
+            </div>
         </div>
     </Layout>
   );
