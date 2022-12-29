@@ -142,6 +142,19 @@ export const allItemSelled = async (req, res) => {
         return res.status(400).json({msg: error});
     }
 }
+// các sản phẩm đang ở khách hàng
+export const allItemInCustomer = async (req, res) => {
+    try {
+        const sql = "SELECT * FROM transactions INNER JOIN productitems ON transactions.productcode = productitems.productcode INNER JOIN"
+    + " consignmentdetails ON consignmentdetails. productcode = transactions.productcode INNER JOIN consignments ON consignments.lot = consignmentdetails.lot "
+    + "WHERE productitems.status = 2 OR productitems.status = 6 AND consignments.distributorid = :distributorid";
+    const all = await database.query(sql, {replacements: {distributorid: req.Id},type: QueryTypes.SELECT});
+    return res.status(200).json(all);
+    } catch (error) {
+        return res.status(400).json({msg: error});
+    }
+    
+}
 // gửi yêu cầu nhập hàng tới cơ sở sản xuất
 export const sendRequest = async (req, res) => {
     const {productline, quantity, manufactureid} = req.body;
