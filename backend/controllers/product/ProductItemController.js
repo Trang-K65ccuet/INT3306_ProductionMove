@@ -45,13 +45,13 @@ export const ssa = async (req, res) => {
 export const spdaban = async (req, res) => {
     try {
         const year = req.params.year;
-        const sql0 = "SELECT COUNT(*) as totalquantity, SUM(productitems.price) as totalmoney FROM transactions LEFT JOIN productitems ON productitems.productcode = transactions.productcode WHERE YEAR(transactions.dateOfTransaction) = 2022";
+        const sql0 = "SELECT COUNT(*) as totalquantity, SUM(productitems.price) as totalmoney FROM transactions LEFT JOIN productitems ON productitems.productcode = transactions.productcode WHERE YEAR(transactions.dateOfTransaction) = :yr";
         const sql1 = "SELECT COUNT(*) as totalquantity, SUM(productitems.price) as totalmoney, YEAR(transactions.dateOfTransaction) as year,MONTH(transactions.dateOfTransaction) as month FROM transactions LEFT JOIN productitems ON productitems.productcode = transactions.productcode WHERE YEAR(transactions.dateOfTransaction) = :yr GROUP BY year, month"
         + " ORDER BY year ASC, month ASC";
-        const sql2 = "SELECT COUNT(*) as total, productline, SUM(productitems.price) FROM transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode GROUP BY productline";
-        const x0 = await database.query(sql0,{type: QueryTypes.SELECT});
-        const x1 = await database.query(sql1,{replacements: {yr: year}});
-        const x2 = await database.query(sql2,{type: QueryTypes.SELECT});
+        const sql2 = "SELECT COUNT(*) as total, productline, SUM(productitems.price) FROM transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode WHERE YEAR(transactions.dateOfTransaction) = :yr GROUP BY productline";
+        const x0 = await database.query(sql0,{replacements: {yr: year},type: QueryTypes.SELECT});
+        const x1 = await database.query(sql1,{replacements: {yr: year}, type: QueryTypes.SELECT});
+        const x2 = await database.query(sql2,{replacements: {yr: year},type: QueryTypes.SELECT});
         return res.status(200).json([x1, x2, x0]);
     } catch (error) {
         return res.status(400).json({msg: error});
@@ -60,6 +60,7 @@ export const spdaban = async (req, res) => {
 // thống kê sản phẩm bị lỗi
 export const AllFaultItem = async(req, res) => {
     try {
+        const year = req.params.year;
         const sql0 = "SELECT COUNT(*) as total FROM warranties";
         const sql1 = "SELECT COUNT(*) as total, productitems.productline, YEAR(productitems.dateOfManufacture) AS year FROM productitems WHERE status >2 AND status < 10 GROUP BY year ORDER BY year ASC";
         const sql2 = "SELECT COUNT(*) as detailproductline, productitems.productline, YEAR(productitems.dateOfManufacture) AS year FROM productitems WHERE productitems.status >2 AND productitems.status < 10 GROUP BY productline, year ORDER BY year ASC";
@@ -149,15 +150,17 @@ export const NumberitemNeedWarrantyManufacture = async (req, res) => {
 // sản phẩm đã nhập
 export const statisticItemDistributor = async (req, res) => {
     try {
+        const year = req.params.year;
+
         const sql1 = "SELECT COUNT(*) as total, YEAR(consignmentdetails.exportday) as year, MONTH(consignmentdetails.exportday) as month FROM consignmentdetails LEFT JOIN"
-        + " consignments ON consignments.lot = consignmentdetails.lot WHERE consignments.distributorid = :dis_id GROUP BY month, year";
+        + " consignments ON consignments.lot = consignmentdetails.lot WHERE YEAR(consignmentdetails.exportday) = :year AND consignments.distributorid = :dis_id GROUP BY month, year";
         const sql2 = "SELECT COUNT(*) as total,productitems.productline, YEAR(consignmentdetails.exportday) as year, MONTH(consignmentdetails.exportday) as month FROM consignmentdetails LEFT JOIN"
-        + " consignments ON consignments.lot = consignmentdetails.lot LEFT JOIN productitems ON productitems.productcode = consignmentdetails.productcode WHERE consignments.distributorid = :dis_id GROUP BY month, year, productline";
+        + " consignments ON consignments.lot = consignmentdetails.lot LEFT JOIN productitems ON productitems.productcode = consignmentdetails.productcode WHERE YEAR(consignmentdetails.exportday) = :year AND consignments.distributorid = :dis_id GROUP BY month, year, productline";
        const x1 = await database.query(sql1, {replacements: {
-        dis_id : req.Id
+        dis_id : req.Id, year: year
        }, type: QueryTypes.SELECT});
        const x2 = await database.query(sql2, {replacements: {
-        dis_id : req.Id
+        dis_id : req.Id, year: year
        }, type: QueryTypes.SELECT});
         
         return res.status(200).json([x1, x2]);
@@ -169,17 +172,18 @@ export const statisticItemDistributor = async (req, res) => {
 // thống kê doanh thu, các sp đã bán
 export const DoanhthuStatisticDistributor = async (req, res) => {
     try {
+        const year = req.params.year;
         const sql1 = "SELECT COUNT(*)as total, SUM(productitems.price) as money, YEAR(transactions.dateOfTransaction) as year, MONTH(transactions.dateOfTransaction) as month FROM productitems LEFT JOIN transactions ON productitems.productcode = transactions.productcode"+
-        " LEFT JOIN consignmentdetails ON consignmentdetails.productcode = productitems.productcode LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot WHERE consignments.distributorid = :dis_id AND productitems.status > 1" +
+        " LEFT JOIN consignmentdetails ON consignmentdetails.productcode = productitems.productcode LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot WHERE YEAR(transactions.dateOfTransaction) = :year AND consignments.distributorid = :dis_id AND productitems.status > 1" +
         " GROUP BY month,year";
         const sql2 = "SELECT COUNT(*)as total, SUM(productitems.price) as money, YEAR(transactions.dateOfTransaction) as year, MONTH(transactions.dateOfTransaction) as month, productitems.productline FROM productitems LEFT JOIN transactions ON productitems.productcode = transactions.productcode"+
-        " LEFT JOIN consignmentdetails ON consignmentdetails.productcode = productitems.productcode LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot WHERE consignments.distributorid = :dis_id AND productitems.status > 1" +
+        " LEFT JOIN consignmentdetails ON consignmentdetails.productcode = productitems.productcode LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot WHERE YEAR(transactions.dateOfTransaction) = :year AND consignments.distributorid = :dis_id AND productitems.status > 1" +
         " GROUP BY month,year, productitems.productline";
         const x1 = await database.query(sql1,  {replacements: {
-            dis_id : req.Id
+            dis_id : req.Id, year: year
            }, type: QueryTypes.SELECT});
         const x2 = await database.query(sql2,  {replacements: {
-            dis_id : req.Id
+            dis_id : req.Id, year: year
            }, type: QueryTypes.SELECT});
            return res.status(200).json([x1, x2]);
     } catch (error) {
@@ -189,20 +193,40 @@ export const DoanhthuStatisticDistributor = async (req, res) => {
 
 // thống kê của trung tâm bảo hành
 
-// số sản phẩm lỗi đã nhập, đã sửa
+// số sản phẩm lỗi đã nhập
 export const AllFaultWarranty = async (req, res) => {
     try {
-        const sql1 = "SELECT COUNT(*) as total, MONTH(warranties.dateOfGuarantee) as month,YEAR(warranties.dateOfGuarantee) as year FROM warranties WHERE warranties.warrantyAgentId = :wr_id GROUP BY month, year";
-        const sql2 = "SELECT COUNT(*) as total, MONTH(warranties.dateOfGuarantee) as month,YEAR(warranties.dateOfGuarantee) as year, productitems.productline FROM warranties LEFT JOIN productitems ON warranties.productcode = productitems.productcode WHERE warranties.warrantyAgentId = :wr_id GROUP BY month, year, productitems.productline";
+        const year = req.params.year;
+        const sql1 = "SELECT COUNT(*) as total, MONTH(warranties.dateOfGuarantee) as month,YEAR(warranties.dateOfGuarantee) as year FROM warranties WHERE warranties.warrantyAgentId = :wr_id AND YEAR(warranties.dateOfGuarantee) = :year GROUP BY month, year ORDER BY year ASC, month ASC ";
+        const sql2 = "SELECT COUNT(*) as total, MONTH(warranties.dateOfGuarantee) as month,YEAR(warranties.dateOfGuarantee) as year, productitems.productline FROM warranties LEFT JOIN productitems ON warranties.productcode = productitems.productcode WHERE warranties.warrantyAgentId = :wr_id AND YEAR(warranties.dateOfGuarantee) = :year GROUP BY month, year, productitems.productline ORDER BY year ASC, month ASC";
         const x1 = await database.query(sql1,  {replacements: {
-            wr_id : req.Id
+            wr_id : req.Id, year: year
            }, type: QueryTypes.SELECT});
         const x2 = await database.query(sql2,  {replacements: {
-            wr_id : req.Id
+            wr_id : req.Id, year: year
          }, type: QueryTypes.SELECT});
            return res.status(200).json([x1, x2]);
     } catch (error) {
-        
+           return res.status(400).json({msg: error});
     }
 }
 // số sản phẩm không sửa được
+export const AllCantWarranty = async(req, res) => {
+    try {
+        const year = req.params.year;
+        const sql1 = "SELECT COUNT(*) as total, MONTH(warranties.dateOfGuarantee) as month,YEAR(warranties.dateOfGuarantee) as year FROM warranties LEFT JOIN"
+        + " productitems ON productitems.productcode = warranties.productcode WHERE YEAR(warranties.dateOfGuarantee) = :year AND warranties.warrantyAgentId = :wr_id AND productitems.status = 7 OR productitems.status = 8 GROUP BY month, year ORDER BY year ASC, month ASC ";
+        const sql2 = "SELECT COUNT(*) as total, MONTH(warranties.dateOfGuarantee) as month,YEAR(warranties.dateOfGuarantee) as year, productitems.productline FROM warranties LEFT JOIN"
+        + " productitems ON productitems.productcode = warranties.productcode WHERE YEAR(warranties.dateOfGuarantee) = :year AND warranties.warrantyAgentId = :wr_id AND productitems.status = 7 OR productitems.status = 8 GROUP BY month, year, productitems.productline ORDER BY year ASC, month ASC ";
+        const x1 = await database.query(sql1,  {replacements: {
+            wr_id : req.Id, year: year
+           }, type: QueryTypes.SELECT});
+        const x2 = await database.query(sql2,  {replacements: {
+            wr_id : req.Id, year: year
+           }, type: QueryTypes.SELECT});
+           return res.status(200).json([x1, x2]);
+    } catch (error) {
+           return res.status(400).json({msg: error});
+
+    }
+}
