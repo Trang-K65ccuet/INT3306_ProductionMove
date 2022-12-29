@@ -18,3 +18,8 @@
     color: rgb(20, 5, 73);
     margin-left: 10px;
 }
+
+.side-bar {
+    position: fixed;
+    width: inherit;
+}
