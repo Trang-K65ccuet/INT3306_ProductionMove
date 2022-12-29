@@ -94,7 +94,7 @@ const Widget = ({ type }) => {
         case "error":
           data = {
             title: "LỖI",
-            value: errorC > 0 ? errorItem[0][0].total : 0,
+            value: errorC > 2 ? errorItem[2][0].total : 0,
             link: "Sản phẩm bị lỗi",
             diff:100,
             icon: (
