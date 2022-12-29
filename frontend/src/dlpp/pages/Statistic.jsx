@@ -33,7 +33,7 @@ useEffect(()=> {
         {
           labels:label,
           datasets: [{
-              label:"Doanh thu",
+              label:"Sản phẩm",
               data:data,
               backgroundColor: [
                 'rgba(52, 125, 85, 0.6)',
