@@ -104,11 +104,11 @@ fetchData();
           <div className="charts">
               <div className = "line-chart" style={{ width: 800 }}>
                 <LineChart chartData={monthimport} />
-                <p className="line-text">Doanh thu</p>
+                <p className="text">Doanh thu</p>
               </div>
               <div className="pie" style={{ width: 350 }}>
                   <PieChartInStatistic chartData = {sell}/>
-                  <p className="text-pie"> Đã bán </p>
+                  <p className="text"> Đã bán </p>
                   <br />
             </div>
           </div>
