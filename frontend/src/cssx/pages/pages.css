@@ -12,9 +12,9 @@
     font-size:20px;
 }
 
-.pie-text,.line-text {
-    font-size: 23px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.text-pie,.line-text {
+    font-size: 19px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
     text-align: center;
 }
 
@@ -26,6 +26,11 @@
     font-weight: bold;
     font-size: 20px;
     text-align: center;
+}
+
+.line-chart{
+    position: relative;
+    top:50px;
 }
 
 

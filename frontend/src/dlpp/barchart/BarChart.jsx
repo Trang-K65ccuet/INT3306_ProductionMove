@@ -34,7 +34,7 @@ const BarChart = () => {
   });
   useEffect(()=> {
     const fetchData = async () =>  {
-      const resp = await axios.get('http://localhost:5000/productitem/importdistributor', {withCredentials: true});
+      const resp = await axios.get('http://localhost:5000/productitem/importdistributor/2022', {withCredentials: true});
         const label = [];
         const data = [];
         for(var i of resp.data[0]) {
