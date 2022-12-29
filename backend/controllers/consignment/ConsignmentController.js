@@ -131,8 +131,8 @@ export const sendProductToCustomer = async(req, res) => {
 // tất cả các sản phẩm đã bán, mọi tình trạng
 export const allItemSelled = async (req, res) => {
     const sql = "SELECT DISTINCT * FROM productitems LEFT JOIN transactions ON productitems.productcode = transactions.productcode "
-    + "LEFT JOIN consignmentdetails ON consignmentdetails.productcode = transactions.productcode LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot "
-    + "WHERE consignments.distributorid = :dis_id";
+    + "LEFT JOIN consignmentdetails ON consignmentdetails.productcode = transactions.productcode LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot LEFT JOIN customerdetails ON customerdetails.customerId = transactions.customerId"
+    + " WHERE consignments.distributorid = :dis_id";
     try {
         const allSellItem = await database.query(sql, {replacements: {
             dis_id: req.Id
