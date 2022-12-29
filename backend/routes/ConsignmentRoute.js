@@ -6,6 +6,8 @@ import {getAllDistributor,getProductLotByDistributor, getProductItemByDistributo
  GetRetrieveItem, allItemNeedSend, chuyenspManufacture, allItemInCustomer} from '../controllers/consignment/ConsignmentController.js';
 
 const consignmentRouter = express.Router();
+//danh sách khách hàng
+
 // tất cả các đại lý
 consignmentRouter.get('/distributor', authorizationUser, getAllDistributor);
 // lấy ra tất cả lô hàng của người dùng
