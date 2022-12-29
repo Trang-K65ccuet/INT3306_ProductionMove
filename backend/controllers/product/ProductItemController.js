@@ -134,4 +134,65 @@ export const NumberitemNeedWarrantyManufacture = async (req, res) => {
 
     }
 }
-// sản phẩm lỗi trả về nhà sản xuất
+// thống kê của đại lý phân phối
+
+// sản phẩm đã nhập
+export const statisticItemDistributor = async (req, res) => {
+    try {
+        const sql1 = "SELECT COUNT(*) as total, YEAR(consignmentdetails.exportday) as year, MONTH(consignmentdetails.exportday) as month FROM consignmentdetails LEFT JOIN"
+        + " consignments ON consignments.lot = consignmentdetails.lot WHERE consignments.distributorid = :dis_id GROUP BY month, year";
+        const sql2 = "SELECT COUNT(*) as total,productitems.productline, YEAR(consignmentdetails.exportday) as year, MONTH(consignmentdetails.exportday) as month FROM consignmentdetails LEFT JOIN"
+        + " consignments ON consignments.lot = consignmentdetails.lot LEFT JOIN productitems ON productitems.productcode = consignmentdetails.productcode WHERE consignments.distributorid = :dis_id GROUP BY month, year, productline";
+       const x1 = await database.query(sql1, {replacements: {
+        dis_id : req.Id
+       }, type: QueryTypes.SELECT});
+       const x2 = await database.query(sql2, {replacements: {
+        dis_id : req.Id
+       }, type: QueryTypes.SELECT});
+        
+        return res.status(200).json([x1, x2]);
+        
+        } catch (error) {
+        return res.status(400).json({msg: error});
+    }
+}
+// thống kê doanh thu, các sp đã bán
+export const DoanhthuStatisticDistributor = async (req, res) => {
+    try {
+        const sql1 = "SELECT COUNT(*)as total, SUM(productitems.price) as money, YEAR(transactions.dateOfTransaction) as year, MONTH(transactions.dateOfTransaction) as month FROM productitems LEFT JOIN transactions ON productitems.productcode = transactions.productcode"+
+        " LEFT JOIN consignmentdetails ON consignmentdetails.productcode = productitems.productcode LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot WHERE consignments.distributorid = :dis_id AND productitems.status > 1" +
+        " GROUP BY month,year";
+        const sql2 = "SELECT COUNT(*)as total, SUM(productitems.price) as money, YEAR(transactions.dateOfTransaction) as year, MONTH(transactions.dateOfTransaction) as month, productitems.productline FROM productitems LEFT JOIN transactions ON productitems.productcode = transactions.productcode"+
+        " LEFT JOIN consignmentdetails ON consignmentdetails.productcode = productitems.productcode LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot WHERE consignments.distributorid = :dis_id AND productitems.status > 1" +
+        " GROUP BY month,year, productitems.productline";
+        const x1 = await database.query(sql1,  {replacements: {
+            dis_id : req.Id
+           }, type: QueryTypes.SELECT});
+        const x2 = await database.query(sql2,  {replacements: {
+            dis_id : req.Id
+           }, type: QueryTypes.SELECT});
+           return res.status(200).json([x1, x2]);
+    } catch (error) {
+          return res.status(400).json({msg: error});
+    }
+}
+
+// thống kê của trung tâm bảo hành
+
+// số sản phẩm lỗi đã nhập, đã sửa
+export const AllFaultWarranty = async (req, res) => {
+    try {
+        const sql1 = "SELECT COUNT(*) as total, MONTH(warranties.dateOfGuarantee) as month,YEAR(warranties.dateOfGuarantee) as year FROM warranties WHERE warranties.warrantyAgentId = :wr_id GROUP BY month, year";
+        const sql2 = "SELECT COUNT(*) as total, MONTH(warranties.dateOfGuarantee) as month,YEAR(warranties.dateOfGuarantee) as year, productitems.productline FROM warranties LEFT JOIN productitems ON warranties.productcode = productitems.productcode WHERE warranties.warrantyAgentId = :wr_id GROUP BY month, year, productitems.productline";
+        const x1 = await database.query(sql1,  {replacements: {
+            wr_id : req.Id
+           }, type: QueryTypes.SELECT});
+        const x2 = await database.query(sql2,  {replacements: {
+            wr_id : req.Id
+         }, type: QueryTypes.SELECT});
+           return res.status(200).json([x1, x2]);
+    } catch (error) {
+        
+    }
+}
+// số sản phẩm không sửa được

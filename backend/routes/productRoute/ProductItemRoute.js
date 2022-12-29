@@ -1,6 +1,6 @@
 import { getProductItem, productStatistic, spdaban, AllFaultItem, productStatisticManufacture, spdabanManufacture, ssa, 
-    NumberitemNeedWarrantyManufacture, allitemSendToDistributor} from "../../controllers/product/ProductItemController.js";
-import { authorizationUser,checkAdmin,checkCssx } from "../../middleware/AuthUser.js";
+    NumberitemNeedWarrantyManufacture, allitemSendToDistributor, statisticItemDistributor, DoanhthuStatisticDistributor, AllFaultWarranty} from "../../controllers/product/ProductItemController.js";
+import { authorizationUser,checkAdmin,checkConsignment,checkCssx, checkWarranty } from "../../middleware/AuthUser.js";
 import express from 'express';
 const itemRoute = express.Router();
 // lấy tất cả các sản phẩm đã được sản xuất
@@ -24,4 +24,13 @@ itemRoute.get('/productitem/selledmanufacture', authorizationUser, checkCssx, sp
 
 // thống kê số sản phẩm cần bảo hành, theo tổng cộng và chi tiết
 itemRoute.get('/productitem/totalfaultitem', authorizationUser, checkCssx, NumberitemNeedWarrantyManufacture);
+
+// thống kê của đại lý pp
+// sản phẩm đã nhập
+itemRoute.get('/productitem/importdistributor', authorizationUser, checkConsignment, statisticItemDistributor);
+// số sản phẩm đã bán, doanh thu, doanh thu theo dòng sản phẩm
+itemRoute.get('/productitem/revenuedistributor',authorizationUser, checkConsignment, DoanhthuStatisticDistributor);
+
+// số sp bị lỗi đã nhập
+itemRoute.get('/productitem/importproductwarranty',authorizationUser, checkWarranty, AllFaultWarranty);
 export default itemRoute;
