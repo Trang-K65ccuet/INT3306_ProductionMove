@@ -15,9 +15,10 @@ const Featured = () => {
 
   useEffect(() => {
     getSell();
+    getError();
   }, []);
   const getError= async () => {
-    const response = await axios.get("http://localhost:5000/productitem/fault",{withCredentials: true});
+    const response = await axios.get("http://localhost:5000/productitem/totalfaultitem",{withCredentials: true});
     setError(response.data);
   };
   const errorCount = errorItem[0][0].total;

@@ -7,3 +7,25 @@
 .charts {
     padding: 5px 20px;
 }
+
+.text {
+    font-size:20px;
+}
+
+.pie-text,.line-text {
+    font-size: 23px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+.main{
+    padding: 10px;
+}
+
+.choose-text{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+
