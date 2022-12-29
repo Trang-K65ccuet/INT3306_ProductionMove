@@ -26,6 +26,7 @@ const Widget = ({ type }) => {
     const response = await axios.get("http://localhost:5000/productitem/fault",{withCredentials: true});
     setError(response.data);
   };
+
   const productlineCount = productline.length;  
   const getProductline = async () => {
     const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
@@ -94,7 +95,7 @@ const Widget = ({ type }) => {
         case "error":
           data = {
             title: "LỖI",
-            value: errorC > 0 ? errorItem[0][0].total : 0,
+            value: errorC > 2 ? errorItem[2][0].total : 0,
             link: "Sản phẩm bị lỗi",
             diff:100,
             icon: (
