@@ -13,12 +13,12 @@ const PieChart = () => {
         label: '# of Votes',
         data: [12, 19, 3, 5, 2, 3],
         backgroundColor: [
-          'rgba(255, 127, 39, 0.5)',
-          'rgba(153, 102, 255, 0.5)',
-          'rgba(255, 159, 64, 0.5)',
-          'rgba(255, 99, 132, 0.5)',
-          'rgba(54, 162, 235, 0.5)',
-          'rgba(255, 206, 86, 0.5)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
         ],
         borderColor: [
           'rgba(75, 192, 192, 1)',
@@ -34,7 +34,7 @@ const PieChart = () => {
   });
   useEffect(()=> {
     const fetchData = async () =>  {
-      const resp = await axios.get('http://localhost:5000/productitem/statisticmanufacture', {withCredentials: true});
+      const resp = await axios.get('http://localhost:5000/productitem/statisticmanufacture/2022', {withCredentials: true});
         const label = [];
         const data = [];
         for(var i of resp.data[1]) {

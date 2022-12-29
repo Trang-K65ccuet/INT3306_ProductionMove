@@ -11,8 +11,6 @@ const initialState = {
     message: ""
 }
 
-
-//Login API
 export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI) => {
     try {
         const response = await axios.post(API.HTTP_API + '/login', {
@@ -28,8 +26,6 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI
     }
 });
 
-
-//GetProfile API
 export const getProfile = createAsyncThunk("user/getProfile", async(cookies, thunkAPI) => {
     try {
         const response = await axios.get(API.HTTP_API + '/profile', {withCredentials: true});
@@ -43,12 +39,10 @@ export const getProfile = createAsyncThunk("user/getProfile", async(cookies, thu
 });
 
 
-//Log out API
 export const LogOut = createAsyncThunk("user/LogOut", async() => {
     await axios.delete(API.HTTP_API + '/logout');
 });
 
-//state
 export const authSlice = createSlice({
     name: "auth",
     initialState,

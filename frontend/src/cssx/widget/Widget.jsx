@@ -44,7 +44,7 @@ const Widget = ({ type }) => {
   let data;
   // temp
   const amount = 500;
-  const diff = 100;
+  const diff = 30;
 
   switch (type) {
         case "import":
