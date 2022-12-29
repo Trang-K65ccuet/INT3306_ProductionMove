@@ -66,7 +66,7 @@ export const AllFaultItem = async(req, res) => {
 // thống kê sản phẩm đã tạo
 export const productStatisticManufacture = async (req, res) => {
     try {
-        const sql1 = "SELECT COUNT(*) as totalquantity , MONTH(productitems.dateOfManufacture) as month, YEAR(productitems.dateOfManufacture) as year FROM productitems WHERE manufactureid = :manu_id GROUP BY year, month";
+        const sql1 = "SELECT COUNT(*) as totalquantity , MONTH(productitems.dateOfManufacture) as month, YEAR(productitems.dateOfManufacture) as year FROM productitems WHERE manufactureid = :manu_id GROUP BY month, year ORDER BY year ASC, month ASC";
         const sql2 = "SELECT COUNT(*) as total, productline FROM productitems WHERE manufactureid = :manu_id GROUP BY productline";
         const x1 = await database.query(sql1,{replacements: {
             manu_id: req.Id
