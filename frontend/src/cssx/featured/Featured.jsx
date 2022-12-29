@@ -10,17 +10,19 @@ import axios from "axios";
 
 
 const Featured = () => {
-  const [errorItem, setError] = useState([[{total: 0, productline: ''}], [{detailproductline: 0, productline: ''}]]);
+  const [error, setError] = useState([[{total: 0, productline: ''}], [{detailproductline: 0, productline: ''}]]);
   const [sell, setSell] = useState([[{totalquantity: 0, totalmoney: 0}], [{total: 0, productline: ''}]]);
 
   useEffect(() => {
     getSell();
+    getError();
   }, []);
-  const getError= async () => {
-    const response = await axios.get("http://localhost:5000/productitem/fault",{withCredentials: true});
+
+  const errorCount = error.length;
+  const getError = async () => {
+    const response = await axios.get("http://localhost:5000/manufacture/allcantfix", {withCredentials: true});
     setError(response.data);
   };
-  const errorCount = errorItem[0][0].total;
   
   const getSell= async () => {
     const response = await axios.get("http://localhost:5000/productitem/selledmanufacture",{withCredentials: true});

@@ -30,6 +30,7 @@ const ProductListCSSX = () => {
       setItemOffset(newOffset);
     };
 
+    //set status
   function returnStatus(status) {
     switch (status) {
       case 0:
