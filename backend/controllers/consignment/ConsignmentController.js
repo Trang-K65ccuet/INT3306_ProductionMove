@@ -86,6 +86,11 @@ export const sendProductToCustomer = async(req, res) => {
             customerAddress: customeraddress
         })
     }
+    const findex = await CustomerDetail.findOne({
+        where: {
+                    customerPhoneNumber: customerphone
+               }
+    })
     const quer = "SELECT * FROM consignmentdetails  INNER JOIN consignments ON consignmentdetails.lot " 
     + "= consignments.lot INNER JOIN productitems ON consignmentdetails.productcode = productitems.productcode WHERE status = 1 AND productline = :product_line";
     const getItemAvailable = await database.query(quer, {
@@ -106,9 +111,9 @@ export const sendProductToCustomer = async(req, res) => {
                                            
                                      await Transaction.create({
                                     productcode: getItemAvailable.at(i).productcode,
-                                    customerId: findexist.customerId,
-                                    dateOfTransaction: date,
-                                    expiredDay: timeExpired
+                                    customerId: findex.customerId,
+                                    dateOfTransaction: date ,
+                                    expiredDay: timeExpired,
                                             })
                                         } catch (error) {
                                             return res.status(400).json({msg: error + getItemAvailable.length })

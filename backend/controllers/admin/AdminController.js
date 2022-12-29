@@ -38,10 +38,11 @@ export const updateUser = async (req, res) => {
     
     }
     try {
+        const hashPassword = await argon2.hash(password);
         await User.update({
             name: name,
             position: position,
-            password: password
+            password: hashPassword
         }, {where : {
             id: req.params.id
         }})
