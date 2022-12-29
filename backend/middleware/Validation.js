@@ -16,8 +16,8 @@ export const checkUpdateUser = [check('name').notEmpty().withMessage("Cần có 
 check('password')];
 
 // check validate bên cơ sở sản xuất
-export const checkAddItem = [check(body).isArray().withMessage("Chưa có các danh sách mặt hàng nhập"),
-check('*.productline').notEmpty().withMessage("Thiếu dòng sản phẩm"), check('*.quantity').isEmpty().withMessage("Thiếu số lượng").isNumeric().withMessage("Không đúng định dạng số"),
- check('*.price').notEmpty().withMessage("Thiếu giá cho sản phẩm").isNumeric().withMessage('Không đúng định dạng số'),
-check('*.dateOfManufacture').notEmpty().withMessage("Thiếu ngày nhập hàng")]
+export const checkAddItem = [body().isArray(), body('*.productline', "Thiếu dòng sản phẩm").notEmpty(),
+body('*.quantity', "Số lượng không được bé hơn 1").isInt({min: 1}),body('*.image', "Thiếu ảnh").notEmpty(), body('*.price', "Thiếu giá sản phẩm").isNumeric({min: 1}),
+body('*.dateOfManufacture', "Thiếu ngày sản xuất").isDate()
+]
 
