@@ -17,6 +17,7 @@ const Login = () => {
     (state) => state.auth
   );
 
+  //Phân luồng
   useEffect(() => {
     if (user || isSuccess) {
       setCookie('access_token',user.token, {path: "/"});

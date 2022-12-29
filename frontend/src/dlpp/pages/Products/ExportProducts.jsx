@@ -16,6 +16,7 @@ const ExportProductsDLPP = () => {
     setItem(response.data);  
   };
 
+  //Status 
   function returnStatus(status) {
     switch(status) {
       case 0: return "Mới sản xuất";
@@ -50,6 +51,7 @@ const ExportProductsDLPP = () => {
             <h1 className="title">Bán hàng</h1>
             <div className="button-widget">
               <Link to="/dlpp/export/new"><Button type="sell" /></Link>
+              <Link to="/dlpp/export/expired"><Button type="expired" /></Link>
             </div>
             <br></br>
             <h3>Lịch sử bán hàng</h3>

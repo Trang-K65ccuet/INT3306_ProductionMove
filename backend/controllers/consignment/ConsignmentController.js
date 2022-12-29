@@ -71,63 +71,63 @@ export const getProductItemByDistributor = async (req, res) => {
 }
 // gửi hàng tới người nhận là khách hàng
 export const sendProductToCustomer = async(req, res) => {
-    const {productline, quantity, customername, customerphone, customeraddress, date, timeExpired} = req.body;
-    const distributorid = req.Id;
-    try {
-     const findexist = await CustomerDetail.findAndCountAll({
-         where: {
-                     customerPhoneNumber: customerphone
-                }
-     })
-     if(findexist.count == 0) {
-         await CustomerDetail.create({
-             customerName: customername,
-             customerPhoneNumber: customerphone,
-             customerAddress: customeraddress
-         })
-     }
-     const findex = await CustomerDetail.findOne({
-         where: {
-                     customerPhoneNumber: customerphone
-                }
-     })
-     const quer = "SELECT * FROM consignmentdetails  INNER JOIN consignments ON consignmentdetails.lot " 
-     + "= consignments.lot INNER JOIN productitems ON consignmentdetails.productcode = productitems.productcode WHERE status = 1 AND productline = :product_line";
-     const getItemAvailable = await database.query(quer, {
-                      replacements: {product_line: productline},
-                      type: QueryTypes.SELECT}); 
-     var i = 0;
-     if(quantity > getItemAvailable.length) return res.status(400).json({msg: "Vượt quá số lượng trong kho, yêu cầu: "+ quantity + " ,trong kho: "+ getItemAvailable.length});
-     else{
-         for(i; i< quantity; i++) {
-                     try {
-                             ProductItem.update({
-                                      status: 2
-                                             }, {
-                                       where: {
-                                        productcode: getItemAvailable.at(i).productcode  
-                                      }
-                                      })
-                                            
-                                      await Transaction.create({
-                                     productcode: getItemAvailable.at(i).productcode,
-                                     customerId: findex.customerId,
-                                     dateOfTransaction: date ,
-                                     expiredDay: timeExpired,
-                                             })
-                                         } catch (error) {
-                                             return res.status(400).json({msg: error + getItemAvailable.length })
-                                         }
-                                         
-                                       }  
-             
-     }
-     res.status(200).json({msg: "Gửi sp thành công"})
- } catch (error) {
-     return res.status(400).json({msg: error})
-    }   
- 
- }
+   const {productline, quantity, customername, customerphone, customeraddress, date, timeExpired} = req.body;
+   const distributorid = req.Id;
+   try {
+    const findexist = await CustomerDetail.findAndCountAll({
+        where: {
+                    customerPhoneNumber: customerphone
+               }
+    })
+    if(findexist.count == 0) {
+        await CustomerDetail.create({
+            customerName: customername,
+            customerPhoneNumber: customerphone,
+            customerAddress: customeraddress
+        })
+    }
+    const findex = await CustomerDetail.findOne({
+        where: {
+                    customerPhoneNumber: customerphone
+               }
+    })
+    const quer = "SELECT * FROM consignmentdetails  INNER JOIN consignments ON consignmentdetails.lot " 
+    + "= consignments.lot INNER JOIN productitems ON consignmentdetails.productcode = productitems.productcode WHERE status = 1 AND productline = :product_line";
+    const getItemAvailable = await database.query(quer, {
+                     replacements: {product_line: productline},
+                     type: QueryTypes.SELECT}); 
+    var i = 0;
+    if(quantity > getItemAvailable.length) return res.status(400).json({msg: "Vượt quá số lượng trong kho, yêu cầu: "+ quantity + " ,trong kho: "+ getItemAvailable.length});
+    else{
+        for(i; i< quantity; i++) {
+                    try {
+                            ProductItem.update({
+                                     status: 2
+                                            }, {
+                                      where: {
+                                       productcode: getItemAvailable.at(i).productcode  
+                                     }
+                                     })
+                                           
+                                     await Transaction.create({
+                                    productcode: getItemAvailable.at(i).productcode,
+                                    customerId: findex.customerId,
+                                    dateOfTransaction: date ,
+                                    expiredDay: timeExpired,
+                                            })
+                                        } catch (error) {
+                                            return res.status(400).json({msg: error + getItemAvailable.length })
+                                        }
+                                        
+                                      }  
+            
+    }
+    res.status(200).json({msg: "Gửi sp thành công"})
+} catch (error) {
+    return res.status(400).json({msg: error})
+   }   
+
+}
 // tất cả các sản phẩm đã bán, mọi tình trạng
 export const allItemSelled = async (req, res) => {
     const sql = "SELECT DISTINCT * FROM productitems LEFT JOIN transactions ON productitems.productcode = transactions.productcode "
@@ -271,7 +271,7 @@ export const retrieveItem = async (req, res) => {
     const {productline} = req.body;
     try {
         const sql = "UPDATE transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode" +
-        " LEFT JOIN customerdetails ON customerdetails.id = transactions.customerId SET productitems.status = 9 WHERE"
+        " LEFT JOIN customerdetails ON customerdetails.customerId = transactions.customerId SET productitems.status = 9 WHERE"
         +" productline = :pro_ln AND status = 2 OR status = 6";
         await database.query(sql, {replacements: {
             pro_ln: productline
@@ -299,6 +299,7 @@ export const GetRetrieveItem = async (req,res) => {
 // chuyển trạng thái sản phẩm về hết thời gian bảo hành
 export const warrantyOverTime = async(req, res) => {
     try {
+        const sql = "UPDATE productitems LEFT JOIN transactions ON productitems.productcode = transactions.productcode SET productitems.status = 10 WHERE DATEDIFF(CURDATE(), transactions."
         
     } catch (error) {
         

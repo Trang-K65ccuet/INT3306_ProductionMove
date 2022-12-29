@@ -25,12 +25,12 @@ import ProductsDLPP from "./dlpp/pages/Products/Products";
 import ImportProductsDLPP from "./dlpp/pages/Products/ImportProducts";
 import ExportProductsDLPP from "./dlpp/pages/Products/ExportProducts";
 import InsuranceDLPP from "./dlpp/pages/Products/Insurance";
-import AddProductInDLPP from "./dlpp/components/products/AddProductInDLPP";
-import ImportProductInDLPP from "./dlpp/components/products/ImportProductInDLPP";
 import ExportProductInDLPP from "./dlpp/components/products/ExportProductInDLPP";
 import FinishedInDLPP from "./dlpp/components/products/FinishedInDLPP";
 import NewInsuranceInDLPP from "./dlpp/components/products/NewInsuranceInDLPP";
 import SendInsuranceDLPP from "./dlpp/components/products/SendInsuranceDLPP";
+import ExpiredTime from "./dlpp/components/products/ExpiredTime";
+import FixAll from "./dlpp/components/products/FixAll";
 
 import DashboardTTBH from "./ttbh/pages/Dashboard";
 import StatisticTTBH from "./ttbh/pages/Statistic";
@@ -72,12 +72,12 @@ function App() {
           <Route path="/dlpp/import" element={<ImportProductsDLPP />} />
           <Route path="/dlpp/export" element={<ExportProductsDLPP />} />
           <Route path="/dlpp/insurance" element={<InsuranceDLPP />} />
-          <Route path="/dlpp/import/add" element={<AddProductInDLPP />} />
-          <Route path="/dlpp/import/import" element={<ImportProductInDLPP />} />
           <Route path="/dlpp/export/new" element={<ExportProductInDLPP />} />
           <Route path="/dlpp/insurance/finished" element={<FinishedInDLPP />} />
           <Route path="/dlpp/insurance/new" element={<NewInsuranceInDLPP />} />
           <Route path="/dlpp/insurance/send" element={<SendInsuranceDLPP />} />
+          <Route path="/dlpp/export/expired" element={<ExpiredTime />} />
+          <Route path="/dlpp/insurance/fixall" element={<FixAll />} />
 
           //TTBH
           <Route path="/ttbh/dashboard" element={<DashboardTTBH />} />

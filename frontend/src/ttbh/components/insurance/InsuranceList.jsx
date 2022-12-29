@@ -10,11 +10,13 @@ const InsuranceList = () => {
     getItem();
   }, []);
 
+  //list
   const getItem = async () => {
     const response = await axios.get("http://localhost:5000/warranty/allitem", {withCredentials: true});
     setItem(response.data);
   };
 
+  //Send
   const sendItemToDLPP = async (productCode) => {
       await axios.post(
         `http://localhost:5000/warranty/sendfixeditem`,
@@ -26,6 +28,7 @@ const InsuranceList = () => {
     getItem(); 
   }
 
+  //set error
   const setItemError = async (productCode) => {
       await axios.post(
         `http://localhost:5000/warranty/cannotfix`,
