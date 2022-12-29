@@ -1,7 +1,6 @@
 import Layout from "../../pages/Layout";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import ReactPaginate from "react-paginate";
 
 
 const FinishedInDLPP = () => {
@@ -42,18 +41,6 @@ const FinishedInDLPP = () => {
     }
   }
 
-  let itemsPerPage = 5; 
-  const [itemOffset, setItemOffset] = useState(0);
-    const endOffset = itemOffset + itemsPerPage;
-    const currentItems = finished.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(finished.length / itemsPerPage);
-  
-    // Invoke when user click to request another page.
-    const handlePageClick = (event) => {
-      const newOffset = (event.selected * itemsPerPage) % finished.length;
-      setItemOffset(newOffset);
-    };
-
   return (
     <Layout>
           <div>
@@ -71,7 +58,7 @@ const FinishedInDLPP = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentItems.map((product, index) => (
+                {finished.map((product, index) => (
                   <tr key={product.productcode}>
                   <td>{index + 1}</td>
                   <td>{product.productcode}</td>
@@ -87,21 +74,6 @@ const FinishedInDLPP = () => {
                 ))}
               </tbody>
             </table>
-            <ReactPaginate
-              breakLabel="..."
-              onPageChange={handlePageClick}
-              pageRangeDisplayed={5}
-              pageCount={pageCount}
-              previousLabel={"< Prev"}
-              nextLabel={"Next >"}
-              renderOnZeroPageCount={null}
-              containerClassName={"pagination-list"}
-              pageLinkClassName={"pagination-link"}
-              previousLinkClassName={"pagination-previous"}
-              nextLinkClassName={"pagination-next"}
-              activeLinkClassName={"pagination-link is-current"}
-              disabledLinkClassName={"pagination-link is-disabled"}
-            />
     </div>
     </Layout>
   );

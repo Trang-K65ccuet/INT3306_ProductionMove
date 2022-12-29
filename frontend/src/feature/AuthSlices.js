@@ -1,9 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import API from "../config/API";
 
 const initialState = {
-    cookies: null,
     user: null,
     isError: false,
     isSuccess: false,
@@ -13,7 +11,7 @@ const initialState = {
 
 export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI) => {
     try {
-        const response = await axios.post(API.HTTP_API + '/login', {
+        const response = await axios.post('http://localhost:5000/login', {
             username: user.username,
             password: user.password
         });
@@ -26,9 +24,9 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async(user, thunkAPI
     }
 });
 
-export const getProfile = createAsyncThunk("user/getProfile", async(cookies, thunkAPI) => {
+/*export const getMe = createAsyncThunk("user/getMe", async(_, thunkAPI) => {
     try {
-        const response = await axios.get(API.HTTP_API + '/profile', {withCredentials: true});
+        const response = await axios.get('http://localhost:5000/me');
         return response.data;
     } catch (error) {
         if(error.response){
@@ -38,11 +36,10 @@ export const getProfile = createAsyncThunk("user/getProfile", async(cookies, thu
     }
 });
 
-
 export const LogOut = createAsyncThunk("user/LogOut", async() => {
-    await axios.delete(API.HTTP_API + '/logout');
+    await axios.delete('http://localhost:5000/logout');
 });
-
+*/
 export const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -63,6 +60,22 @@ export const authSlice = createSlice({
             state.isError = true;
             state.message = action.payload;
         })
+
+        // Get User Login
+       /* builder.addCase(getMe.pending, (state) =>{
+            state.isLoading = true;
+        });
+        builder.addCase(getMe.fulfilled, (state, action) =>{
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.user = action.payload;
+        });
+        builder.addCase(getMe.rejected, (state, action) =>{
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload;
+        })
+        */
     }
 });
 

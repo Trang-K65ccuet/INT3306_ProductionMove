@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Featured = () => {
-  //value
   const [errorItem, setError] = useState([[{total: 0, productline: ''}], [{detailproductline: 0, productline: ''}]]);
   const [sell, setSell] = useState([[{totalquantity: 0, totalmoney: 0}], [{total: 0, productline: ''}]]);
 
@@ -17,14 +16,12 @@ const Featured = () => {
     getSell();
     getError();
   }, []);
-  //return error information
   const getError= async () => {
     const response = await axios.get("http://localhost:5000/productitem/fault",{withCredentials: true});
     setError(response.data);
   };
   const errorCount = errorItem[0][0].total;
   
-  //return sell information 
   const getSell= async () => {
     const response = await axios.get("http://localhost:5000/productitem/byproductline",{withCredentials: true});
     setSell(response.data);

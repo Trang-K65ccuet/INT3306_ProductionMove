@@ -30,8 +30,6 @@ const SendInsuranceDLPP = () => {
       setWarrantyAgentId(response.data[0].id);
     };
   
-
-    //Send error
     const getSendError = async (e) => {
       e.preventDefault();
       try {

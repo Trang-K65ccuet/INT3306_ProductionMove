@@ -14,34 +14,30 @@ const Widget = ({ type }) => {
   const [product, setProduct] = useState([]);
   const [errorItem, setError] = useState([[{total: 0, productline: ''}], [{detailproductline: 0, productline: ''}]]);
  
+
   useEffect(() => {
     getProductline();
     getUser();
     getProduct();
     getError();
   }, []);
-  //Error API
   var errorC = errorItem.length;
   const getError= async () => {
     const response = await axios.get("http://localhost:5000/productitem/fault",{withCredentials: true});
     setError(response.data);
   };
-
-  //ProductlineAPI
   const productlineCount = productline.length;  
   const getProductline = async () => {
     const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
     setProductline(response.data);  
   }
 
-  //Users API
   const userCount = user.length;
   const getUser= async () => {
     const response = await axios.get("http://localhost:5000/users",{withCredentials: true});
     setUser(response.data);
   };
 
-  //ProductAPI
   const productCount = product.length;
   const getProduct= async () => {
     const response = await axios.get("http://localhost:5000/productitem/all",{withCredentials: true});

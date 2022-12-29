@@ -15,12 +15,12 @@ const DashboardCSSX = () => {
             <Widget type="error" />
         </div>
         <div className="charts">
-          <Featured class ="featured" />
-          <div class="pie" style={{ width: 500 }}>
-            <div class = "border">
+          <Featured className ="featured" />
+          <div className="pie" style={{ width: 500 }}>
+            <div className = "border">
               <PieChart/>
               <br />
-              <p class = "text">Tỷ lệ các sản phẩm</p>
+              <p className = "text">Tỷ lệ các sản phẩm</p>
             </div>
           </div>
         </div>

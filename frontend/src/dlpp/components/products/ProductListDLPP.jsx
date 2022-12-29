@@ -2,9 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
+import Modal from "../modal/Modal";
 
 const ProductListDLPP = () => {
   const [productDLPP, setProductDLPP] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [product, setProduct] = useState({});
 
   useEffect(() => {
     getProductDLPP();
@@ -56,6 +59,7 @@ const ProductListDLPP = () => {
             <th>Lô</th>
             <th>Giá</th>
             <th>Trạng thái</th>
+            <th>Tùy chọn</th>
           </tr>
         </thead>
         <tbody>
@@ -68,10 +72,22 @@ const ProductListDLPP = () => {
             <td>{product.lot}</td>
             <td>{product.price}</td>
             <td>{returnStatus(product.status)}</td>
+            <td>
+            <button
+                    className="button is-small is-info"
+                    onClick={() => {
+                      setModalOpen(!modalOpen);
+                      setProduct(product);
+                    }}
+                  >
+                    Xem chi tiết
+                  </button>
+            </td>
           </tr>
           ))}
         </tbody>
       </table>
+      <Modal open={modalOpen} onClose={() => setModalOpen(!modalOpen)} product={product} />
       <ReactPaginate
         breakLabel="..."
         onPageChange={handlePageClick}

@@ -53,7 +53,6 @@ const InsuranceDLPP = () => {
               <Link to="/dlpp/insurance/new"><Button type="new" /></Link>
               <Link to = "/dlpp/insurance/send"><Button type="send" /></Link>
               <Link to="/dlpp/insurance/finished"><Button type="finished" /></Link>
-              <Link to="/dlpp/insurance/fixall"><Button type="fixall"/></Link>
           </div>
           <br />
             <h3>Danh sách sản phẩm lỗi</h3>

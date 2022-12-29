@@ -10,6 +10,15 @@
     background-color: rgb(119, 200, 222);
 }
 
+.imageWrapper {
+    margin-top: 20px;
+}
+
+#uploadedimage {
+    width: 40%;
+    margin-top: 20px;
+}
+
 .logo-text{
     font-size: 30px;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
