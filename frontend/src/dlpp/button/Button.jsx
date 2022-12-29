@@ -2,6 +2,7 @@ import React from "react";
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import SendIcon from '@mui/icons-material/Send';
 import OfflinePinIcon from '@mui/icons-material/OfflinePin';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 
 const Button = ({ type }) => {
     let data;
@@ -74,6 +75,30 @@ const Button = ({ type }) => {
                 <LibraryAddIcon
                      className="icon"
                     style={{color: "crimson", backgroundColor: "#ff000033"}}
+                />
+                 ),
+            };
+          break;
+          case "expired":
+            data = {
+              title: "HẾT HẠN",
+              link: "Các sản phẩm hết hạn",
+              icon: (
+                <AccessTimeFilledIcon
+                     className="icon"
+                     style={{ color: "blue", backgroundColor: "#ddeeff" }}
+                />
+                 ),
+            };
+          break;
+          case "fixall":
+            data = {
+              title: "TRIỆU HỒI",
+              link: "Triệu hồi dòng sản phẩm bị lỗi nhiều",
+              icon: (
+                <AccessTimeFilledIcon
+                     className="icon"
+                     style={{ color: "blue", backgroundColor: "#ddeeff" }}
                 />
                  ),
             };
