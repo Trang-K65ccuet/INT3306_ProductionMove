@@ -175,10 +175,10 @@ export const DoanhthuStatisticDistributor = async (req, res) => {
         const year = req.params.year;
         const sql1 = "SELECT COUNT(*)as total, SUM(productitems.price) as money, YEAR(transactions.dateOfTransaction) as year, MONTH(transactions.dateOfTransaction) as month FROM productitems LEFT JOIN transactions ON productitems.productcode = transactions.productcode"+
         " LEFT JOIN consignmentdetails ON consignmentdetails.productcode = productitems.productcode LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot WHERE YEAR(transactions.dateOfTransaction) = :year AND consignments.distributorid = :dis_id AND productitems.status > 1" +
-        " GROUP BY month,year";
+        " GROUP BY month,year ORDER BY year ASC, month ASC";
         const sql2 = "SELECT COUNT(*)as total, SUM(productitems.price) as money, YEAR(transactions.dateOfTransaction) as year, MONTH(transactions.dateOfTransaction) as month, productitems.productline FROM productitems LEFT JOIN transactions ON productitems.productcode = transactions.productcode"+
         " LEFT JOIN consignmentdetails ON consignmentdetails.productcode = productitems.productcode LEFT JOIN consignments ON consignments.lot = consignmentdetails.lot WHERE YEAR(transactions.dateOfTransaction) = :year AND consignments.distributorid = :dis_id AND productitems.status > 1" +
-        " GROUP BY month,year, productitems.productline";
+        " GROUP BY month,year, productitems.productline ORDER BY year ASC, month ASC";
         const x1 = await database.query(sql1,  {replacements: {
             dis_id : req.Id, year: year
            }, type: QueryTypes.SELECT});

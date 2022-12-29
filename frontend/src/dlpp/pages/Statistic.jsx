@@ -101,7 +101,7 @@ fetchData();
 
   return (
       <Layout>
-          <div className="charts">
+          <div className="chartstatistic">
               <div className = "line-chart" style={{ width: 800 }}>
                 <LineChart chartData={monthimport} />
                 <p className="text">Doanh thu</p>
