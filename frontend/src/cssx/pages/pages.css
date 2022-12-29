@@ -28,4 +28,10 @@
     text-align: center;
 }
 
+.chartstatistic{
+    padding: 5px 20px;
+    margin-top: 70px;
+    display: flex;
+}
+
 

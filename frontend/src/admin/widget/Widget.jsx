@@ -26,6 +26,7 @@ const Widget = ({ type }) => {
     const response = await axios.get("http://localhost:5000/productitem/fault",{withCredentials: true});
     setError(response.data);
   };
+
   const productlineCount = productline.length;  
   const getProductline = async () => {
     const response = await axios.get("http://localhost:5000/productline",{withCredentials: true});
