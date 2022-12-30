@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const NewInsuranceInDLPP = () => {
     const [productcode, setProduct] = useState("");
     const [msg, setMsg] = useState("");
+    const [customer, setCustomer] = useState([]);
     const navigate = useNavigate();
     const getSendError = async (e) => {
       e.preventDefault();
@@ -27,6 +28,16 @@ const NewInsuranceInDLPP = () => {
       }
     };
 
+    useEffect(() => {
+      getCustomer();
+    }, []);
+
+    const getCustomer = async () => {
+      const response = await axios.get("http://localhost:5000/consignment/productatcustomer",{withCredentials: true});
+      console.log(response.data); 
+      setCustomer(response.data);  
+    };
+
   return (
     <Layout>
       <div>
@@ -39,13 +50,15 @@ const NewInsuranceInDLPP = () => {
               <div className="field">
                 <label className="label">Mã sản phẩm</label>
                 <div className="control">
-                  <input
-                    value = {productcode} 
-                    onChange={(e) => setProduct(e.target.value)}
-                    type="text"
-                    className="input"
-                    placeholder="Mã sản phẩm"
-                  />
+                <select 
+                  className="input"
+                  value = {productcode} 
+                  onChange={(e) => setProduct(e.target.value)}
+                >
+                {customer.map((customer) => (
+                    <option>{customer.productcode}</option>
+                ))}
+                </select>
                 </div>
               </div>
               <p className="has-text-centered">{msg}</p>
