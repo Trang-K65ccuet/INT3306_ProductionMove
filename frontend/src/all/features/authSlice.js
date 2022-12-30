@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import API from "../config/API";
+import Cookie from "universal-cookie";
+
+const cookie = new Cookie();
 
 const initialState = {
     cookies: null,
@@ -41,6 +44,7 @@ export const getProfile = createAsyncThunk("user/getProfile", async(cookies, thu
 
 export const LogOut = createAsyncThunk("user/LogOut", async() => {
     await axios.delete(API.HTTP_API + '/logout');
+    cookie.remove('access_token', { path: '/' });
 });
 
 export const authSlice = createSlice({
