@@ -46,7 +46,7 @@ export const updateUser = async (req, res) => {
         }, {where : {
             id: req.params.id
         }})
-        return res.status(200).json({msg: "Update người dùng thành công!"})
+        return res.status(200).json({msg: "Chỉnh sửa tài khoản người dùng thành công!"})
     } catch (error) {
         return res.status(400).json({msg: error})
     }
@@ -72,8 +72,8 @@ export const postUser = async(req, res) => {
         }
 
     })
-    if(existed.count != 0) return res.status(400).json({msg:  existed + (await existed).count});
-    if(password !== confpassword) return res.status(400).json({msg: "Password khác conf"});
+    if(existed.count != 0) return res.status(400).json({msg:  "Đã tồn tại tên tài khoản"});
+    if(password !== confpassword) return res.status(400).json({msg: "Mật khẩu khác mật khẩu gõ lại"});
     const hashPassword = await argon2.hash(password);
     try {
         await User.create({
@@ -85,7 +85,7 @@ export const postUser = async(req, res) => {
             status: status
             
         });
-        res.status(201).json({msg: "Tạo user thành công"});
+        res.status(201).json({msg: "Tạo tài khoản thành công"});
     } catch (error) {
         res.status(400).json({msg: error.message});
     }
@@ -97,7 +97,7 @@ export const deleteUser = async(req, res) =>{
             id: req.params.id
         }
     });
-    if(!user) return res.status(404).json({msg: "User không tồn tại"});
+    if(!user) return res.status(404).json({msg: "Tài khoản người dùng không tồn tại"});
     try {
         await User.destroy({
             where:{
