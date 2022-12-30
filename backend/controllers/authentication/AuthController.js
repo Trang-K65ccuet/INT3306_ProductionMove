@@ -11,9 +11,15 @@ dotenv.config();
 // đăng nhập tài khoản sử dụng
 export const Login = async (req, res)=> {
    const errors = validationResult(req);
-   if (!errors.isEmpty()) {
-     return res.status(400).json({ errors: errors.array() });
-   }
+   let errorsInfo = ""; 
+    if (!errors.isEmpty()) {
+        let i = 0; 
+        for (i ; i < errors.array().length - 1; i++) {
+            errorsInfo = errorsInfo + errors.array().at(i).msg + ", "; 
+        }
+        errorsInfo = errorsInfo + errors.array().at(errors.array().length - 1).msg + ".";
+      return res.status(400).json({ msg: errorsInfo });
+    }
    const existUser = await User.findOne({
    where : {
            username: req.body.username
@@ -21,7 +27,7 @@ export const Login = async (req, res)=> {
    });
    if(!existUser) {return res.status(400).json({msg: "Không tồn tại tài khoản"})};
    const match = await argon2.verify(existUser.password, req.body.password);
-   if(!match) return res.status(400).json({msg: "Wrong Password"});
+   if(!match) return res.status(400).json({msg: "Mật khẩu đăng nhập sai"});
    const token = jwt.sign({id: existUser.id, username: existUser.username, position: existUser.position}, process.env.ACCESS_TOKEN_SECRET, {
        expiresIn: "4h"
    });

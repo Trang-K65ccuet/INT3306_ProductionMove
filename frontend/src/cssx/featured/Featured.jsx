@@ -22,7 +22,7 @@ const Featured = () => {
     setError(response.data);
   };
   
-  const errorCount = errorItem[0][0].total;
+  const errorCount = errorItem[0].length > 1 ? errorItem[0][1].total : 0;
  
   const getSell= async () => {
     const response = await axios.get("http://localhost:5000/productitem/selledmanufacture/2022",{withCredentials: true});

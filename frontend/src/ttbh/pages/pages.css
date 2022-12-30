@@ -32,13 +32,8 @@
 }
 
 .chartstatistic{
-    display: block;
+    display: flex;
     padding: 5px 20px;
     margin-top: 70px;
 }
 
-@media screen and (min-width: 1260px) {
-    .chartstatistic-custom {
-        display: flex;
-    }
-}
