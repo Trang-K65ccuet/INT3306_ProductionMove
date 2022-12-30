@@ -13,3 +13,8 @@
     margin-top: 70px;
     display: flex;
 }
+
+.inputYear{
+    width: 100px;
+    height: 30px;
+}

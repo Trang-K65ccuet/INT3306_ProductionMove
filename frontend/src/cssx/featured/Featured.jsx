@@ -21,13 +21,9 @@ const Featured = () => {
     const response = await axios.get("http://localhost:5000/productitem/totalfaultitem",{withCredentials: true});
     setError(response.data);
   };
-  let errorCount;
-  if(errorItem.length>2) {
-    errorCount = errorItem[2][0].total;
-  } else {
-    errorCount = 0;
-  }
   
+  const errorCount = errorItem[0][0].total;
+ 
   const getSell= async () => {
     const response = await axios.get("http://localhost:5000/productitem/selledmanufacture/2022",{withCredentials: true});
     setSell(response.data);
