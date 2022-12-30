@@ -1,6 +1,7 @@
 import { database } from "../../config/Database.js";
 import { DataTypes } from "sequelize";
 
+// model cho thông tin người dùng
 const CustomerDetail = database.define('customerdetail', {
     customerId: {
         type: DataTypes.INTEGER,

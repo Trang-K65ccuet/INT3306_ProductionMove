@@ -3,6 +3,8 @@ import {Consignment} from "../../models/consignment/ConsignmentModel.js";
 import { ConsignmentDetail } from "../../models/consignment/ConsignmentDetailModel.js";
 import { database } from "../../config/Database.js";
 import { QueryTypes } from "sequelize";
+
+//lấy ra tất cả các sản phẩm
 export const getProductItem = async (req, res) => {
     try {
         const productItem = await ProductItem.findAll({
@@ -14,6 +16,10 @@ export const getProductItem = async (req, res) => {
     }
    
 };
+// lấy ra tất cả các năm trong giao dịch
+const allYear = async (req, res) => {
+    const sql = "SELECT DISTINCT YEAR(transactions.dateOfTransaction) AS year"
+}
 // admin
 // thống kê số sản phẩm đã tạo theo từng dòng sản phẩm
 export const productStatistic = async (req, res) => {
@@ -30,15 +36,6 @@ export const productStatistic = async (req, res) => {
         return res.status(400).json({msg: error});
     }
 
-}
-export const ssa = async (req, res) => {
-   try {
-    const sql2 = "SELECT COUNT(*) as total, productline FROM productitems GROUP BY productline";
-    const x2 = await database.query(sql2,{type: QueryTypes.SELECT});
-    return res.status(200).json(x2);
-   } catch (error) {
-    return res.status(400).json({msg: error});
-   }
 }
 
 // thống kê số sản phẩm đã bán
@@ -114,11 +111,12 @@ export const allitemSendToDistributor = async (req, res) => {
 // sp đã bán
 export const spdabanManufacture = async (req, res) => {
     try {
+        const year = req.params.year;
         const sql1 = "SELECT COUNT(*) as totalquantity, SUM(productitems.price) as totalmoney, YEAR(transactions.dateOfTransaction) as year FROM transactions LEFT JOIN productitems ON productitems.productcode = transactions.productcode"
-        + " WHERE productitems.manufactureid = :manu_id GROUP BY year ORDER BY year ASC";
+        + " WHERE YEAR(transactions.dateOfTransaction) = :year AND productitems.manufactureid = :manu_id GROUP BY year ORDER BY year ASC";
         const sql2 = "SELECT COUNT(*) as total, productline, SUM(productitems.price) as totalmoney, YEAR(transactions.dateOfTransaction) as year FROM transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode WHERE productitems.manufactureid = :manu_id GROUP BY productline, year ORDER BY year ASC";
         const x1 = await database.query(sql1,{replacements: {
-            manu_id: req.Id
+            manu_id: req.Id, year: year
         },type: QueryTypes.SELECT});
         const x2 = await database.query(sql2,{replacements: {
             manu_id: req.Id
@@ -210,6 +208,7 @@ export const AllFaultWarranty = async (req, res) => {
            return res.status(400).json({msg: error});
     }
 }
+
 // số sản phẩm không sửa được
 export const AllCantWarranty = async(req, res) => {
     try {

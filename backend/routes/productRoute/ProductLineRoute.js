@@ -10,7 +10,7 @@ linerouter.get('/productline', authorizationUser,getProductLine );
 linerouter.post('/productline/add',authorizationUser,checkAdmin, addProductLine);
 
 //xóa danh mục sản phẩm
-linerouter.delete('/productline/delete',authorizationUser, checkAdmin,deleteProductLine );
+linerouter.post('/productline/delete',authorizationUser, checkAdmin, deleteProductLine );
 
 // sửa danh mục sản phẩm
 linerouter.put('/productline/update', authorizationUser, checkAdmin, updateProductLine);

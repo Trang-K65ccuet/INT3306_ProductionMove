@@ -3,6 +3,7 @@ import { DataTypes } from "sequelize";
 import {ConsignmentDetail} from '../consignment/ConsignmentDetailModel.js';
 import CustomerDetail from "./CustomerDetailModel.js";
 
+// model cho các giao dịch mua bán giữa user và các khách hàng mua sản phẩm
 const Transaction = database.define('transaction', {
     transactionId : {
         type: DataTypes.INTEGER,

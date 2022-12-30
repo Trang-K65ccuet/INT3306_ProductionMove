@@ -12,6 +12,7 @@ export const checkRegisterForm = [check('name').notEmpty().withMessage("Cần đ
 .matches(/\d/).withMessage('Mật khẩu phải có 1 ký tự in hoa'), check('username').notEmpty().withMessage("Cần điền tên tài khoản"), check('confpassword').notEmpty().withMessage("Chưa điền confpass"),
 check('status').notEmpty().withMessage("Chưa có trạng thái hoạt động"), check('position').notEmpty().withMessage("Chưa có vị trí")];
 
+// check validate để update người dùng
 export const checkUpdateUser = [check('name').notEmpty().withMessage("Cần có tên người dùng"), check('position').notEmpty().withMessage("Cần có role cho người dùng"),
 check('password')];
 

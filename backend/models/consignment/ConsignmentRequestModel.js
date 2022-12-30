@@ -3,6 +3,7 @@ import { DataTypes, INTEGER } from "sequelize";
 import { ProductLine } from "../product/ProductLineModel.js";
 import User from "../user/UserModel.js";
 
+// các yêu cầu nhập hàng của đại lý phân phối
 const ConsignmentRequest = database.define('consignmentrequests', {
     id: {
         type: DataTypes.INTEGER,

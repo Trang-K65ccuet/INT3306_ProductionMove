@@ -15,7 +15,7 @@ export const allWarrantyAgents = async (req, res) => {
     } catch (error) {
         return res.status(400).json({msg: error});
     }
-}
+};
 // lấy ra tất cả các sản phẩm đang bảo hành theo từng trung tâm bảo hành
 export const allItemWarranty = async (req, res) => {
     try {
@@ -29,7 +29,7 @@ export const allItemWarranty = async (req, res) => {
     } catch (error) {
       return res.status(400).json({msg: error});
     } 
-}
+};
 // sửa sản phẩm thành công, gửi lại cho đại lý phân phối
 export const sendfixedItem = async (req, res) => {
     const {productcode} = req.body;
@@ -52,7 +52,7 @@ export const sendfixedItem = async (req, res) => {
     } catch (error) {
         res.status(400).json({msg: error});
     }
-}
+};
 // các sản phẩm đã sửa xong
 export const allFixedWarranty = async (req, res) => {   
     try {
@@ -65,7 +65,7 @@ export const allFixedWarranty = async (req, res) => {
         return res.status(400).json({msg: error});
     }
     
-}
+};
 // sản phẩm không thể sửa, cần trả lại nhà máy
 export const setCannotFIxItem = async (req, res) => {
     const {productcode} = req.body;
@@ -87,7 +87,7 @@ export const setCannotFIxItem = async (req, res) => {
    res.status(400).json({msg: error});
     }
 
-}
+};
 // tất cả các sản phẩm không thể bảo hành
 export const allCantFixItemsByWarrantyAgent = async (req, res) => {
     try {
@@ -101,7 +101,7 @@ export const allCantFixItemsByWarrantyAgent = async (req, res) => {
     } catch (error) {
         return res.status(400).json({msg: error})
     }
-}
+};
 
 // chuyển sản phẩm về nhà máy sản xuất
 export const sendCannotFixItem = async (req, res) => {
@@ -123,4 +123,4 @@ export const sendCannotFixItem = async (req, res) => {
     } catch (error) {
         return res.status(400).json({msg: error})
     }
-}
+};

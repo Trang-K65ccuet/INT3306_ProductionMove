@@ -3,6 +3,7 @@ import { database} from "../../config/Database.js";
 import { ProductItem } from "../product/ProductItemModel.js";
 import { Consignment } from "./ConsignmentModel.js";
 
+// đây là model cho chi tiết của lô hàng đã xuất 
 export const ConsignmentDetail = database.define('consignmentdetail',{
   productcode: {
     type: DataTypes.STRING,

@@ -1,10 +1,11 @@
  import User from "../../models/user/UserModel.js";
  import argon2 from 'argon2';
- import { where } from "sequelize";
+ import { QueryTypes, where } from "sequelize";
  import bcrypt from 'bcrypt';
  import jwt from "jsonwebtoken";
  import dotenv from "dotenv";
-import { body, validationResult } from 'express-validator';
+ import { body, validationResult } from 'express-validator';
+ import { database } from "../../config/Database.js";
 
 
 dotenv.config();
@@ -39,8 +40,15 @@ export const Login = async (req, res)=> {
 
 //lấy profile của user
 export const profile = async (req, res) =>{
-    return res.json({ user: { username: req.userName, position: req.userPosition } });
+    try {
+    const sql = "SELECT * FROM userdetails WHERE id = :id";
+    const all = await database.query(sql, {replacements: {id: req.Id},type: QueryTypes.SELECT});
+    return res.status(200).json(all);
+    } catch (error) {
+    return res.status(400).json({msg: error});
+    }
 }
+
 
 //đăng xuất tài khoản
 export const logOut = (req, res) =>{

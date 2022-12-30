@@ -25,7 +25,13 @@ try {
 export const addProductItemList = async(req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+        let i = 0;
+        let errorsInfo = "";
+        for(i; i < errors.array().length; i++) {
+            errorsInfo = errorsInfo + errors.array().at(i).msg + "\n";
+        }
+        return res.status(400).json({msg: errorsInfo})
+
     }
     try {
         const records = req.body.length;
@@ -56,7 +62,7 @@ export const addProductItemList = async(req, res) => {
     } catch (error) {
         return res.status(400).json({msg: error.message});
     }
-}
+};
 
 // lấy ra tất cả các sản phẩm do user(cssx) sản xuất
 export const getProductitemByManufacture = async (req, res) => {
@@ -84,7 +90,8 @@ export const getAllRequestByManufacture = async (req, res) => {
    } catch (error) {
     return res.status(400).json({msg: error})
    } 
-}
+};
+
 // gửi lô hàng
 export const sendListProductItem = async (req, res) => {
     try {
@@ -132,7 +139,8 @@ export const sendListProductItem = async (req, res) => {
         return res.status(500).json({msg: error.message});
     }
     
-}
+};
+
 // lấy ra tất cả các lô hàng của cơ sở sản xuất đã chuyển đi
 export const allLotsHaveSent = async (req, res) => {
     const sql = "SELECT lot, quantity, users.name FROM consignments LEFT JOIN users ON users.id = consignments.distributorid WHERE consignments.manufactureid = :mn_id";
@@ -144,7 +152,8 @@ export const allLotsHaveSent = async (req, res) => {
    } catch (error) {
     return res.status(400).json({msg: error});
    }
-}
+};
+
 // chi tiết lô hàng
 export const lotDetail = async (req, res) => {
     const {lot} = req.body;
@@ -157,7 +166,8 @@ export const lotDetail = async (req, res) => {
     } catch (error) {
       return res.status(400).json({msg: error});
     }
-}
+};
+
 // tất cả các sản phẩm không thể sửa trả về cssx
 export const getAllCantFixItem = async (req, res) => {
     try {
@@ -170,4 +180,4 @@ export const getAllCantFixItem = async (req, res) => {
         return res.status(400).json({msg: error});
     }
     
-}
+};

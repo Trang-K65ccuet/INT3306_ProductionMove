@@ -3,6 +3,7 @@ import { DataTypes } from "sequelize";
 import { ProductLine } from "./ProductLineModel.js";
 import User from '../user/UserModel.js';
 
+// model cho tất cả các sản phẩm đã sản xuất
 export const ProductItem = database.define('productitems',{
     productcode: {
         type: DataTypes.STRING,

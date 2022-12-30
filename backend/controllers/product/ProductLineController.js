@@ -1,6 +1,7 @@
 import { ProductItem } from "../../models/product/ProductItemModel.js";
 import {ProductLine} from "../../models/product/ProductLineModel.js";
-
+import { database } from "../../config/Database.js";
+import { QueryTypes } from "sequelize";
 // lấy ra tất cả các danh mục sản phẩm
 export const getProductLine = async (req, res) => {
     try {
@@ -61,13 +62,12 @@ export const updateProductLine = async (req, res) => {
 }
 // xóa danh mục sản phẩm khi không có sp nào
 export const deleteProductLine = async (req, res) => {
-    const {productline} = req.body;
-    try {
-        await ProductLine.destroy({
-            where: {
-                productline: productline
-            }
-        })
+    //const {productline} = req.body.productline;
+    const a = req.body.productline;
+    var x = " '" + a + "' "
+       try {
+         const sql = "DELETE FROM productlines WHERE productlines.productline = :productline ";
+         await database.query(sql, {replacements: {productline: x}, type: QueryTypes.DELETE});
         return res.status(200).json({msg: "Xóa danh mục sản phẩm thành công"});
     } catch (error) {
         return res.status(400).json({msg: error});

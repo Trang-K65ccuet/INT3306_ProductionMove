@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize";
 import { database} from "../../config/Database.js";
 import User from "../user/UserModel.js";
 
+// model cho các lô hàng
 export const Consignment = database.define('consignment', {
     lot: {
         type: DataTypes.INTEGER,

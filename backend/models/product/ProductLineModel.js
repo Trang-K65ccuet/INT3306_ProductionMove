@@ -2,6 +2,7 @@ import { database } from "../../config/Database.js";
 import { Sequelize } from "sequelize";
 import { DataTypes } from "sequelize";
 
+// model cho các dòng sản phẩm
   export const ProductLine = database.define("productlines", {
     productline: {
         type: DataTypes.STRING,

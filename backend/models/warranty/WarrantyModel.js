@@ -2,6 +2,8 @@ import {database} from "../../config/Database.js";
 import { DataTypes } from "sequelize";
 import Transaction from '../transaction/TransactionModel.js';
 import User from "../user/UserModel.js";
+
+// các sản phẩm đem đi bảo hành
 const Warranty = database.define('warranty', {
     productcode: {
         type: DataTypes.STRING,
