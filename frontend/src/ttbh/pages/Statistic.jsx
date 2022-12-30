@@ -7,6 +7,8 @@ import axios from "axios";
 
 const StatisticTTBH = () => {
 
+  const [year, setYear] = useState("2022");
+
 //Line chart 
 const [sell, setSell] = useState({
   labels: [],
@@ -22,7 +24,7 @@ const [sell, setSell] = useState({
 });
 useEffect(()=> {
   const fetchData = async () =>  {
-    const resp = await axios.get('http://localhost:5000/productitem/allproductcantwarranty/2022', {withCredentials: true});
+    const resp = await axios.get(`http://localhost:5000/productitem/allproductcantwarranty/${year}`, {withCredentials: true});
     const label = [];
       const data = [];
       for(var i of resp.data[0]) {
@@ -33,7 +35,7 @@ useEffect(()=> {
         {
           labels:label,
           datasets: [{
-              label:"Doanh thu",
+              label:"Sản phẩm",
               data:data,
               backgroundColor: [
                 'rgba(52, 125, 85, 0.6)',
@@ -57,7 +59,7 @@ useEffect(()=> {
       )
     };
 fetchData();
-}, [])
+}, [year])
 
 //Line chart 
 const [monthimport, setmonthimport] = useState({
@@ -74,7 +76,7 @@ const [monthimport, setmonthimport] = useState({
 });
 useEffect(()=> {
   const fetchData = async () =>  {
-    const resp = await axios.get('http://localhost:5000/productitem/importproductwarranty/2022', {withCredentials: true});
+    const resp = await axios.get(`http://localhost:5000/productitem/importproductwarranty/${year}`, {withCredentials: true});
     const label = [];
       const data = [];
       for(var i of resp.data[0]) {
@@ -85,7 +87,7 @@ useEffect(()=> {
         {
           labels:label,
           datasets: [{
-              label:"Doanh thu",
+              label:"Sản phẩm",
               data:data,
               backgroundColor: [
                 'rgba(52, 125, 85, 1)',
@@ -97,10 +99,23 @@ useEffect(()=> {
       )
     };
 fetchData();
-}, [])
+}, [year])
 
   return (
       <Layout>
+            <div className="field">
+              <label className="label">Năm</label>
+              <div className="control">
+                <input
+                  type="text"
+                  className="input"
+                  placeholder="Năm"
+                  value={year}
+                  onChange={(e) => setYear(e.target.value)}
+                  required="required"
+                />
+            </div>
+          </div>
           <div className="chartstatistic">
               <div className = "line-chart" style={{ width: 800 }}>
                 <LineChart chartData={monthimport} />

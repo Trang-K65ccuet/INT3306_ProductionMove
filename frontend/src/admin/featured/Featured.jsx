@@ -31,8 +31,19 @@ const Featured = () => {
     const response = await axios.get("http://localhost:5000/productitem/byproductline/2022",{withCredentials: true});
     setSell(response.data);
   };
-  const sellCount = sell[0][0].totalquantity;
-  const sellPrice = sell[0][0].totalmoney;
+  let sellCount;
+  if(sell.length>2) {
+    sellCount = sell[2][0].totalquantity;
+  } else {
+    sellCount = 0;
+  }
+
+  let sellPrice;
+  if(sell.length>2) {
+    sellPrice = sell[2][0].totalmoney;
+  } else {
+    sellPrice = 0;
+  }
 
 
   return (

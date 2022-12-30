@@ -43,7 +43,7 @@ export const profile = async (req, res) =>{
 }
 
 //đăng xuất tài khoản
-export const LogOut = createAsyncThunk("user/LogOut", async() => {
-  await axios.delete(API.HTTP_API + '/logout');
-  cookie.remove('access_token', { path: '/' });
-});
+export const logOut = (req, res) =>{
+  res.cookie('access_token','', {maxAge: 1});
+  return res.status(200).json({msg: "Đăng xuất thành công"})
+}
