@@ -40,11 +40,12 @@ const AddUserForm = () => {
       <h1 className="title">Thêm người dùng mới</h1>
       {/* <h2 className="subtitle">Thêm người dùng mới</h2> */}
       <div className="card is-shadowless">
+      <div className="card-content">
         <div className="content">
-          <form onSubmit={saveUser} className = "addUserForm">
-            <div className="field fieldWrapper">
-              <label className="label info">Tên người dùng</label>
-              <div className="control inputWrapper">
+          <form onSubmit={saveUser}>
+            <div className="field">
+              <label className="label ">Tên người dùng</label>
+              <div className="control">
                 <input
                   type="text"
                   className="input"
@@ -55,9 +56,9 @@ const AddUserForm = () => {
                 />
               </div>
             </div>
-            <div className="field fieldWrapper">
-              <label className="label info">Tên đăng nhập</label>
-              <div className="control inputWrapper">
+            <div className="field">
+              <label className="label ">Tên đăng nhập</label>
+              <div className="control">
                 <input
                   type="text"
                   className="input"
@@ -68,9 +69,9 @@ const AddUserForm = () => {
                 />
               </div>
             </div>
-            <div className="field fieldWrapper">
-              <label className="label info">Mật khẩu</label>
-              <div className="control inputWrapper">
+            <div className="field">
+              <label className="label ">Mật khẩu</label>
+              <div className="control">
                 <input
                   type="password"
                   className="input"
@@ -81,9 +82,9 @@ const AddUserForm = () => {
                 />
               </div>
             </div>
-            <div className="field fieldWrapper">
-              <label className="label info">Xác nhận mật khẩu</label>
-              <div className="control inputWrapper">
+            <div className="field">
+              <label className="label ">Xác nhận mật khẩu</label>
+              <div className="control">
                 <input
                   type="password"
                   className="input"
@@ -94,9 +95,9 @@ const AddUserForm = () => {
                 />
               </div>
             </div>
-            <div className="field fieldWrapper">
-              <label className="label info">Vai trò</label>
-              <div className="control  inputWrapper">
+            <div className="field">
+              <label className="label ">Vai trò</label>
+              <div className="control ">
                 <div className="select is-fullwidth">
                   <select
                     value={position}
@@ -124,6 +125,7 @@ const AddUserForm = () => {
               </div>
             </div>
           </form>
+        </div>
         </div>
       </div>
     </div>

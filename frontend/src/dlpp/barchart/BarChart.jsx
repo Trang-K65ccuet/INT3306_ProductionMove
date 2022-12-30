@@ -60,7 +60,7 @@ const BarChart = () => {
       };
   fetchData();
   }, [])
-  console.log(datat);
+  // console.log(datat);
   
   return (
     <div className = "barchart">

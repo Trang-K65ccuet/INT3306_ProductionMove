@@ -5,9 +5,12 @@ import axios from "axios";
 import Button from "../../button/Button";
 import "./products.css"
 import ReactPaginate from "react-paginate";
+import ItemSoldModal from "../../components/modal/itemSoldModel";
 
 const ExportProductsDLPP = () => {
   const [item, setItem] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [product, setProduct] = useState({});
   useEffect(() => {
     getItem();
   }, []);
@@ -59,12 +62,14 @@ const ExportProductsDLPP = () => {
                 <tr>
                   <th>STT</th>
                   <th>Mã sản phẩm</th>
-                  <th>Sản phẩm</th>
-                  <th>Dòng sản phẩm</th>
+                  {/* <th>Dòng sản phẩm</th> */}
+                  <th>Tên sản phẩm</th>
+                  <th>Khách hàng</th>
                   <th>Giá</th>
                   <th>Ngày bán</th>
-                  <th>Số ngày bảo hành</th>
-                  <th>Trạng thái</th>
+                  <th style={{textAlign: "center"}}>Số ngày bảo hành</th>
+                  {/* <th>Trạng thái</th> */}
+                  <th>Tùy chọn</th>
                 </tr>
               </thead>
               <tbody>
@@ -72,16 +77,29 @@ const ExportProductsDLPP = () => {
                   <tr key={item.productcode}>
                   <td>{index + 1}</td>
                   <td>{item.productcode}</td>
-                  <td>{item.productline}</td>
+                  {/* <td>{item.productline}</td> */}
                   <td>{item.name}</td>
+                  <td>{item.customerName}</td>
                   <td>{item.price}</td>
                   <td>{item.dateOfTransaction.split("T")[0]}</td>
-                  <td>{item.expiredDay}</td>
-                  <td>{returnStatus(item.status)}</td>
+                  <td style={{textAlign: "center"}}>{item.expiredDay}</td>
+                  {/* <td>{returnStatus(item.status)}</td> */}
+                  <td>
+            <button
+                    className="button is-small is-info"
+                    onClick={() => {
+                      setModalOpen(!modalOpen);
+                      setProduct(item);
+                    }}
+                  >
+                    Xem chi tiết
+                  </button>
+            </td>
                 </tr>
                 ))}
               </tbody>
             </table>
+            <ItemSoldModal open={modalOpen} onClose={() => setModalOpen(!modalOpen)} product={product} />
             <ReactPaginate
                 breakLabel="..."
                 onPageChange={handlePageClick}

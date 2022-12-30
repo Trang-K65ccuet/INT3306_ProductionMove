@@ -10,7 +10,7 @@ const manufactureRouter = express.Router();
 manufactureRouter.get('/manufactures/all', authorizationUser, getManufactures);
 
 //tạo danh sách các sản phẩm mới
-manufactureRouter.post('/productitem/add',checkAddItem,authorizationUser,checkCssx,addProductItemList);
+manufactureRouter.post('/productitem/add',authorizationUser,checkCssx,checkAddItem,addProductItemList);
 // các sản phẩm do user đã tạo
 manufactureRouter.get('/manufactures/items',authorizationUser, getProductitemByManufacture);
 
