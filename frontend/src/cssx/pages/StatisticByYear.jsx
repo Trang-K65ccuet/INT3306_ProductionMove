@@ -5,11 +5,14 @@ import LineChart from "../linechart/LineChart";
 import axios from "axios";
 import PieChartInStatistic from "../pie/PieChartInStatistic";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../../dlpp/button/Button";
+import { useParams } from "react-router-dom";
 
-const StatisticCSSX = () => {
-  const [year, setYear] = useState("");
+
+const StatisticCSSXByYear = () => {
+  const [yearInput, setYearInput] = useState(""); 
   const navigate = useNavigate(); 
+
+    const {year} = useParams(); 
   //Danh cho bieu do tron cac san pham da ban
   const [sell, setsell] = useState({
     labels: [],
@@ -26,7 +29,7 @@ const StatisticCSSX = () => {
   useEffect(() => {
     const fetchData = async () => {
       const resp = await axios.get(
-        "http://localhost:5000/productitem/selledmanufacture/2022",
+        `http://localhost:5000/productitem/selledmanufacture/${year}`,
         { withCredentials: true }
       );
       const label = [];
@@ -71,7 +74,7 @@ const StatisticCSSX = () => {
   useEffect(() => {
     const fetchData = async () => {
       const resp = await axios.get(
-        "http://localhost:5000/productitem/statisticmanufacture/2022",
+        `http://localhost:5000/productitem/statisticmanufacture/${year}`,
         { withCredentials: true }
       );
       const label = [];
@@ -94,11 +97,17 @@ const StatisticCSSX = () => {
     fetchData();
   }, []);
 
+  const loadData =  async (e) => {
+    e.preventDefault();
+    try {
+        navigate("cssx/statistic/statisticbyyear/" + yearInput); 
+    } catch(error) {
+        console.log(error);
+    }
+  }
   return (
     <Layout>
-      <form onSubmit={() => {
-        navigate("statisticbyyear/" + year); 
-      }}>
+      <form onSubmit={loadData}>
         <div className="field">
           <label className="label">Năm</label>
           <div className="control">
@@ -106,9 +115,10 @@ const StatisticCSSX = () => {
               type="text"
               className="input"
               placeholder="Năm"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
+              value={yearInput}
+              onChange={(e) => setYearInput(e.target.value)}
               required="required"
+
             />
           </div>
         </div>
@@ -116,7 +126,6 @@ const StatisticCSSX = () => {
           Chọn
         </button>
       </form>
-
       <div className="chartstatistic">
         <div className="line-chart" style={{ width: 800 }}>
           <LineChart chartData={monthimport} />
@@ -132,4 +141,4 @@ const StatisticCSSX = () => {
   );
 };
 
-export default StatisticCSSX;
+export default StatisticCSSXByYear;
