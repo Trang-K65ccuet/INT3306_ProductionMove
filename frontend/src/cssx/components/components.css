@@ -6,6 +6,13 @@
 #logout:hover{
     background-color: rgb(15, 75, 92);
 }
+
+@media screen and (max-width: 1000px) {
+    .button.is-light.navbar-burger.burger {
+        display: flex;
+        width: 125px;
+    }
+}
 #nav{
     background-color: white;
 }
@@ -39,16 +46,6 @@
 
 
 .navbar-item.navbar-item-custom {
-    /* color: #4a4a4a;
-    display: block;
-    line-height: 1.5;
-    padding: 0.5rem 0.75rem;
-    position: relative;
-    box-sizing: inherit;
-    flex-grow: 0;
-    flex-shrink: 0;
-    align-items: center;
-    display: flex; */
     padding: 0rem 0.75rem;
 }
 

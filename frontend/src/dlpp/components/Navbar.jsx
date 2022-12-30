@@ -17,14 +17,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className="nav-bar">
+    <div>
       <nav id = "nav" className="navbar is-fixed-top-custom has-shadow" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-        <NavLink to="/dlpp/dashboard" className="navbar-item">
-            <img src={logo} width="70" alt="logo" />
-            <p className="logo-text">Production Move</p>
+        <NavLink to="/dlpp/dashboard" className="navbar-item navbar-item-custom">
+            <img src={logo} width="10%" alt="logo" />
+            <h1 className="logo-text logo-text-custom">Production Move</h1>
           </NavLink>
-          <a
+          {/* <a
             href="!#"
             role="button"
             className="navbar-burger burger"
@@ -35,12 +35,17 @@ const Navbar = () => {
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-          </a>
+          </a> */}
+          <div className="buttons">
+            <button onClick={logout} className="button is-light buttonShowResponsive" id="logout">
+              <IoIosLogOut /> Đăng xuất
+            </button>
+          </div>
         </div>
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-end">
-            <div className="navbar-item">
+            <div className="navbar-item navbar-item-custom">
               <div className="buttons">
               <button onClick={logout} className="button is-light" id="logout">
                   <IoIosLogOut/>Đăng xuất
