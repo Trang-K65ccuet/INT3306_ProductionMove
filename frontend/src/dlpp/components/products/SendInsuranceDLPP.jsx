@@ -14,6 +14,15 @@ const SendInsuranceDLPP = () => {
     const [msg, setMsg] = useState("");
     const navigate = useNavigate();
 
+    const [item, setItem] = useState([]);
+    useEffect(() => {
+      getItem();
+    }, []);
+    const getItem = async () => {
+      const response = await axios.get("http://localhost:5000/productitem/faultiteminstock",{withCredentials: true});
+      setItem(response.data);  
+    };
+
 
     useEffect(() => {
       getWarrantyLists();
@@ -62,15 +71,18 @@ const SendInsuranceDLPP = () => {
               <div className="field">
                 <label className="label">Mã sản phẩm</label>
                 <div className="control">
-                  <input
-                    value = {productcode} 
-                    onChange={(e) => setProduct(e.target.value)}
-                    type="text"
-                    className="input"
-                    placeholder="Mã sản phẩm"
-                  />
+                <select 
+                  className="input"
+                  value = {productcode} 
+                  onChange={(e) => setProduct(e.target.value)}
+                >
+                {item.map((item) => (
+                    <option>{item.productcode}</option>
+                ))}
+                </select>
                 </div>
               </div>
+
               <div className="field">
                   <label className="label">Trung tâm bảo hành</label>
                   <div className="control select is-fullwidth">

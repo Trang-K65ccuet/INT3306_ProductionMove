@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "./all/account/Login";
+import PrivateRoute from "./protect/ProtectRoute";
 
 import Dashboard from "./admin/pages/Dashboard";
 import Users from "./admin/pages/users/Users";
@@ -46,46 +47,48 @@ function App() {
         <Routes>
           // All
           <Route path="/" element={<Login />} />
+          <Route element={<PrivateRoute />}>
+            //Admin
+            <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route path="/admin/users/add" element={<AddUser />} />
+            <Route path="/admin/users/edit/:id" element={<EditUser />} />
+            <Route path="/admin/products" element={<Products />} />
+            <Route path="/admin/products/add" element={<AddProduct />} />
+            <Route path="/admin/products/edit/:productline" element={<EditProduct />} />
 
-          //Admin
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/users" element={<Users />} />
-          <Route path="/admin/users/add" element={<AddUser />} />
-          <Route path="/admin/users/edit/:id" element={<EditUser />} />
-          <Route path="/admin/products" element={<Products />} />
-          <Route path="/admin/products/add" element={<AddProduct />} />
-          <Route path="/admin/products/edit/:productline" element={<EditProduct />} />
+            //CSSX
+            <Route path="/cssx/dashboard" element={<DashboardCSSX />} />
+            <Route path="/cssx/statistic" element={<StatisticCSSX />} />
+            <Route path="/cssx/products" element={<ProductsCSSX />} />
+            <Route path="/cssx/import" element={<ImportProductsCSSX />} />
+            <Route path="/cssx/export" element={<ExportProductsCSSX />} />
+            <Route path="/cssx/insurance" element={<InsuranceCSSX />} />
+            <Route path="/cssx/import/add" element={<AddProductInCSSX />} />
+            <Route path="/cssx/export/exportnew" element={<ExportProductInCSSX />} />
 
-          //CSSX
-          <Route path="/cssx/dashboard" element={<DashboardCSSX />} />
-          <Route path="/cssx/statistic" element={<StatisticCSSX />} />
-          <Route path="/cssx/products" element={<ProductsCSSX />} />
-          <Route path="/cssx/import" element={<ImportProductsCSSX />} />
-          <Route path="/cssx/export" element={<ExportProductsCSSX />} />
-          <Route path="/cssx/insurance" element={<InsuranceCSSX />} />
-          <Route path="/cssx/import/add" element={<AddProductInCSSX />} />
-          <Route path="/cssx/export/exportnew" element={<ExportProductInCSSX />} />
+            //DLPP
+            <Route path="/dlpp/dashboard" element={<DashboardDLPP />} />
+            <Route path="/dlpp/statistic" element={<StatisticDLPP />} />
+            <Route path="/dlpp/products" element={<ProductsDLPP />} />
+            <Route path="/dlpp/import" element={<ImportProductsDLPP />} />
+            <Route path="/dlpp/export" element={<ExportProductsDLPP />} />
+            <Route path="/dlpp/insurance" element={<InsuranceDLPP />} />
+            <Route path="/dlpp/export/new" element={<ExportProductInDLPP />} />
+            <Route path="/dlpp/insurance/finished" element={<FinishedInDLPP />} />
+            <Route path="/dlpp/insurance/new" element={<NewInsuranceInDLPP />} />
+            <Route path="/dlpp/insurance/send" element={<SendInsuranceDLPP />} />
+            <Route path="/dlpp/export/expired" element={<ExpiredTime />} />
+            <Route path="/dlpp/insurance/fixall" element={<FixAll />} />
 
-          //DLPP
-          <Route path="/dlpp/dashboard" element={<DashboardDLPP />} />
-          <Route path="/dlpp/statistic" element={<StatisticDLPP />} />
-          <Route path="/dlpp/products" element={<ProductsDLPP />} />
-          <Route path="/dlpp/import" element={<ImportProductsDLPP />} />
-          <Route path="/dlpp/export" element={<ExportProductsDLPP />} />
-          <Route path="/dlpp/insurance" element={<InsuranceDLPP />} />
-          <Route path="/dlpp/export/new" element={<ExportProductInDLPP />} />
-          <Route path="/dlpp/insurance/finished" element={<FinishedInDLPP />} />
-          <Route path="/dlpp/insurance/new" element={<NewInsuranceInDLPP />} />
-          <Route path="/dlpp/insurance/send" element={<SendInsuranceDLPP />} />
-          <Route path="/dlpp/export/expired" element={<ExpiredTime />} />
-          <Route path="/dlpp/insurance/fixall" element={<FixAll />} />
+            //TTBH
+            <Route path="/ttbh/dashboard" element={<DashboardTTBH />} />
+            <Route path="/ttbh/statistic" element={<StatisticTTBH />} />
+            <Route path="/ttbh/products" element={<ProductsTTBH />} />
+            <Route path="/ttbh/successful" element={<SuccessfulTTBH />} />
+            <Route path="/ttbh/errors" element={<ErrorsTTBH />} />          
+          </Route>
 
-          //TTBH
-          <Route path="/ttbh/dashboard" element={<DashboardTTBH />} />
-          <Route path="/ttbh/statistic" element={<StatisticTTBH />} />
-          <Route path="/ttbh/products" element={<ProductsTTBH />} />
-          <Route path="/ttbh/successful" element={<SuccessfulTTBH />} />
-          <Route path="/ttbh/errors" element={<ErrorsTTBH />} />
           
         </Routes>
       </BrowserRouter>
