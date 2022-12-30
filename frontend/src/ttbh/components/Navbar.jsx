@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import logo from "../../image/product.png";
 import { LogOut, reset } from "../../all/features/authSlice";
-import './components.css';
+import "./components.css";
 import { IoIosLogOut } from "react-icons/io";
 
 const Navbar = () => {
@@ -18,33 +18,37 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav id = "nav" className="navbar is-fixed-top has-shadow" role="navigation" aria-label="main navigation">
+      <nav
+        id="nav"
+        className="navbar is-fixed-top has-shadow"
+        role="navigation"
+        aria-label="main navigation"
+      >
         <div className="navbar-brand">
-        <NavLink to="/ttbh/dashboard" className="navbar-item">
-            <img src={logo} width="70" alt="logo" />
-            <p className="logo-text">Production Move</p>
-          </NavLink>
-
-          <a
-            href="!#"
-            role="button"
-            className="navbar-burger burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
+          <NavLink
+            to="/ttbh/dashboard"
+            className="navbar-item navbar-item-custom"
           >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
+            <img src={logo} width="10%" alt="logo" />
+            <h1 className="logo-text logo-text-custom">Production Move</h1>
+          </NavLink>
+          <div className="buttons">
+            <button onClick={logout} className="button is-light buttonShowResponsive" id="logout">
+              <IoIosLogOut /> Đăng xuất
+            </button>
+          </div>
         </div>
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-end">
-            <div className="navbar-item">
+            <div className="navbar-item navbar-item-custom">
               <div className="buttons">
-              <button onClick={logout} className="button is-light" id = "logout">
-                  <IoIosLogOut/> Đăng xuất
+                <button
+                  onClick={logout}
+                  className="button is-light"
+                  id="logout"
+                >
+                  <IoIosLogOut /> Đăng xuất
                 </button>
               </div>
             </div>

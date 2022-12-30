@@ -7,14 +7,22 @@
     background-color: rgb(15, 75, 92);
 }
 
-#nav{
-    background-color: rgb(119, 200, 222);
+
+@media screen and (max-width: 1000px) {
+    .button.is-light.navbar-burger.burger {
+        display: flex;
+        width: 125px;
+    }
 }
 
-.side-bar {
+#nav{
+    background-color: white;
+}
+
+/* .side-bar {
     position: fixed;
     width: inherit;
-}
+} */
 
 .logo-text{
     font-size: 30px;

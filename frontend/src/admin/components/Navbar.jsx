@@ -1,11 +1,10 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../image/product.png";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { LogOut, reset } from "../../all/features/authSlice";
-import './components.css'
+import "./components.css";
 import { IoIosLogOut } from "react-icons/io";
-
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -19,13 +18,45 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav id = "nav" className="navbar is-fixed-top has-shadow" role="navigation" aria-label="main navigation">
+      <nav
+        id="nav"
+        className="navbar is-fixed-top has-shadow"
+        role="navigation"
+        aria-label="main navigation"
+      >
         <div className="navbar-brand">
-        <NavLink to="/admin/dashboard" className="navbar-item">
-            <img src={logo} width="70" alt="logo" />
-            <p className="logo-text">Production Move</p>
+          <NavLink
+            to="/admin/dashboard"
+            className="navbar-item navbar-item-custom"
+          >
+            <img src={logo} width="10%" alt="logo" />
+            <h1 className="logo-text logo-text-custom">Production Move</h1>
           </NavLink>
-          <a
+          <div className="buttons">
+                <button
+                  onClick={logout}
+                  className="button is-light buttonShowResponsive"
+                  id="logout"
+                >
+                  <IoIosLogOut />
+                  Đăng xuất
+                </button>
+              </div>
+          {/* <div className="navbar-end navbar-burger burger">
+            <div className="navbar-item navbar-item-custom">
+              <div className="buttons">
+                <button
+                  onClick={logout}
+                  className="button is-light"
+                  id="logout"
+                >
+                  <IoIosLogOut />
+                  Đăng xuất
+                </button>
+              </div>
+            </div>
+          </div> */}
+          {/* <a
             href="!#"
             role="button"
             className="navbar-burger burger"
@@ -36,15 +67,21 @@ const Navbar = () => {
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-          </a>
+          </a> */}
+          
         </div>
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-end">
-            <div className="navbar-item">
+            <div className="navbar-item navbar-item-custom">
               <div className="buttons">
-              <button onClick={logout} className="button is-light" id = "logout">
-                  <IoIosLogOut/>Đăng xuất
+                <button
+                  onClick={logout}
+                  className="button is-light"
+                  id="logout"
+                >
+                  <IoIosLogOut />
+                  Đăng xuất
                 </button>
               </div>
             </div>

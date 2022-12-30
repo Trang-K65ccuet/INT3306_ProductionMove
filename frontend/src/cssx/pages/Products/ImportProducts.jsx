@@ -16,7 +16,7 @@ const ImportProductsCSSX = () => {
     setProductCSSX(response.data);
   };
 
-  let itemsPerPage = 5; 
+  let itemsPerPage = 8; 
   const [itemOffset, setItemOffset] = useState(0);
     const endOffset = itemOffset + itemsPerPage;
     const currentItems = productCSSX.slice(itemOffset, endOffset);

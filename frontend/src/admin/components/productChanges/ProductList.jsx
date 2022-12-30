@@ -5,23 +5,29 @@ import ReactPaginate from "react-paginate";
 
 const ProductList = () => {
   const [productLines, setProductLines] = useState([]);
+  const [productlineDeletion, setProductlineDeletion] = useState("");
 
   useEffect(() => {
-    getProductLines(); 
-  }, []); 
+    getProductLines();
+  }, []);
 
   const getProductLines = async () => {
-    const response = await axios.get('http://localhost:5000/productline', {withCredentials: true}); 
-    setProductLines(response.data); 
-  }
+    const response = await axios.get("http://localhost:5000/productline", {
+      withCredentials: true,
+    });
+    setProductLines(response.data);
+  };
 
-  const deleteProductLine = async () => {
-    await axios.delete(`http://localhost:5000/productline/delete`, {withCredentials: true})
-    getProductLines(); 
-  }
-  
+  const deleteProductLine = async (productLineName) => {
+    await axios.delete(
+      `http://localhost:5000/productline/delete`,
+      { productline: productLineName },
+      { withCredentials: true }
+    );
+    getProductLines();
+  };
 
-  let itemsPerPage = 5; 
+  let itemsPerPage = 8;
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = productLines.slice(itemOffset, endOffset);
@@ -52,42 +58,44 @@ const ProductList = () => {
         <tbody>
           {currentItems.map((productLine, index) => (
             <tr key={productLine.productline}>
-            <td>{index + 1}</td>
-            <td>{productLine.productline}</td>
-            <td>{productLine.description}</td>
-            <td>
-              <Link
-                to={`/admin/products/edit/${productLine.productline}`}
-                className="button is-small is-info"
-              >
-                Edit
-              </Link>
-              <button
-                onClick={() => deleteProductLine()}
-                className="button is-small is-danger"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
+              <td>{index + 1}</td>
+              <td>{productLine.productline}</td>
+              <td>{productLine.description}</td>
+              <td>
+                <Link
+                  to={`/admin/products/edit/${productLine.productline}`}
+                  className="button is-small is-info"
+                >
+                  Edit
+                </Link>
+                <button
+                  onClick={() => {
+                    deleteProductLine(productLine.productline);
+                  }}
+                  className="button is-small is-danger"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
           ))}
         </tbody>
       </table>
       <ReactPaginate
-              breakLabel="..."
-              onPageChange={handlePageClick}
-              pageRangeDisplayed={5}
-              pageCount={pageCount}
-              previousLabel={"< Prev"}
-              nextLabel={"Next >"}
-              renderOnZeroPageCount={null}
-              containerClassName={"pagination-list"}
-              pageLinkClassName={"pagination-link"}
-              previousLinkClassName={"pagination-previous"}
-              nextLinkClassName={"pagination-next"}
-              activeLinkClassName={"pagination-link is-current"}
-              disabledLinkClassName={"pagination-link is-disabled"}
-        />
+        breakLabel="..."
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel={"< Prev"}
+        nextLabel={"Next >"}
+        renderOnZeroPageCount={null}
+        containerClassName={"pagination-list"}
+        pageLinkClassName={"pagination-link"}
+        previousLinkClassName={"pagination-previous"}
+        nextLinkClassName={"pagination-next"}
+        activeLinkClassName={"pagination-link is-current"}
+        disabledLinkClassName={"pagination-link is-disabled"}
+      />
     </div>
   );
 };

@@ -6,9 +6,15 @@
 #logout:hover{
     background-color: rgb(15, 75, 92);
 }
+@media screen and (max-width: 1000px) {
+    .button.is-light.navbar-burger.burger {
+        display: flex;
+        width: 125px;
+    }
+}
 
 #nav{
-    background-color: rgb(119, 200, 222);
+    background-color: white;
 }
 
 .logo-text{

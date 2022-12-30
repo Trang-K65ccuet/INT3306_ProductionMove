@@ -49,7 +49,7 @@ const InsuranceDLPP = () => {
     <Layout>
           <div>
             <h1 className="title">Bảo hành</h1>
-            <div className="button-widget">
+            <div className="button-widget button-widget-custom">
               <Link to="/dlpp/insurance/new"><Button type="new" /></Link>
               <Link to = "/dlpp/insurance/send"><Button type="send" /></Link>
               <Link to="/dlpp/insurance/finished"><Button type="finished" /></Link>

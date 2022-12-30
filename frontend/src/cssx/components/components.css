@@ -6,8 +6,15 @@
 #logout:hover{
     background-color: rgb(15, 75, 92);
 }
+
+@media screen and (max-width: 1000px) {
+    .button.is-light.navbar-burger.burger {
+        display: flex;
+        width: 125px;
+    }
+}
 #nav{
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 .imageWrapper {
@@ -26,6 +33,22 @@
     color: rgb(20, 5, 73);
     margin-left: 10px;
 }
+
+.navbar-brand-custom {
+    padding-left: 0.75rem;
+}
+
+.buttonsName {
+    padding-right: 0.75rem;
+    justify-content: center;
+    display: flex;
+}
+
+
+.navbar-item.navbar-item-custom {
+    padding: 0rem 0.75rem;
+}
+
 
 .totalItemsInCSSX {
     margin-bottom: 10px;

@@ -115,7 +115,7 @@ fetchData();
               />
             </div>
           </div>
-          <div className="chartstatistic">
+          <div className="chartstatistic chartstatistic-custom">
               <div className = "line-chart" style={{ width: 800 }}>
                 <LineChart chartData={monthimport} />
                 <p className="text">Doanh thu</p>
