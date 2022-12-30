@@ -114,14 +114,15 @@ export const allitemSendToDistributor = async (req, res) => {
 // sp đã bán
 export const spdabanManufacture = async (req, res) => {
     try {
+        const year = req.params.year;
         const sql1 = "SELECT COUNT(*) as totalquantity, SUM(productitems.price) as totalmoney, YEAR(transactions.dateOfTransaction) as year FROM transactions LEFT JOIN productitems ON productitems.productcode = transactions.productcode"
-        + " WHERE productitems.manufactureid = :manu_id GROUP BY year ORDER BY year ASC";
-        const sql2 = "SELECT COUNT(*) as total, productline, SUM(productitems.price) as totalmoney, YEAR(transactions.dateOfTransaction) as year FROM transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode WHERE productitems.manufactureid = :manu_id GROUP BY productline, year ORDER BY year ASC";
+        + " WHERE YEAR(transactions.dateOfTransaction) = :year AND productitems.manufactureid = :manu_id GROUP BY year ORDER BY year ASC";
+        const sql2 = "SELECT COUNT(*) as total, productline, SUM(productitems.price) as totalmoney, YEAR(transactions.dateOfTransaction) as year FROM transactions LEFT JOIN productitems ON transactions.productcode = productitems.productcode WHERE productitems.manufactureid = :manu_id AND YEAR(transactions.dateOfTransaction) = :year GROUP BY productline, year ORDER BY year ASC";
         const x1 = await database.query(sql1,{replacements: {
-            manu_id: req.Id
+            manu_id: req.Id, year: year
         },type: QueryTypes.SELECT});
         const x2 = await database.query(sql2,{replacements: {
-            manu_id: req.Id
+            manu_id: req.Id, year: year
         },type: QueryTypes.SELECT});
         return res.status(200).json([x1, x2]);
     } catch (error) {

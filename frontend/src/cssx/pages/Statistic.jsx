@@ -8,8 +8,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../../dlpp/button/Button";
 
 const StatisticCSSX = () => {
-  const [year, setYear] = useState("");
-  const navigate = useNavigate(); 
+  const [year, setYear] = useState("2022");
+
   //Danh cho bieu do tron cac san pham da ban
   const [sell, setsell] = useState({
     labels: [],
@@ -26,7 +26,7 @@ const StatisticCSSX = () => {
   useEffect(() => {
     const fetchData = async () => {
       const resp = await axios.get(
-        "http://localhost:5000/productitem/selledmanufacture/2022",
+        `http://localhost:5000/productitem/selledmanufacture/${year}`,
         { withCredentials: true }
       );
       const label = [];
@@ -53,7 +53,7 @@ const StatisticCSSX = () => {
       });
     };
     fetchData();
-  }, []);
+  }, [year]);
 
   //Line chart
   const [monthimport, setmonthimport] = useState({
@@ -71,7 +71,7 @@ const StatisticCSSX = () => {
   useEffect(() => {
     const fetchData = async () => {
       const resp = await axios.get(
-        "http://localhost:5000/productitem/statisticmanufacture/2022",
+        `http://localhost:5000/productitem/statisticmanufacture/${year}`,
         { withCredentials: true }
       );
       const label = [];
@@ -92,30 +92,23 @@ const StatisticCSSX = () => {
       });
     };
     fetchData();
-  }, []);
+  }, [year]);
 
   return (
     <Layout>
-      <form onSubmit={() => {
-        navigate("statisticbyyear/" + year); 
-      }}>
-        <div className="field">
-          <label className="label">Năm</label>
-          <div className="control">
-            <input
-              type="text"
-              className="input"
-              placeholder="Năm"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-              required="required"
-            />
-          </div>
+      <div className="field">
+        <label className="label">Năm</label>
+        <div className="control">
+          <input
+            type="text"
+            className="input"
+            placeholder="Năm"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+            required="required"
+          />
         </div>
-        <button type="submit" className="button is-small is-info">
-          Chọn
-        </button>
-      </form>
+      </div>
 
       <div className="chartstatistic">
         <div className="line-chart" style={{ width: 800 }}>
