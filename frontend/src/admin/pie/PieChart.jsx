@@ -63,7 +63,7 @@ const PieChart = () => {
       };
   fetchData();
   }, [])
-  console.log(datat);
+  // console.log(datat);
   
   return (
     <div className = "piechart">

@@ -12,7 +12,9 @@ const Userlist = () => {
   }, []);
 
   const getUsers = async () => {
-    const response = await axios.get("http://localhost:5000/users", {withCredentials: true});
+    const response = await axios.get("http://localhost:5000/users", {
+      withCredentials: true,
+    });
     setUsers(response.data);
   };
 
@@ -22,12 +24,12 @@ const Userlist = () => {
   };
 
   function replacePos(pos) {
-    if(pos == "admin") return "Ban điều hành";
-    if(pos == "cssx") return "Cơ sở sản xuất";
-    if(pos == "dlpp") return "Đại lý phân phối";
-    if(pos == "ttbh") return "Trung tâm bảo hành"
+    if (pos == "admin") return "Ban điều hành";
+    if (pos == "cssx") return "Cơ sở sản xuất";
+    if (pos == "dlpp") return "Đại lý phân phối";
+    if (pos == "ttbh") return "Trung tâm bảo hành";
   }
-  let itemsPerPage = 5; 
+  let itemsPerPage = 5;
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = users.slice(itemOffset, endOffset);
@@ -39,11 +41,17 @@ const Userlist = () => {
     setItemOffset(newOffset);
   };
 
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <div>
       <h1 className="title">Người dùng</h1>
       <h2 className="subtitle">Danh sách người dùng</h2>
-      <Link to="/admin/users/add" className="button is-primary mb-2">
+      <Link to="/admin/users/add" className="button is-primary mb-2" 
+        // onClick={() => {
+        //   setModalOpen(!modalOpen);
+        // }}
+        >
         Thêm mới
       </Link>
       <table className="table is-striped is-fullwidth">
@@ -57,7 +65,7 @@ const Userlist = () => {
           </tr>
         </thead>
         <tbody>
-        {currentItems.map((user, index) => (
+          {currentItems.map((user, index) => (
             <tr key={user.id}>
               <td>{index + 1}</td>
               <td>{user.name}</td>
@@ -81,21 +89,22 @@ const Userlist = () => {
           ))}
         </tbody>
       </table>
-        <ReactPaginate
-              breakLabel="..."
-              onPageChange={handlePageClick}
-              pageRangeDisplayed={5}
-              pageCount={pageCount}
-              previousLabel={"< Prev"}
-              nextLabel={"Next >"}
-              renderOnZeroPageCount={null}
-              containerClassName={"pagination-list"}
-              pageLinkClassName={"pagination-link"}
-              previousLinkClassName={"pagination-previous"}
-              nextLinkClassName={"pagination-next"}
-              activeLinkClassName={"pagination-link is-current"}
-              disabledLinkClassName={"pagination-link is-disabled"}
-        />
+      {/* <Modal open={modalOpen} onClose={() => setModalOpen(!modalOpen)} /> */}
+      <ReactPaginate
+        breakLabel="..."
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel={"< Prev"}
+        nextLabel={"Next >"}
+        renderOnZeroPageCount={null}
+        containerClassName={"pagination-list"}
+        pageLinkClassName={"pagination-link"}
+        previousLinkClassName={"pagination-previous"}
+        nextLinkClassName={"pagination-next"}
+        activeLinkClassName={"pagination-link is-current"}
+        disabledLinkClassName={"pagination-link is-disabled"}
+      />
     </div>
   );
 };
