@@ -17,12 +17,12 @@ const Navbar = () => {
   };
 
   return (
-    <div>
+    <div className="nav-bar">
       <nav id = "nav" className="navbar is-fixed-top-custom has-shadow" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-        <NavLink to="/cssx/dashboard" className="navbar-item">
-            <img src={logo} width="70" alt="logo" />
-            <p className="logo-text">Production Move</p>
+        <NavLink to="/cssx/dashboard" className="navbar-item navbar-item-custom">
+            <img src={logo} width="10%" alt="logo" />
+            <h1 className="logo-text">Production Move</h1>
           </NavLink>
           <a
             href="!#"
@@ -40,7 +40,7 @@ const Navbar = () => {
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-end">
-            <div className="navbar-item">
+            <div className="navbar-item navbar-item-custom">
               <div className="buttons">
               <button onClick={logout} className="button is-light" id="logout">
                   <IoIosLogOut/> Đăng xuất
