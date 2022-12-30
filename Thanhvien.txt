@@ -1,0 +1,20 @@
+####Các thành viên nhóm###
+1. Phan Đức Mạnh - MSSV: 20020441
+- Xây dựng CSDL
+- Code backend
+
+2. Nguyễn Đặng Mạnh Hoàn - MSSV: 20020407
+- Xây dựng các tính năng cho quản trị viên(admin)
+- Xử lý phần nhập hàng vào cơ sở sản xuất, xuất hàng tới đại lý phân phối
+- Xây dựng các form nhập liệu
+- Xử lý phần thêm ảnh
+- Responsive
+- Xử lý validate
+
+3. Nguyễn Hà Trang - MSSV: 20020482
+- Tạo giao diện chính, chia components
+- Định tuyến URL
+- Xây dựng các bảng chứa thông tin các phần
+- Làm phần login(giao diện)
+- Xử lý các phần tính năng bán hàng, bảo hành, triệu hồi... của đại lý phân phối và các tính năng của trung tâm bảo hành
+- Xây dựng các biểu đồ, làm thống kê
