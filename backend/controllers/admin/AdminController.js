@@ -58,9 +58,10 @@ export const postUser = async(req, res) => {
     let errorsInfo = ""; 
     if (!errors.isEmpty()) {
         let i = 0; 
-        for (i ; i < errors.array().length; i++) {
-            errorsInfo = errorsInfo + errors.array().at(i).msg + "\n"; 
+        for (i ; i < errors.array().length - 1; i++) {
+            errorsInfo = errorsInfo + errors.array().at(i).msg + ", "; 
         }
+        errorsInfo = errorsInfo + errors.array().at(errors.array().length - 1).msg + ".";
       return res.status(400).json({ msg: errorsInfo });
     }
     const {name,username,position,password, confpassword, status} = req.body;

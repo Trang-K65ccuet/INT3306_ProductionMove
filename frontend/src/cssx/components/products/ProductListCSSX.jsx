@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 import Modal from "../modal/Modal";
 import "../modal/Modal.css";
 import { FaRegTimesCircle, FaUserCircle } from "react-icons/fa";
+import "../components.css"
 
 const ProductListCSSX = () => {
   const [productCSSX, setProductCSSX] = useState([]);
@@ -105,6 +106,7 @@ const ProductListCSSX = () => {
           </tbody>
         </table>
         <Modal open={modalOpen} onClose={() => setModalOpen(!modalOpen)} product={product} />
+        <p className="totalItemsInCSSX">Tổng số: {productCSSX.length} sản phẩm</p>
         <ReactPaginate
           breakLabel="..."
           onPageChange={handlePageClick}

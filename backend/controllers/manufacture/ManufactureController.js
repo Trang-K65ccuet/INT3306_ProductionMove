@@ -24,8 +24,14 @@ try {
 // tạo các sản phẩm mới
 export const addProductItemList = async(req, res) => {
     const errors = validationResult(req);
+    let errorsInfo = ""; 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+        let i = 0; 
+        for (i ; i < errors.array().length - 1; i++) {
+            errorsInfo = errorsInfo + errors.array().at(i).msg + ", "; 
+        }
+        errorsInfo = errorsInfo + errors.array().at(errors.array().length - 1).msg + ".";
+      return res.status(400).json({ msg: errorsInfo });
     }
     try {
         const records = req.body.length;

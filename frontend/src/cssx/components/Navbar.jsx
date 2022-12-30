@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav id = "nav" className="navbar is-fixed-top has-shadow" role="navigation" aria-label="main navigation">
+      <nav id = "nav" className="navbar is-fixed-top-custom has-shadow" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
         <NavLink to="/cssx/dashboard" className="navbar-item">
             <img src={logo} width="70" alt="logo" />

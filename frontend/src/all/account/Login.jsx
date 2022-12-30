@@ -49,7 +49,7 @@ const Login = () => {
           <div className="columns is-centered">
             <div className="column is-4" id="signin">
               <form onSubmit={Auth} className="box" id = "box">
-                <img src={img_log} alt="Login" id = "login-img" />
+                <img src="https://res.cloudinary.com/dmkdfrjpz/image/upload/v1672338271/ybzbkmdxukdtvybl5eyk.png" alt="Login" id = "login-img" />
                 <h1 className="title is-2" id = 'production-move'>Production Move</h1>
                 <div className="field">
                   <label className="label"><IoPerson /> Tài khoản</label>

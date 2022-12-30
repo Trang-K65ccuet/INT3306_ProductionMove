@@ -54,6 +54,7 @@ const AddProductInCSSX = () => {
 
   const importData = async (e) => {
     e.preventDefault();
+    console.log(arrays);
     try {
       await axios.post("http://localhost:5000/productitem/add", arrays, {
         withCredentials: true,
@@ -184,7 +185,7 @@ const AddProductInCSSX = () => {
                 ))}
               </tbody>
             </table>
-
+            <p className="has-text-centered">{msg}</p>
             <div className="field">
               <div className="control">
                 <button className="button is-success" onClick={importData}>
