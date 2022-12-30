@@ -18,7 +18,6 @@ import ProductsCSSX from "./cssx/pages/Products/Products";
 import InsuranceCSSX from "./cssx/pages/Products/Insurance";
 import AddProductInCSSX from "./cssx/components/products/AddProductInCSSX";
 import ExportProductInCSSX from "./cssx/components/products/ExportProductInCSSX";
-import StatisticCSSXByYear from "./cssx/pages/StatisticByYear";
 
 
 import DashboardDLPP from "./dlpp/pages/Dashboard";
@@ -60,7 +59,6 @@ function App() {
           //CSSX
           <Route path="/cssx/dashboard" element={<DashboardCSSX />} />
           <Route path="/cssx/statistic" element={<StatisticCSSX />} />
-          <Route path="/cssx/statistic/statisticbyyear/:year" element={<StatisticCSSXByYear />} />
           <Route path="/cssx/products" element={<ProductsCSSX />} />
           <Route path="/cssx/import" element={<ImportProductsCSSX />} />
           <Route path="/cssx/export" element={<ExportProductsCSSX />} />
