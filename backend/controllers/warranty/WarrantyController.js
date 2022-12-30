@@ -20,7 +20,7 @@ export const allWarrantyAgents = async (req, res) => {
 export const allItemWarranty = async (req, res) => {
     try {
     const sql = "SELECT warranties.productcode, productitems.productline, productitems.name, productitems.status, users.name FROM warranties "
-     +"INNER JOIN productitems ON productitems.productcode = warranties.productcode INNER JOIN users ON users.id = :wr_id WHERE productitems.status = 4 AND warranties.warrantyAgentId = :wr_id";
+     +"INNER JOIN productitems ON productitems.productcode = warranties.productcode INNER JOIN users ON users.id = :wr_id WHERE warranties.warrantyAgentId = :wr_id";
     
     const allitem = await database.query(sql, {replacements: {
         wr_id: req.Id
