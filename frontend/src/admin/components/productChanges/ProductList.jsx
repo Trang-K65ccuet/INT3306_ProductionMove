@@ -18,14 +18,14 @@ const ProductList = () => {
     setProductLines(response.data);
   };
 
-  const deleteProductLine = async (productLineName) => {
-    await axios.delete(
-      `http://localhost:5000/productline/delete`,
-      { productline: productLineName },
-      { withCredentials: true }
-    );
-    getProductLines();
-  };
+  // const deleteProductLine = async (productLineName) => {
+  //   await axios.delete(
+  //     `http://localhost:5000/productline/delete`,
+  //     { productline: productLineName },
+  //     { withCredentials: true }
+  //   );
+  //   getProductLines();
+  // };
 
   let itemsPerPage = 8;
   const [itemOffset, setItemOffset] = useState(0);
@@ -68,14 +68,14 @@ const ProductList = () => {
                 >
                   Edit
                 </Link>
-                <button
+                {/* <button
                   onClick={() => {
                     deleteProductLine(productLine.productline);
                   }}
                   className="button is-small is-danger"
                 >
                   Delete
-                </button>
+                </button> */}
               </td>
             </tr>
           ))}
